@@ -61,9 +61,11 @@ json_recs <- json_recs |>
   select(recommendation_id, 
          recommendation, 
          keywords, 
+         hazmat,
+         most_wanted,
          priority, 
          priority_number, 
-         hazmat, 
+         nprm,
          is_reiterated, 
          times_reiterated, 
          rec_letter_url) |>
@@ -75,5 +77,5 @@ json_recs <- json_recs |>
 
 ```{r}
 # write to csv (this is the version of the data we're joining to the csv summary data)
-write_csv(json_recs, "../data/rail_safety_json_data.csv")
+write_csv(json_recs, "rail_safety_json_data.csv")
 ```

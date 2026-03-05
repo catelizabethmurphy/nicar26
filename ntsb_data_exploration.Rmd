@@ -1,12 +1,12 @@
 ---
 title: "Finding the Story: Transportation Data"
-author: "Cat Murphy"
+author: "Code by Cat Murphy, Howard Center for Investigative Journalism at the University of Maryland"
 output: html_notebook
 ---
 
-# Finding the Story: Transportation Data
+## Step 1: Install & Load Packages
 
-## Install & Load Packages
+These are the packages we'll be using for this data exploration process. If you don't have them installed, you can run the install.packages() lines to install them. Otherwise, just load the libraries and we'll get going!
 
 ```{r install_packages}
 # install.packages("tidyverse")
@@ -17,27 +17,38 @@ library(dplyr)
 
 # install.packages("janitor")
 library(janitor)
-
-# install.packages("lubridate")
-library(lubridate)
 ```
 
-## Load Rail Safety Recommendations (2000-present)
+## Step 2: Load Data & Clean Column Names
 
 *Source: National Transportation Safety Board's CAROL Database*
 
 *Link to Custom Search Builder: <https://data.ntsb.gov/carol-main-public/query-builder>*
 
-The first step in our data exploration process is to load the raw .csv data from the NTSB's database to get a sense of what we're working with.
+### Use `load_csv`() to load the data
 
-Note that this is *summary* data from NTSB's CAROL database, which means it's missing some of the contextual information that you can see online — like a recommendation's priority level, hazmat status, etc.
+The first step in our data exploration process is to load that data we were working with.
 
-The reason? The full data is in a nested JSON file that by itself is pretty unmanageable. We'll come back to this, but for now, the summary data is what we'll focus on.
+We're going to use the `read_csv()` function to help us do that and then we'll clean the column names and peek at the data using `glimpse()` to get a sense of what we're working with.
 
 ```{r load_data}
-# load raw csv
-raw_rail_recs <- read_csv("data/rail_safety_recs.csv") |>
-  
+# syntax:
+# what_you_want_to_name_your_data <- read_csv("path/to/your/data.csv")
+
+recs <- read_csv("data/rail_safety_recs.csv") 
+
+# take a look to see what we have
+glimpse(recs)
+```
+
+Great! But those column names are a little hard to work with.
+
+### Use `clean_names()` to clean column names
+
+So let's use the `clean_names()` function from the `janitor` package to make our column names easier to work with, and then we can use `glimpse()` to peek at the data again.
+
+```{r clean_names_and_glimpse}
+recs <- recs |>
   # clean names
   clean_names() |>
   
@@ -45,129 +56,215 @@ raw_rail_recs <- read_csv("data/rail_safety_recs.csv") |>
   glimpse()
 ```
 
-OK, so `glimpse()` shows us that we've got 21 columns. 
+Much easier to work with!
 
-Most of the column names are pretty self-explanatory, but not all of them. Let's fix that.
+## Step 3: Exploring & Cleaning the Data
 
-## Initial Column Cleaning
+### Explore recommendations with multiple recipients
 
-```{r cleaning_and_renaming}
-clean_rail_recs <- raw_rail_recs |>
+OK, remember that example where one recommendation had multiple recipients with different statuses, and everything was jammed into one column? Let's check that out now that we have the data loaded and cleaned.
+
+```{r}
+recs |>
+  # filter for recommendations with multiple recipients
+  filter(is_multiple_recipient == TRUE) |>
   
-  # rename columns
-  rename(recommendation_id = srid,
-         summary = abstract,
-         recommendation_encodings = sr_coding_mode,
-         recommendation_category = sr_coding_tier_1,
-         recommendation_subcategory = sr_coding_tier2,
-         recommendation_url = sr_url,
-         recommendation_date_issued = date_issued,
-         ) |>
-
-  # standardize all text to uppercase
-  mutate(across(everything(), ~str_to_upper(.)))
+  # select only the addressee details column to see what the recipient details look like for recommendations with multiple recipients
+  select(addressee_details) |>
+  
+  # take a peek at the first five rows
+  head(5)
 ```
 
-```{r separate_recommendations_by_addressee}
-clean_rail_recs <- clean_rail_recs |>
-  
-  # remove trailing semicolons in recipient details
-  mutate(addressee_details = str_remove_all(addressee_details, ";$")) |>
+#### **BIG YIKES.**
 
-  # use remaining semicolons to put assign each recipient its own recommendation row when a single recommendation has multiple recipients
-  separate_rows(addressee_details, sep = ";") |>
-  
+Like ... gross. How am I supposed to be able to look at who the NTSB is giving recommendations to and how — or if — they've responded when all of that information is in one messy column?
+
+### What we know about the data
+
+We can see that the `addressee_details` column contains:
+
+-   The name of each organization or agency that was sent the recommendation
+
+-   The statuses of the recommendation (open vs. closed)
+
+-   How the NTSB has classified their response to the recommendation (acceptable vs. unacceptable, etc.)
+
+-   The date the recommendation was closed (if applicable)
+
+All of that info is super useful, but it's all in one column and it's pretty messy.
+
+What we we need to do is **clean up that column and separate it into distinct columns** for recipient name, recommendation status, and recommendation date closed.
+
+If you look at the `addressee_details` column, you can see two things:
+
+-   The recipients are separated by semicolons (;)
+
+-   The different pieces of information are separated by a pipe character (\|)
+
+We can use those characters to help us separate the information.
+
+### Creating distinct rows for each recipient
+
+Let's start with the semicolons. If you look close, in addition to the semicolons separating each recipient, there are actually trailing semicolons in the `addressee_details` column. So if we separate them as is, we'll end up with some rows without recipients because it will think that last semicolon means it should create a row. So let's clean those up first and then we can use the semicolons to separate the recipients into distinct rows.
+
+Note that many functions we use in R require you to put it inside *another* function called `mutate()`. This is because `mutate()` is what allows you to create new columns and modify existing ones. Basically, you tell R to run a function on a column, and then you can assign that mutated version of the column back to the original column name to overwrite it, or you can assign it to a new column name if you want to keep the original column as well.
+
+#### Removing trailing semicolons
+
+```{r remove_trailing_semicolons}
+recs <- recs |>
+  # remove trailing semicolons in recipient details
+  mutate(addressee_details = str_remove_all(addressee_details, ";$"))
+
+recs |>
+  select(addressee_details) |>
+  head(5)
+
+# NOTE: the $ in the syntax is telling R that we only want to remove semicolons that are at the end of a string. this is a type of regular expression (regex). they're complicated and usually non-intuitive, so don't worry about remembering that. you can (as i often do) just look up the correct syntax :)
+```
+
+No more trailing semicolons! But what are those weird newline elements? Those are just the way the data is formatted in the original source. Luckily, we can use `str_squish()` to fix that.
+
+#### Removing extra white space with and newline characters with `str_squish()`
+
+`str_squish()` — the most adorable-sounding function — just removes extra white space from the start and end of a string, and replaces all internal white spaces with a single space, so it's perfect for this job (not to mention awesome to say).
+
+```{r}
+recs <- recs |>
   # remove extra white space from addressee details
   mutate(addressee_details = str_squish(addressee_details))
+
+# let's take a look at the addressee_details column one more time to make sure the extra white space is gone!
+recs |>
+  filter(is_multiple_recipient == TRUE) |>
+  select(addressee_details) |>
+  head(5)
 ```
 
+#### Using `separate_rows()` to create distinct rows for each recipient
+
+Now that it looks more normal ... well, normal-ish ... we can use the remaining semicolons to separate the recipients into distinct rows.
+
+```{r separate_recommendations_by_addressee}
+recs <- recs |>
+  # use semicolons to put assign each recipient its own recommendation row when a single recommendation has multiple recipients
+  separate_rows(addressee_details, sep = ";")
+
+
+# let's take a peek at our data frame again
+recs |>
+  filter(is_multiple_recipient == TRUE) |>
+  select(addressee_details) |>
+  head(5)
+```
+
+Perfect! We have one row per recipient and no extra white space in the `addressee_details` column. 
+
+### Creating separate columns for the information in the `addressee_details` column
+
+We still have all of the information for that recipient in the `addressee_details` column, which is pretty messy.
+
+Let's use the pipe characters and the function `separate()` — which is very similar to `separate_rows()` — to separate that information into three columns: recipient name, recommendation status and the date the recommendation was closed (if applicable).
+
 ```{r separate_addressee_details}
-clean_rail_recs <- clean_rail_recs |>
+recs <- recs |>
   # separate recipient details into three distinct columns
   separate(addressee_details, 
            into = c("recipient", 
-                    "recommendation_status", 
-                    "recommendation_date_closed"), 
+                    "recipient_recommendation_status", 
+                    "recipient_recommendation_date_closed"), 
            sep = " \\| ")
+
+# all we're doing here is telling R to:
+  # look at the addressee_details column
+  # separate it into three new columns called recipient, recommendation_status and recommendation_date_closed
+  # use the pipe character (|) as the separator
+
+# we also have to add a space before and after the pipe character in the separator argument since there is a space before and after the pipe character in the addressee_details column.
+
+
+# then we can check out the new columns we just created to make sure they look right!
+recs |>
+  filter(is_multiple_recipient == TRUE) |>
+  select(recipient, recipient_recommendation_status, recipient_recommendation_date_closed) |>
+  head(5)
 ```
 
-```{r}
- # since some recommendations have multiple recipients with different statuses, we need to parse the recipient status column to get a more accurate picture of which recommendations are open vs. closed for each recipient
+Look at that! Now we have separate columns for recipient name, recommendation status and the date for when the recommendation was closed (if applicable).
 
-clean_rail_recs <- clean_rail_recs |>
+#### Removing unnecessary columns
+
+And because we have the recipient-specific columns now, we actually don't need the `overall_date_closed` or `overall_status` column anymore, so we can drop that using `select()` with a minus sign to essentially tell R to *deselect* those columns.
+
+```{r}
+recs <- recs |>
+  # drop overall status and date closed columns since we now have recipient-specific status and date closed columns
+  select(-overall_status, -overall_date_closed)
+```
+
+#### Transforming the newly created date column to date format
+
+Because we extracted the new date column from the `addressee_details` column, it's in character format instead of date format, which means we won't be able to do any date calculations with it. The date is in a mm/dd/yyyy format, so we'll adjust it using the `mdy()` function. This is another function that needs to be put within a `mutate()` statement.
+
+```{r}
+recs <- recs |>
+  # convert recipient date column to date format using mdy() since it was extracted from the addressee_details column and is in a different format than the overall date columns
+  mutate(recipient_recommendation_date_closed = mdy(recipient_recommendation_date_closed))
+```
+
+Honestly, this is already a much more usable dataset than what we started with, but we can make it even better by parsing the recipient recommendation status column to get a more accurate picture of which whether each recipient's recommendation is open or closed and how the NTSB has classified their response to the recommendation.
+
+Here, we're going to use `case_when()` to analyze the current column and create a new column that just tells us whether the recommendation is open or closed.
+
+All a `case_when()` does is parse one column and create a new column based on whether certain conditions are met. In this case, the conditions are whether the `recipient_recommendation_status` column contains the word "CLOSED" or "OPEN", so we're going to use `str_detect()` — literally, detect "what_i_want_to_look_for" in a given string — to check for those words in the column and then create a new column called `recipient_recommendation_open_closed` that just tells us whether the recommendation is open or closed for each recipient.
+
+```{r}
+recs <- recs |>
+  # step 1 — create open/closed column using case_when()
   mutate(
-    
-    # step 1 — create open/closed column using case_when()
-    recommendation_open_closed = case_when(
-      str_detect(recommendation_status, "CLOSED") ~ "CLOSED",
-      str_detect(recommendation_status, "OPEN") ~ "OPEN"),
-    
-    # step 2 — response status column using str_remove_all() & str_trim()
-    recommendation_response_status = str_trim(str_remove_all(recommendation_status, "CLOSED|OPEN|-")))
+    recipient_recommendation_open_closed = case_when(
+      
+      str_detect(recipient_recommendation_status, "Closed") ~ "Closed",
+      
+      str_detect(recipient_recommendation_status, "Open") ~ "Open")
+    )
 ```
+
+Now we'll use `str_remove_all()` and `str_squish()` — the first of which does what you think, remove elements of a string — to create another column that *just* tells us how the NTSB has classified the recipient's response to the recommendation (acceptable, unacceptable, etc.) without all of the extra information about whether it's open or closed.
 
 ```{r}
-# drop original overall_status and recommendation_status columns since we've parsed out the relevant information into new columns!
-clean_rail_recs <- clean_rail_recs |>
-  select(-overall_status, -recommendation_status)
-```
-
-```{r date_handling}
-# convert date columns to date format using as.Date() and mdy() from lubridate package (since some of the date formats are inconsistent across columns)
-
-clean_rail_recs <- clean_rail_recs |>
+recs <- recs |>  
+  # step 2 — response status column using str_remove_all() & str_trim()
   mutate(
-    # convert overall date columns to date format using as.Date() since they are in a consistent format
-    across(c(event_date, recommendation_date_issued), ~as.Date(.)),
-    
-    # convert recipient date column to date format using mdy() since it was extracted from the addressee_details column and is in a different format than the overall date columns
-   recommendation_date_closed = mdy(recommendation_date_closed),
-    
-    # add year columns
-    event_year = year(event_date),
-    recommendation_year_issued = year(recommendation_date_issued),
-    recommendation_year_closed = year(recommendation_date_closed)
-  )
-
-# *note: you will get a warning for the recipient_date_closed column. that's ok! the columns it's failing to convert are the ones that have NA values in them, which is expected since not all recommendations are closed
+    recipient_recommendation_response_status = str_squish(
+      str_remove_all(
+        recipient_recommendation_status, 
+        "Closed|Open|-")
+      # this is the part where we tell R to remove the words "CLOSED", "OPEN" and any dashes from the recipient_recommendation_status column
+      )
+    )
 ```
+
+Since we now have separate columns for whether the recommendation is open or closed and how the NTSB has classified the recipient's response to the recommendation, we can drop the original `recipient_recommendation_status` column since it contains all of that information in one messy string.
 
 ```{r}
-# reorganize columns
-clean_rail_recs <- clean_rail_recs |>
-  select(recommendation_id, 
-         ntsb_no,
-         mkey,
-         report_no,
-         recommendation_mode,
-         summary,
-         event_date,
-         event_year,
-         city,
-         state,
-         country,
-         recommendation,
-         recommendation_encodings,
-         recommendation_category,
-         recommendation_subcategory,
-         recommendation_date_issued,
-         recommendation_year_issued,
-         recipient,
-         is_multiple_recipient,
-         recommendation_response_status,
-         recommendation_open_closed,
-         recommendation_date_closed,
-         recommendation_year_closed,
-         recommendation_url,
-         accident_report_url
-         )
+recs <- recs |>
+  # drop original recipient recommendation status column since we now have separate columns for open/closed status
+  select(-recipient_recommendation_status)
 ```
 
-```{r}
-json_data <- read_csv("data/rail_safety_json_data.csv")
-```
+Well, now that we've got all this cleaned up, we can write it back into a csv and save it — that way we have a cleaned version saved, and we can import it into Google Sheets if we want to.
 
 ```{r}
-x <- clean_rail_recs |>
-  left_join(json_data, join_by(recommendation_id, recommendation))
+# write to csv
+write_csv(recs, "data/clean_rail_safety_recs.csv")
 ```
+
+## BONUS: Exploring the Full Data
+
+### Go through these next steps on your own, if you want to try getting some additional information out of the data!
+
+Note that this is *summary* data from NTSB's CAROL database, which means it's missing some of the contextual information that you can see online — like a recommendation's priority level, hazmat status, etc.
+
+The reason? The full data is in a nested JSON file that by itself is pretty unmanageable. We'll come back to this, but for now, the summary data is what we're going to focus on.

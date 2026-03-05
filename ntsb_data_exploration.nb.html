@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Cat Murphy" />
+<meta name="author" content="Code by Cat Murphy, Howard Center for Investigative Journalism at the University of Maryland" />
 
 
 <title>Finding the Story: Transportation Data</title>
@@ -1748,57 +1748,98 @@ display: none;
 
 
 <h1 class="title toc-ignore">Finding the Story: Transportation Data</h1>
-<h4 class="author">Cat Murphy</h4>
+<h4 class="author">Code by Cat Murphy, Howard Center for Investigative
+Journalism at the University of Maryland</h4>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<div id="finding-the-story-transportation-data" class="section level1">
-<h1>Finding the Story: Transportation Data</h1>
-<div id="install-load-packages" class="section level2">
-<h2>Install &amp; Load Packages</h2>
+<div id="step-1-install-load-packages" class="section level2">
+<h2>Step 1: Install &amp; Load Packages</h2>
+<p>These are the packages we’ll be using for this data exploration
+process. If you don’t have them installed, you can run the
+install.packages() lines to install them. Otherwise, just load the
+libraries and we’ll get going!</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJwYm5OMFlXeHNMbkJoWTJ0aFoyVnpLRndpZEdsa2VYWmxjbk5sWENJcFhHNXNhV0p5WVhKNUtIUnBaSGwyWlhKelpTbGNibHh1SXlCcGJuTjBZV3hzTG5CaFkydGhaMlZ6S0Z3aVpIQnNlWEpjSWlsY2JteHBZbkpoY25rb1pIQnNlWElwWEc1Y2JpTWdhVzV6ZEdGc2JDNXdZV05yWVdkbGN5aGNJbXBoYm1sMGIzSmNJaWxjYm14cFluSmhjbmtvYW1GdWFYUnZjaWxjYmx4dUl5QnBibk4wWVd4c0xuQmhZMnRoWjJWektGd2liSFZpY21sa1lYUmxYQ0lwWEc1c2FXSnlZWEo1S0d4MVluSnBaR0YwWlNsY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIGluc3RhbGwucGFja2FnZXMoXCJ0aWR5dmVyc2VcIilcbmxpYnJhcnkodGlkeXZlcnNlKVxuXG4jIGluc3RhbGwucGFja2FnZXMoXCJkcGx5clwiKVxubGlicmFyeShkcGx5cilcblxuIyBpbnN0YWxsLnBhY2thZ2VzKFwiamFuaXRvclwiKVxubGlicmFyeShqYW5pdG9yKVxuXG4jIGluc3RhbGwucGFja2FnZXMoXCJsdWJyaWRhdGVcIilcbmxpYnJhcnkobHVicmlkYXRlKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbnN0YWxsLnBhY2thZ2VzKFwidGlkeXZlcnNlXCIpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcblxuIyBpbnN0YWxsLnBhY2thZ2VzKFwiZHBseXJcIilcbmxpYnJhcnkoZHBseXIpXG5cbiMgaW5zdGFsbC5wYWNrYWdlcyhcImphbml0b3JcIilcbmxpYnJhcnkoamFuaXRvcilcblxuIyBpbnN0YWxsLnBhY2thZ2VzKFwibHVicmlkYXRlXCIpXG5saWJyYXJ5KGx1YnJpZGF0ZSlcbmBgYCJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJwYm5OMFlXeHNMbkJoWTJ0aFoyVnpLRndpZEdsa2VYWmxjbk5sWENJcFhHNXNhV0p5WVhKNUtIUnBaSGwyWlhKelpTbGNibHh1SXlCcGJuTjBZV3hzTG5CaFkydGhaMlZ6S0Z3aVpIQnNlWEpjSWlsY2JteHBZbkpoY25rb1pIQnNlWElwWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIGluc3RhbGwucGFja2FnZXMoXCJ0aWR5dmVyc2VcIilcbmxpYnJhcnkodGlkeXZlcnNlKVxuXG4jIGluc3RhbGwucGFja2FnZXMoXCJkcGx5clwiKVxubGlicmFyeShkcGx5cilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbnN0YWxsLnBhY2thZ2VzKFwidGlkeXZlcnNlXCIpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcblxuIyBpbnN0YWxsLnBhY2thZ2VzKFwiZHBseXJcIilcbmxpYnJhcnkoZHBseXIpXG5gYGAifQ== -->
 <pre class="r"><code># install.packages(&quot;tidyverse&quot;)
 library(tidyverse)
 
 # install.packages(&quot;dplyr&quot;)
-library(dplyr)
-
-# install.packages(&quot;janitor&quot;)
-library(janitor)
-
-# install.packages(&quot;lubridate&quot;)
-library(lubridate)</code></pre>
+library(dplyr)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="load-rail-safety-recommendations-2000-present" class="section level2">
-<h2>Load Rail Safety Recommendations (2000-present)</h2>
+<div id="step-2-load-data-clean-column-names" class="section level2">
+<h2>Step 2: Load Data &amp; Clean Column Names</h2>
 <p><em>Source: National Transportation Safety Board’s CAROL
 Database</em></p>
 <p><em>Link to Custom Search Builder: <a href="https://data.ntsb.gov/carol-main-public/query-builder" class="uri">https://data.ntsb.gov/carol-main-public/query-builder</a></em></p>
-<p>The first step in our data exploration process is to load the raw
-.csv data from the NTSB’s database to get a sense of what we’re working
-with.</p>
-<p>Note that this is <em>summary</em> data from NTSB’s CAROL database,
-which means it’s missing some of the contextual information that you can
-see online — like a recommendation’s priority level, hazmat status,
-etc.</p>
-<p>The reason? The full data is in a nested JSON file that by itself is
-pretty unmanageable. We’ll come back to this, but for now, the summary
-data is what we’re going to focus on.</p>
+<div id="use-load_csv-to-load-the-data" class="section level3">
+<h3>Use <code>load_csv</code>() to load the data</h3>
+<p>The first step in our data exploration process is to load that data
+we were working with.</p>
+<p>We’re going to use the <code>read_csv()</code> function to help us do
+that and then we’ll clean the column names and peek at the data using
+<code>glimpse()</code> to get a sense of what we’re working with.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJzYjJGa0lISmhkeUJqYzNaY2JuSmhkMTl5WVdsc1gzSmxZM01nUEMwZ2NtVmhaRjlqYzNZb1hDSmtZWFJoTDNKaGFXeGZjMkZtWlhSNVgzSmxZM011WTNOMlhDSXBJSHcrWEc0Z0lGeHVJQ0FqSUdOc1pXRnVJRzVoYldWelhHNGdJR05zWldGdVgyNWhiV1Z6S0NrZ2ZENWNiaUFnWEc0Z0lDTWdjR1ZsYXlCaGRDQmtZWFJoWEc0Z0lHZHNhVzF3YzJVb0tWeHVZR0JnSW4wPSAtLT5cblxuYGBgclxuIyBsb2FkIHJhdyBjc3ZcbnJhd19yYWlsX3JlY3MgPC0gcmVhZF9jc3YoXCJkYXRhL3JhaWxfc2FmZXR5X3JlY3MuY3N2XCIpIHw+XG4gIFxuICAjIGNsZWFuIG5hbWVzXG4gIGNsZWFuX25hbWVzKCkgfD5cbiAgXG4gICMgcGVlayBhdCBkYXRhXG4gIGdsaW1wc2UoKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBsb2FkIHJhdyBjc3ZcbnJhd19yYWlsX3JlY3MgPC0gcmVhZF9jc3YoXCJkYXRhL3JhaWxfc2FmZXR5X3JlY3MuY3N2XCIpIHw+XG4gIFxuICAjIGNsZWFuIG5hbWVzXG4gIGNsZWFuX25hbWVzKCkgfD5cbiAgXG4gICMgcGVlayBhdCBkYXRhXG4gIGdsaW1wc2UoKVxuYGBgIn0= -->
-<pre class="r"><code># load raw csv
-raw_rail_recs &lt;- read_csv(&quot;data/rail_safety_recs.csv&quot;) |&gt;
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJ6ZVc1MFlYZzZYRzRqSUhkb1lYUmZlVzkxWDNkaGJuUmZkRzlmYm1GdFpWOTViM1Z5WDJSaGRHRWdQQzBnY21WaFpGOWpjM1lvWENKd1lYUm9MM1J2TDNsdmRYSXZaR0YwWVM1amMzWmNJaWxjYmx4dWNtVmpjeUE4TFNCeVpXRmtYMk56ZGloY0ltUmhkR0V2Y21GcGJGOXpZV1psZEhsZmNtVmpjeTVqYzNaY0lpa2dYRzVjYmlNZ2RHRnJaU0JoSUd4dmIyc2dkRzhnYzJWbElIZG9ZWFFnZDJVZ2FHRjJaVnh1WjJ4cGJYQnpaU2h5WldOektWeHVZR0JnSW4wPSAtLT5cblxuYGBgclxuIyBzeW50YXg6XG4jIHdoYXRfeW91X3dhbnRfdG9fbmFtZV95b3VyX2RhdGEgPC0gcmVhZF9jc3YoXCJwYXRoL3RvL3lvdXIvZGF0YS5jc3ZcIilcblxucmVjcyA8LSByZWFkX2NzdihcImRhdGEvcmFpbF9zYWZldHlfcmVjcy5jc3ZcIikgXG5cbiMgdGFrZSBhIGxvb2sgdG8gc2VlIHdoYXQgd2UgaGF2ZVxuZ2xpbXBzZShyZWNzKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzeW50YXg6XG4jIHdoYXRfeW91X3dhbnRfdG9fbmFtZV95b3VyX2RhdGEgPC0gcmVhZF9jc3YoXCJwYXRoL3RvL3lvdXIvZGF0YS5jc3ZcIilcblxucmVjcyA8LSByZWFkX2NzdihcImRhdGEvcmFpbF9zYWZldHlfcmVjcy5jc3ZcIikgXG5cbiMgdGFrZSBhIGxvb2sgdG8gc2VlIHdoYXQgd2UgaGF2ZVxuZ2xpbXBzZShyZWNzKVxuYGBgIn0= -->
+<pre class="r"><code># syntax:
+# what_you_want_to_name_your_data &lt;- read_csv(&quot;path/to/your/data.csv&quot;)
+
+recs &lt;- read_csv(&quot;data/rail_safety_recs.csv&quot;) 
+
+# take a look to see what we have
+glimpse(recs)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNzMxXG5Db2x1bW5zOiAyMVxuJCBTcmlkICAgICAgICAgICAgICAgIDxjaHI+IFwiUi0yNS0wMTNcIiwgXCJSLTI1LTAxNFwiLCBcIlItMjUtMDEyXCIsIFwiUi0yNS0wMTFcIuKAplxuJCBSZWNvbW1lbmRhdGlvbk1vZGUgIDxjaHI+IFwiUmFpbHJvYWRcIiwgXCJSYWlscm9hZFwiLCBcIlJhaWxyb2FkXCIsIFwiUmFpbHJvYWRcIuKAplxuJCBFdmVudERhdGUgICAgICAgICAgIDxkdHRtPiAyMDI1LTAyLTA2IDIyOjU2OjAwLCAyMDI1LTAyLTA2IDIyOjU2OjAwLCAyMDLigKZcbiQgQ2l0eSAgICAgICAgICAgICAgICA8Y2hyPiBcIlJpZGxleSBQYXJrXCIsIFwiUmlkbGV5IFBhcmtcIiwgXCJSaWRsZXkgUGFya1wiLCBcIuKAplxuJCBTdGF0ZSAgICAgICAgICAgICAgIDxjaHI+IFwiUGVubnN5bHZhbmlhXCIsIFwiUGVubnN5bHZhbmlhXCIsIFwiUGVubnN5bHZhbmlhXCLigKZcbiQgQ291bnRyeSAgICAgICAgICAgICA8Y2hyPiBcIlVTQVwiLCBcIlVTQVwiLCBcIlVTQVwiLCBcIlVTQVwiLCBcIlVTQVwiLCBcIlVTQVwiLCBcIlVTQeKAplxuJCBBYnN0cmFjdCAgICAgICAgICAgIDxjaHI+IFwiVGhlIE5hdGlvbmFsIFRyYW5zcG9ydGF0aW9uIFNhZmV0eSBCb2FyZCAoTlRT4oCmXG4kIERhdGVJc3N1ZWQgICAgICAgICAgPGR0dG0+IDIwMjUtMTAtMDEgMDQ6MDA6MDAsIDIwMjUtMTAtMDEgMDQ6MDA6MDAsIDIwMuKAplxuJCBBZGRyZXNzZWVEZXRhaWxzICAgIDxjaHI+IFwiU291dGhlYXN0ZXJuIFBlbm5zeWx2YW5pYSBUcmFuc3BvcnRhdGlvbiBBdXRo4oCmXG4kIElzTXVsdGlwbGVSZWNpcGllbnQgPGxnbD4gRkFMU0UsIEZBTFNFLCBGQUxTRSwgVFJVRSwgVFJVRSwgRkFMU0UsIEZBTFNFLOKAplxuJCBPdmVyYWxsU3RhdHVzICAgICAgIDxjaHI+IFwiT3BlbiAtIEluaXRpYWwgUmVzcG9uc2UgUmVjZWl2ZWRcIiwgXCJPcGVuIC0gSW7igKZcbiQgT3ZlcmFsbERhdGVDbG9zZWQgICA8ZHR0bT4gTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBO4oCmXG4kIFJlY29tbWVuZGF0aW9uICAgICAgPGNocj4gXCJUTyBUSEUgU09VVEhFQVNURVJOIFBFTk5TWUxWQU5JQSBUUkFOU1BPUlRBVEnigKZcbiQgYFNSIGNvZGluZyBtb2RlYCAgICA8Y2hyPiBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBcIlJhaWxyb2FkLOKAplxuJCBgU1IgY29kaW5nIHRpZXIgMWAgIDxjaHI+IE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIFwiUGVyc29ubmVs4oCmXG4kIGBTUiBjb2RpbmcgdGllcjJgICAgPGNocj4gTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgXCJUcmFpbmluZyDigKZcbiQgTnRzYk5vICAgICAgICAgICAgICA8Y2hyPiBcIlJSRDI1RlIwMDZcIiwgXCJSUkQyNUZSMDA2XCIsIFwiUlJEMjVGUjAwNlwiLCBcIlJSROKAplxuJCBNa2V5ICAgICAgICAgICAgICAgIDxkYmw+IDE5OTY2MSwgMTk5NjYxLCAxOTk2NjEsIDE5MjgwMywgMTkyODAzLCAxOTI4MDPigKZcbiQgUmVwb3J0Tm8gICAgICAgICAgICA8Y2hyPiBcIlJJUi0yNS0xMlwiLCBcIlJJUi0yNS0xMlwiLCBcIlJJUi0yNS0xMlwiLCBcIlJJUi0yNeKAplxuJCBTclVybCAgICAgICAgICAgICAgIDxjaHI+IFwiaHR0cHM6Ly9kYXRhLm50c2IuZ292L2Nhcm9sLW1haW4tcHVibGljL3NyLWRl4oCmXG4kIEFjY2lkZW50UmVwb3J0VXJsICAgPGNocj4gXCJodHRwczovL3d3dy5udHNiLmdvdi9pbnZlc3RpZ2F0aW9ucy9QYWdlcy9SUkTigKZcbiJ9 -->
+<pre><code>Rows: 731
+Columns: 21
+$ Srid                &lt;chr&gt; &quot;R-25-013&quot;, &quot;R-25-014&quot;, &quot;R-25-012&quot;, &quot;R-25-011&quot;…
+$ RecommendationMode  &lt;chr&gt; &quot;Railroad&quot;, &quot;Railroad&quot;, &quot;Railroad&quot;, &quot;Railroad&quot;…
+$ EventDate           &lt;dttm&gt; 2025-02-06 22:56:00, 2025-02-06 22:56:00, 202…
+$ City                &lt;chr&gt; &quot;Ridley Park&quot;, &quot;Ridley Park&quot;, &quot;Ridley Park&quot;, &quot;…
+$ State               &lt;chr&gt; &quot;Pennsylvania&quot;, &quot;Pennsylvania&quot;, &quot;Pennsylvania&quot;…
+$ Country             &lt;chr&gt; &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA…
+$ Abstract            &lt;chr&gt; &quot;The National Transportation Safety Board (NTS…
+$ DateIssued          &lt;dttm&gt; 2025-10-01 04:00:00, 2025-10-01 04:00:00, 202…
+$ AddresseeDetails    &lt;chr&gt; &quot;Southeastern Pennsylvania Transportation Auth…
+$ IsMultipleRecipient &lt;lgl&gt; FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE,…
+$ OverallStatus       &lt;chr&gt; &quot;Open - Initial Response Received&quot;, &quot;Open - In…
+$ OverallDateClosed   &lt;dttm&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+$ Recommendation      &lt;chr&gt; &quot;TO THE SOUTHEASTERN PENNSYLVANIA TRANSPORTATI…
+$ `SR coding mode`    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Railroad,…
+$ `SR coding tier 1`  &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Personnel…
+$ `SR coding tier2`   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Training …
+$ NtsbNo              &lt;chr&gt; &quot;RRD25FR006&quot;, &quot;RRD25FR006&quot;, &quot;RRD25FR006&quot;, &quot;RRD…
+$ Mkey                &lt;dbl&gt; 199661, 199661, 199661, 192803, 192803, 192803…
+$ ReportNo            &lt;chr&gt; &quot;RIR-25-12&quot;, &quot;RIR-25-12&quot;, &quot;RIR-25-12&quot;, &quot;RIR-25…
+$ SrUrl               &lt;chr&gt; &quot;https://data.ntsb.gov/carol-main-public/sr-de…
+$ AccidentReportUrl   &lt;chr&gt; &quot;https://www.ntsb.gov/investigations/Pages/RRD…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Great! But those column names are a little hard to work with.</p>
+</div>
+<div id="use-clean_names-to-clean-column-names" class="section level3">
+<h3>Use <code>clean_names()</code> to clean column names</h3>
+<p>So let’s use the <code>clean_names()</code> function from the
+<code>janitor</code> package to make our column names easier to work
+with, and then we can use <code>glimpse()</code> to peek at the data
+again.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJRnh1SUNBaklHTnNaV0Z1SUc1aGJXVnpYRzRnSUdOc1pXRnVYMjVoYldWektDa2dmRDVjYmlBZ1hHNGdJQ01nY0dWbGF5QmhkQ0JrWVhSaFhHNGdJR2RzYVcxd2MyVW9LVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbnJlY3MgPC0gcmVjcyB8PlxuICBcbiAgIyBjbGVhbiBuYW1lc1xuICBjbGVhbl9uYW1lcygpIHw+XG4gIFxuICAjIHBlZWsgYXQgZGF0YVxuICBnbGltcHNlKClcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gIFxuICAjIGNsZWFuIG5hbWVzXG4gIGNsZWFuX25hbWVzKCkgfD5cbiAgXG4gICMgcGVlayBhdCBkYXRhXG4gIGdsaW1wc2UoKVxuYGBgIn0= -->
+<pre class="r"><code>recs &lt;- recs |&gt;
   
   # clean names
   clean_names() |&gt;
@@ -1807,209 +1848,381 @@ raw_rail_recs &lt;- read_csv(&quot;data/rail_safety_recs.csv&quot;) |&gt;
   glimpse()</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNzMxXG5Db2x1bW5zOiAyMVxuJCBzcmlkICAgICAgICAgICAgICAgICAgPGNocj4gXCJSLTI1LTAxM1wiLCBcIlItMjUtMDE0XCIsIFwiUi0yNS0wMTJcIiwgXCJSLTI1LTAxMVwiLCBcIlIt4oCmXG4kIHJlY29tbWVuZGF0aW9uX21vZGUgICA8Y2hyPiBcIlJhaWxyb2FkXCIsIFwiUmFpbHJvYWRcIiwgXCJSYWlscm9hZFwiLCBcIlJhaWxyb2FkXCIsIFwiUmHigKZcbiQgZXZlbnRfZGF0ZSAgICAgICAgICAgIDxkdHRtPiAyMDI1LTAyLTA2IDIyOjU2OjAwLCAyMDI1LTAyLTA2IDIyOjU2OjAwLCAyMDI1LTAyLeKAplxuJCBjaXR5ICAgICAgICAgICAgICAgICAgPGNocj4gXCJSaWRsZXkgUGFya1wiLCBcIlJpZGxleSBQYXJrXCIsIFwiUmlkbGV5IFBhcmtcIiwgXCJHcmVhdOKAplxuJCBzdGF0ZSAgICAgICAgICAgICAgICAgPGNocj4gXCJQZW5uc3lsdmFuaWFcIiwgXCJQZW5uc3lsdmFuaWFcIiwgXCJQZW5uc3lsdmFuaWFcIiwgXCJNYeKAplxuJCBjb3VudHJ5ICAgICAgICAgICAgICAgPGNocj4gXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJV4oCmXG4kIGFic3RyYWN0ICAgICAgICAgICAgICA8Y2hyPiBcIlRoZSBOYXRpb25hbCBUcmFuc3BvcnRhdGlvbiBTYWZldHkgQm9hcmQgKE5UU0IpIGlz4oCmXG4kIGRhdGVfaXNzdWVkICAgICAgICAgICA8ZHR0bT4gMjAyNS0xMC0wMSAwNDowMDowMCwgMjAyNS0xMC0wMSAwNDowMDowMCwgMjAyNS0xMC3igKZcbiQgYWRkcmVzc2VlX2RldGFpbHMgICAgIDxjaHI+IFwiU291dGhlYXN0ZXJuIFBlbm5zeWx2YW5pYSBUcmFuc3BvcnRhdGlvbiBBdXRob3JpdHnigKZcbiQgaXNfbXVsdGlwbGVfcmVjaXBpZW50IDxsZ2w+IEZBTFNFLCBGQUxTRSwgRkFMU0UsIFRSVUUsIFRSVUUsIEZBTFNFLCBGQUxTRSwgVFJVReKAplxuJCBvdmVyYWxsX3N0YXR1cyAgICAgICAgPGNocj4gXCJPcGVuIC0gSW5pdGlhbCBSZXNwb25zZSBSZWNlaXZlZFwiLCBcIk9wZW4gLSBJbml0aWFs4oCmXG4kIG92ZXJhbGxfZGF0ZV9jbG9zZWQgICA8ZHR0bT4gTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkHigKZcbiQgcmVjb21tZW5kYXRpb24gICAgICAgIDxjaHI+IFwiVE8gVEhFIFNPVVRIRUFTVEVSTiBQRU5OU1lMVkFOSUEgVFJBTlNQT1JUQVRJT04gQVXigKZcbiQgc3JfY29kaW5nX21vZGUgICAgICAgIDxjaHI+IE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIFwiUmFpbHJvYWQsIFJhaWzigKZcbiQgc3JfY29kaW5nX3RpZXJfMSAgICAgIDxjaHI+IE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIFwiUGVyc29ubmVsLCBQcm/igKZcbiQgc3JfY29kaW5nX3RpZXIyICAgICAgIDxjaHI+IE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIFwiVHJhaW5pbmcgLyBwcm/igKZcbiQgbnRzYl9ubyAgICAgICAgICAgICAgIDxjaHI+IFwiUlJEMjVGUjAwNlwiLCBcIlJSRDI1RlIwMDZcIiwgXCJSUkQyNUZSMDA2XCIsIFwiUlJEMjNGUjDigKZcbiQgbWtleSAgICAgICAgICAgICAgICAgIDxkYmw+IDE5OTY2MSwgMTk5NjYxLCAxOTk2NjEsIDE5MjgwMywgMTkyODAzLCAxOTI4MDMsIDE5MuKAplxuJCByZXBvcnRfbm8gICAgICAgICAgICAgPGNocj4gXCJSSVItMjUtMTJcIiwgXCJSSVItMjUtMTJcIiwgXCJSSVItMjUtMTJcIiwgXCJSSVItMjUtMTFcIizigKZcbiQgc3JfdXJsICAgICAgICAgICAgICAgIDxjaHI+IFwiaHR0cHM6Ly9kYXRhLm50c2IuZ292L2Nhcm9sLW1haW4tcHVibGljL3NyLWRldGFpbHPigKZcbiQgYWNjaWRlbnRfcmVwb3J0X3VybCAgIDxjaHI+IFwiaHR0cHM6Ly93d3cubnRzYi5nb3YvaW52ZXN0aWdhdGlvbnMvUGFnZXMvUlJEMjVGUjDigKZcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNzMxXG5Db2x1bW5zOiAyMVxuJCBzcmlkICAgICAgICAgICAgICAgICAgPGNocj4gXCJSLTI1LTAxM1wiLCBcIlItMjUtMDE0XCIsIFwiUi0yNS0wMTJcIiwgXCJSLTI1LTAx4oCmXG4kIHJlY29tbWVuZGF0aW9uX21vZGUgICA8Y2hyPiBcIlJhaWxyb2FkXCIsIFwiUmFpbHJvYWRcIiwgXCJSYWlscm9hZFwiLCBcIlJhaWxyb2HigKZcbiQgZXZlbnRfZGF0ZSAgICAgICAgICAgIDxkdHRtPiAyMDI1LTAyLTA2IDIyOjU2OjAwLCAyMDI1LTAyLTA2IDIyOjU2OjAwLCAy4oCmXG4kIGNpdHkgICAgICAgICAgICAgICAgICA8Y2hyPiBcIlJpZGxleSBQYXJrXCIsIFwiUmlkbGV5IFBhcmtcIiwgXCJSaWRsZXkgUGFya1wiLOKAplxuJCBzdGF0ZSAgICAgICAgICAgICAgICAgPGNocj4gXCJQZW5uc3lsdmFuaWFcIiwgXCJQZW5uc3lsdmFuaWFcIiwgXCJQZW5uc3lsdmFuaeKAplxuJCBjb3VudHJ5ICAgICAgICAgICAgICAgPGNocj4gXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJVU0FcIiwgXCJV4oCmXG4kIGFic3RyYWN0ICAgICAgICAgICAgICA8Y2hyPiBcIlRoZSBOYXRpb25hbCBUcmFuc3BvcnRhdGlvbiBTYWZldHkgQm9hcmQgKE7igKZcbiQgZGF0ZV9pc3N1ZWQgICAgICAgICAgIDxkdHRtPiAyMDI1LTEwLTAxIDA0OjAwOjAwLCAyMDI1LTEwLTAxIDA0OjAwOjAwLCAy4oCmXG4kIGFkZHJlc3NlZV9kZXRhaWxzICAgICA8Y2hyPiBcIlNvdXRoZWFzdGVybiBQZW5uc3lsdmFuaWEgVHJhbnNwb3J0YXRpb24gQXXigKZcbiQgaXNfbXVsdGlwbGVfcmVjaXBpZW50IDxsZ2w+IEZBTFNFLCBGQUxTRSwgRkFMU0UsIFRSVUUsIFRSVUUsIEZBTFNFLCBGQUxT4oCmXG4kIG92ZXJhbGxfc3RhdHVzICAgICAgICA8Y2hyPiBcIk9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkXCIsIFwiT3BlbiAtIOKAplxuJCBvdmVyYWxsX2RhdGVfY2xvc2VkICAgPGR0dG0+IE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSzigKZcbiQgcmVjb21tZW5kYXRpb24gICAgICAgIDxjaHI+IFwiVE8gVEhFIFNPVVRIRUFTVEVSTiBQRU5OU1lMVkFOSUEgVFJBTlNQT1JUQeKAplxuJCBzcl9jb2RpbmdfbW9kZSAgICAgICAgPGNocj4gTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgXCJSYWlscm9h4oCmXG4kIHNyX2NvZGluZ190aWVyXzEgICAgICA8Y2hyPiBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBcIlBlcnNvbm7igKZcbiQgc3JfY29kaW5nX3RpZXIyICAgICAgIDxjaHI+IE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIE5BLCBOQSwgTkEsIFwiVHJhaW5pbuKAplxuJCBudHNiX25vICAgICAgICAgICAgICAgPGNocj4gXCJSUkQyNUZSMDA2XCIsIFwiUlJEMjVGUjAwNlwiLCBcIlJSRDI1RlIwMDZcIiwgXCJS4oCmXG4kIG1rZXkgICAgICAgICAgICAgICAgICA8ZGJsPiAxOTk2NjEsIDE5OTY2MSwgMTk5NjYxLCAxOTI4MDMsIDE5MjgwMywgMTkyOOKAplxuJCByZXBvcnRfbm8gICAgICAgICAgICAgPGNocj4gXCJSSVItMjUtMTJcIiwgXCJSSVItMjUtMTJcIiwgXCJSSVItMjUtMTJcIiwgXCJSSVIt4oCmXG4kIHNyX3VybCAgICAgICAgICAgICAgICA8Y2hyPiBcImh0dHBzOi8vZGF0YS5udHNiLmdvdi9jYXJvbC1tYWluLXB1YmxpYy9zci3igKZcbiQgYWNjaWRlbnRfcmVwb3J0X3VybCAgIDxjaHI+IFwiaHR0cHM6Ly93d3cubnRzYi5nb3YvaW52ZXN0aWdhdGlvbnMvUGFnZXMvUuKAplxuIn0= -->
 <pre><code>Rows: 731
 Columns: 21
-$ srid                  &lt;chr&gt; &quot;R-25-013&quot;, &quot;R-25-014&quot;, &quot;R-25-012&quot;, &quot;R-25-011&quot;, &quot;R-…
-$ recommendation_mode   &lt;chr&gt; &quot;Railroad&quot;, &quot;Railroad&quot;, &quot;Railroad&quot;, &quot;Railroad&quot;, &quot;Ra…
-$ event_date            &lt;dttm&gt; 2025-02-06 22:56:00, 2025-02-06 22:56:00, 2025-02-…
-$ city                  &lt;chr&gt; &quot;Ridley Park&quot;, &quot;Ridley Park&quot;, &quot;Ridley Park&quot;, &quot;Great…
-$ state                 &lt;chr&gt; &quot;Pennsylvania&quot;, &quot;Pennsylvania&quot;, &quot;Pennsylvania&quot;, &quot;Ma…
-$ country               &lt;chr&gt; &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;U…
-$ abstract              &lt;chr&gt; &quot;The National Transportation Safety Board (NTSB) is…
-$ date_issued           &lt;dttm&gt; 2025-10-01 04:00:00, 2025-10-01 04:00:00, 2025-10-…
-$ addressee_details     &lt;chr&gt; &quot;Southeastern Pennsylvania Transportation Authority…
-$ is_multiple_recipient &lt;lgl&gt; FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE…
-$ overall_status        &lt;chr&gt; &quot;Open - Initial Response Received&quot;, &quot;Open - Initial…
-$ overall_date_closed   &lt;dttm&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
-$ recommendation        &lt;chr&gt; &quot;TO THE SOUTHEASTERN PENNSYLVANIA TRANSPORTATION AU…
-$ sr_coding_mode        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Railroad, Rail…
-$ sr_coding_tier_1      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Personnel, Pro…
-$ sr_coding_tier2       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Training / pro…
-$ ntsb_no               &lt;chr&gt; &quot;RRD25FR006&quot;, &quot;RRD25FR006&quot;, &quot;RRD25FR006&quot;, &quot;RRD23FR0…
-$ mkey                  &lt;dbl&gt; 199661, 199661, 199661, 192803, 192803, 192803, 192…
-$ report_no             &lt;chr&gt; &quot;RIR-25-12&quot;, &quot;RIR-25-12&quot;, &quot;RIR-25-12&quot;, &quot;RIR-25-11&quot;,…
-$ sr_url                &lt;chr&gt; &quot;https://data.ntsb.gov/carol-main-public/sr-details…
-$ accident_report_url   &lt;chr&gt; &quot;https://www.ntsb.gov/investigations/Pages/RRD25FR0…</code></pre>
+$ srid                  &lt;chr&gt; &quot;R-25-013&quot;, &quot;R-25-014&quot;, &quot;R-25-012&quot;, &quot;R-25-01…
+$ recommendation_mode   &lt;chr&gt; &quot;Railroad&quot;, &quot;Railroad&quot;, &quot;Railroad&quot;, &quot;Railroa…
+$ event_date            &lt;dttm&gt; 2025-02-06 22:56:00, 2025-02-06 22:56:00, 2…
+$ city                  &lt;chr&gt; &quot;Ridley Park&quot;, &quot;Ridley Park&quot;, &quot;Ridley Park&quot;,…
+$ state                 &lt;chr&gt; &quot;Pennsylvania&quot;, &quot;Pennsylvania&quot;, &quot;Pennsylvani…
+$ country               &lt;chr&gt; &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;USA&quot;, &quot;U…
+$ abstract              &lt;chr&gt; &quot;The National Transportation Safety Board (N…
+$ date_issued           &lt;dttm&gt; 2025-10-01 04:00:00, 2025-10-01 04:00:00, 2…
+$ addressee_details     &lt;chr&gt; &quot;Southeastern Pennsylvania Transportation Au…
+$ is_multiple_recipient &lt;lgl&gt; FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, FALS…
+$ overall_status        &lt;chr&gt; &quot;Open - Initial Response Received&quot;, &quot;Open - …
+$ overall_date_closed   &lt;dttm&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ recommendation        &lt;chr&gt; &quot;TO THE SOUTHEASTERN PENNSYLVANIA TRANSPORTA…
+$ sr_coding_mode        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Railroa…
+$ sr_coding_tier_1      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Personn…
+$ sr_coding_tier2       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, &quot;Trainin…
+$ ntsb_no               &lt;chr&gt; &quot;RRD25FR006&quot;, &quot;RRD25FR006&quot;, &quot;RRD25FR006&quot;, &quot;R…
+$ mkey                  &lt;dbl&gt; 199661, 199661, 199661, 192803, 192803, 1928…
+$ report_no             &lt;chr&gt; &quot;RIR-25-12&quot;, &quot;RIR-25-12&quot;, &quot;RIR-25-12&quot;, &quot;RIR-…
+$ sr_url                &lt;chr&gt; &quot;https://data.ntsb.gov/carol-main-public/sr-…
+$ accident_report_url   &lt;chr&gt; &quot;https://www.ntsb.gov/investigations/Pages/R…</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>OK, so <code>glimpse()</code> shows us we’ve got about 730 records
-across 21 columns, most of which are character columns.</p>
-<p>Most of the column names are pretty self-explanatory, but not all of
-them. Let’s fix that.</p>
+<p>Much easier to work with!</p>
 </div>
-<div id="initial-column-cleaning" class="section level2">
-<h2>Initial Column Cleaning</h2>
+</div>
+<div id="step-3-exploring-cleaning-the-data" class="section level2">
+<h2>Step 3: Exploring &amp; Cleaning the Data</h2>
+<div id="explore-recommendations-with-multiple-recipients" class="section level3">
+<h3>Explore recommendations with multiple recipients</h3>
+<p>OK, remember that example where one recommendation had multiple
+recipients with different statuses, and everything was jammed into one
+column? Let’s check that out now that we have the data loaded and
+cleaned.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZMnhsWVc1ZmNtRnBiRjl5WldOeklEd3RJSEpoZDE5eVlXbHNYM0psWTNNZ2ZENWNiaUFnWEc0Z0lDTWdjbVZ1WVcxbElHTnZiSFZ0Ym5OY2JpQWdjbVZ1WVcxbEtISmxZMjl0YldWdVpHRjBhVzl1WDJsa0lEMGdjM0pwWkN4Y2JpQWdJQ0FnSUNBZ0lITjFiVzFoY25rZ1BTQmhZbk4wY21GamRDeGNiaUFnSUNBZ0lDQWdJSEpsWTI5dGJXVnVaR0YwYVc5dVgyVnVZMjlrYVc1bmN5QTlJSE55WDJOdlpHbHVaMTl0YjJSbExGeHVJQ0FnSUNBZ0lDQWdjbVZqYjIxdFpXNWtZWFJwYjI1ZlkyRjBaV2R2Y25rZ1BTQnpjbDlqYjJScGJtZGZkR2xsY2w4eExGeHVJQ0FnSUNBZ0lDQWdjbVZqYjIxdFpXNWtZWFJwYjI1ZmMzVmlZMkYwWldkdmNua2dQU0J6Y2w5amIyUnBibWRmZEdsbGNqSXNYRzRnSUNBZ0lDQWdJQ0J5WldOdmJXMWxibVJoZEdsdmJsOTFjbXdnUFNCemNsOTFjbXdzWEc0Z0lDQWdJQ0FnSUNCeVpXTnZiVzFsYm1SaGRHbHZibDlrWVhSbFgybHpjM1ZsWkNBOUlHUmhkR1ZmYVhOemRXVmtMRnh1SUNBZ0lDQWdJQ0FnS1NCOFBseHVYRzRnSUNNZ2MzUmhibVJoY21ScGVtVWdZV3hzSUhSbGVIUWdkRzhnZFhCd1pYSmpZWE5sWEc0Z0lHMTFkR0YwWlNoaFkzSnZjM01vWlhabGNubDBhR2x1WnlncExDQitjM1J5WDNSdlgzVndjR1Z5S0M0cEtTbGNibUJnWUNKOSAtLT5cblxuYGBgclxuY2xlYW5fcmFpbF9yZWNzIDwtIHJhd19yYWlsX3JlY3MgfD5cbiAgXG4gICMgcmVuYW1lIGNvbHVtbnNcbiAgcmVuYW1lKHJlY29tbWVuZGF0aW9uX2lkID0gc3JpZCxcbiAgICAgICAgIHN1bW1hcnkgPSBhYnN0cmFjdCxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX2VuY29kaW5ncyA9IHNyX2NvZGluZ19tb2RlLFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fY2F0ZWdvcnkgPSBzcl9jb2RpbmdfdGllcl8xLFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fc3ViY2F0ZWdvcnkgPSBzcl9jb2RpbmdfdGllcjIsXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl91cmwgPSBzcl91cmwsXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCA9IGRhdGVfaXNzdWVkLFxuICAgICAgICAgKSB8PlxuXG4gICMgc3RhbmRhcmRpemUgYWxsIHRleHQgdG8gdXBwZXJjYXNlXG4gIG11dGF0ZShhY3Jvc3MoZXZlcnl0aGluZygpLCB+c3RyX3RvX3VwcGVyKC4pKSlcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5fcmFpbF9yZWNzIDwtIHJhd19yYWlsX3JlY3MgfD5cbiAgXG4gICMgcmVuYW1lIGNvbHVtbnNcbiAgcmVuYW1lKHJlY29tbWVuZGF0aW9uX2lkID0gc3JpZCxcbiAgICAgICAgIHN1bW1hcnkgPSBhYnN0cmFjdCxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX2VuY29kaW5ncyA9IHNyX2NvZGluZ19tb2RlLFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fY2F0ZWdvcnkgPSBzcl9jb2RpbmdfdGllcl8xLFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fc3ViY2F0ZWdvcnkgPSBzcl9jb2RpbmdfdGllcjIsXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl91cmwgPSBzcl91cmwsXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCA9IGRhdGVfaXNzdWVkLFxuICAgICAgICAgKSB8PlxuXG4gICMgc3RhbmRhcmRpemUgYWxsIHRleHQgdG8gdXBwZXJjYXNlXG4gIG11dGF0ZShhY3Jvc3MoZXZlcnl0aGluZygpLCB+c3RyX3RvX3VwcGVyKC4pKSlcbmBgYCJ9 -->
-<pre class="r"><code>clean_rail_recs &lt;- raw_rail_recs |&gt;
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lCOFBseHVJQ0FqSUdacGJIUmxjaUJtYjNJZ2NtVmpiMjF0Wlc1a1lYUnBiMjV6SUhkcGRHZ2diWFZzZEdsd2JHVWdjbVZqYVhCcFpXNTBjMXh1SUNCbWFXeDBaWElvYVhOZmJYVnNkR2x3YkdWZmNtVmphWEJwWlc1MElEMDlJRlJTVlVVcElIdytYRzRnSUZ4dUlDQWpJSE5sYkdWamRDQnZibXg1SUhSb1pTQmhaR1J5WlhOelpXVWdaR1YwWVdsc2N5QmpiMngxYlc0Z2RHOGdjMlZsSUhkb1lYUWdkR2hsSUhKbFkybHdhV1Z1ZENCa1pYUmhhV3h6SUd4dmIyc2diR2xyWlNCbWIzSWdjbVZqYjIxdFpXNWtZWFJwYjI1eklIZHBkR2dnYlhWc2RHbHdiR1VnY21WamFYQnBaVzUwYzF4dUlDQnpaV3hsWTNRb1lXUmtjbVZ6YzJWbFgyUmxkR0ZwYkhNcElIdytYRzRnSUZ4dUlDQWpJSFJoYTJVZ1lTQndaV1ZySUdGMElIUm9aU0JtYVhKemRDQm1hWFpsSUhKdmQzTmNiaUFnYUdWaFpDZzFLVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbnJlY3MgfD5cbiAgIyBmaWx0ZXIgZm9yIHJlY29tbWVuZGF0aW9ucyB3aXRoIG11bHRpcGxlIHJlY2lwaWVudHNcbiAgZmlsdGVyKGlzX211bHRpcGxlX3JlY2lwaWVudCA9PSBUUlVFKSB8PlxuICBcbiAgIyBzZWxlY3Qgb25seSB0aGUgYWRkcmVzc2VlIGRldGFpbHMgY29sdW1uIHRvIHNlZSB3aGF0IHRoZSByZWNpcGllbnQgZGV0YWlscyBsb29rIGxpa2UgZm9yIHJlY29tbWVuZGF0aW9ucyB3aXRoIG11bHRpcGxlIHJlY2lwaWVudHNcbiAgc2VsZWN0KGFkZHJlc3NlZV9kZXRhaWxzKSB8PlxuICBcbiAgIyB0YWtlIGEgcGVlayBhdCB0aGUgZmlyc3QgZml2ZSByb3dzXG4gIGhlYWQoNSlcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyB8PlxuICAjIGZpbHRlciBmb3IgcmVjb21tZW5kYXRpb25zIHdpdGggbXVsdGlwbGUgcmVjaXBpZW50c1xuICBmaWx0ZXIoaXNfbXVsdGlwbGVfcmVjaXBpZW50ID09IFRSVUUpIHw+XG4gIFxuICAjIHNlbGVjdCBvbmx5IHRoZSBhZGRyZXNzZWUgZGV0YWlscyBjb2x1bW4gdG8gc2VlIHdoYXQgdGhlIHJlY2lwaWVudCBkZXRhaWxzIGxvb2sgbGlrZSBmb3IgcmVjb21tZW5kYXRpb25zIHdpdGggbXVsdGlwbGUgcmVjaXBpZW50c1xuICBzZWxlY3QoYWRkcmVzc2VlX2RldGFpbHMpIHw+XG4gIFxuICAjIHRha2UgYSBwZWVrIGF0IHRoZSBmaXJzdCBmaXZlIHJvd3NcbiAgaGVhZCg1KVxuYGBgIn0= -->
+<pre class="r"><code>recs |&gt;
+  # filter for recommendations with multiple recipients
+  filter(is_multiple_recipient == TRUE) |&gt;
   
-  # rename columns
-  rename(recommendation_id = srid,
-         summary = abstract,
-         recommendation_encodings = sr_coding_mode,
-         recommendation_category = sr_coding_tier_1,
-         recommendation_subcategory = sr_coding_tier2,
-         recommendation_url = sr_url,
-         recommendation_date_issued = date_issued,
-         ) |&gt;
-
-  # standardize all text to uppercase
-  mutate(across(everything(), ~str_to_upper(.)))</code></pre>
+  # select only the addressee details column to see what the recipient details look like for recommendations with multiple recipients
+  select(addressee_details) |&gt;
+  
+  # take a peek at the first five rows
+  head(5)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1mcmFtZS1iZWdpbiBleUp0WlhSaFpHRjBZU0k2ZXlKamJHRnpjMlZ6SWpwYkluUmliRjlrWmlJc0luUmliQ0lzSW1SaGRHRXVabkpoYldVaVhTd2libkp2ZHlJNk5Td2libU52YkNJNk1Td2ljM1Z0YldGeWVTSTZleUpCSUhScFltSnNaU0k2V3lJMUlNT1hJREVpWFgxOUxDSnlaR1lpT2lKSU5ITkpRVUZCUVVGQlFVRkJLekZYVlZsMlZGRkNSR1Z3YjJ4NVFsVlljRWc1WjBoSU56SkRLME5NTkZseE1HTnBjbHBMWlhka09VOUtRbmh6TWpKWU1qaDVSek5qTXpGRWJucDNlR0l2YkdsNk9VeHpSVGRUTW5wUGRHUXlSRFphYWtkM2VWZFVlV1pVVDNwemVFNXRlSEVyYlZSNmRsUkViVTl6ZW1WSmExbDFNa1ZTU21GalNFSTRaRkJ0VFhOcWRXbHNlRmRLTWxGTk9EZFdjbkJEWlRoaGFXSm5WbTV5Um5RNVdHSXZTSFJDTjFVd1FUaG9WRmx1WjNCUWVWbFRaemxMVHpGTVpWZDRUM0ZXVVdVemVHTktkWEZYU1hSYU16UnlaMmRSYUdzck5FdEhRV1ZzYUdzNVUwSXhZVXBEVEVzdmVrbFBZMmRHV25wS1QwVnVUMlYyVjBscmFYVkJUaTgyYldKU1MwRlFURXAzYkdwUU0zbHRWVWhFUkd4WmVteFlRbXRJZWsxbE0wSkhhMmcxTTNwcmFrWklhRk00T0M4NFpsTTJVa2d2VEN0RmNGRnVjMDF6VGs5cmJqWlZaaTgxY1ZRelJsVlpWM0l3ZDJORk9FeFpVVVppTHpCTlFWTkdXR2xMWjJ0RVptSm1iMUJMY1RsS1JYTkVObGRSY1hCNmJXWTFNbk01TlVaT1NIaDBRMmRtWlc5Q1NqRm9NV3RQWlU1dVNUTnNRMnh4V2xwUFdHaEVZalZ6V1RKcU5tbG1aVkYwYm1wVFozWlNOVTlxUzNWM2JFNUpkREpCUVdsd2IzSlFZbmxRWWs5V2FqWkJWVVJRU3pSR2RFRkNORFJRYkVjNWIyRkVUR3g0TldKSmJFUm9abEptVTFsaFMweFllVTFxU1RKS2JsSmFNM2hwUTNJclVVWnVZeXRwUWsxelIxZEdVSHBaZEhGUU16Wk9NWFptTDBKaWEyNUNaRzQySzJzclkza3lNV3gyZW1WSVZXWlliV0ZNV0ZaME1YUlFkSEIxTWpCUFJHTkdjWEZVWjI5bVpYcEtZbVJsYUU0cldVMHllVVl2Y0RoUFV6bEZXQ3RwTWxkeE1TdHlUSFF6UjBRMmRXaDRSRk56Wm5Wc1oxSmxVRmRNYUhGak9GcEhhMDh3ZDJJeVVVdHlNRmMwUTBwR05qUXdSbloxZG01RU9VY3lkV3R3TVdSc1pYUkhObXd4YUdSS1IyaERMMDFOV2xOaVNWTlJOM3BMYTA0dmVYa3pla2hVTmxwMlEzZFVSamQ2TDBGMGNEaE9NR3RFUTJkQlFTSjkgLS0+XG5cbjxkaXYgZGF0YS1wYWdlZHRhYmxlPVwiZmFsc2VcIj5cbiAgPHNjcmlwdCBkYXRhLXBhZ2VkdGFibGUtc291cmNlIHR5cGU9XCJhcHBsaWNhdGlvbi9qc29uXCI+XG57XCJjb2x1bW5zXCI6W3tcImxhYmVsXCI6W1wiYWRkcmVzc2VlX2RldGFpbHNcIl0sXCJuYW1lXCI6WzFdLFwidHlwZVwiOltcImNoclwiXSxcImFsaWduXCI6W1wibGVmdFwiXX1dLFwiZGF0YVwiOlt7XCIxXCI6XCJBbWVyaWNhbiBTaG9ydCBMaW5lIGFuZCBSZWdpb25hbCBSYWlscm9hZCBBc3NvY2lhdGlvbiB8IE9wZW4gLSBBd2FpdCBSZXNwb25zZSB8IE5BO1xcXFxyXFxcXG5OYXRpb25hbCBSYWlscm9hZCBDb25zdHJ1Y3Rpb24gYW5kIE1haW50ZW5hbmNlIEFzc29jaWF0aW9uIHwgT3BlbiAtIEluaXRpYWwgUmVzcG9uc2UgUmVjZWl2ZWQgfCBOQTtcXFxcclxcXFxuXCJ9LHtcIjFcIjpcIkhvdXNhdG9uaWMgUmFpbHJvYWQgQ29tcGFueSB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcbk1pZGRsZXNleCBDb3Jwb3JhdGlvbiB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcbkFtdHJhayB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcbkJOU0YgUmFpbHdheSB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcbkNhbmFkaWFuIE5hdGlvbmFsIFJhaWx3YXkgfCBPcGVuIC0gSW5pdGlhbCBSZXNwb25zZSBSZWNlaXZlZCB8IE5BO1xcXFxyXFxcXG5DYW5hZGlhbiBQYWNpZmljIEthbnNhcyBDaXR5IHwgT3BlbiAtIEluaXRpYWwgUmVzcG9uc2UgUmVjZWl2ZWQgfCBOQTtcXFxcclxcXFxuQ1NYIFRyYW5zcG9ydGF0aW9uLCBJbmMuIHwgT3BlbiAtIEluaXRpYWwgUmVzcG9uc2UgUmVjZWl2ZWQgfCBOQTtcXFxcclxcXFxuTm9yZm9sayBTb3V0aGVybiBDb3Jwb3JhdGlvbiB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcblVuaW9uIFBhY2lmaWMgfCBPcGVuIC0gSW5pdGlhbCBSZXNwb25zZSBSZWNlaXZlZCB8IE5BO1xcXFxyXFxcXG5cIn0se1wiMVwiOlwiQW1lcmljYW4gU2hvcnQgTGluZSBhbmQgUmVnaW9uYWwgUmFpbHJvYWQgQXNzb2NpYXRpb24gfCBPcGVuIC0gQXdhaXQgUmVzcG9uc2UgfCBOQTtcXFxcclxcXFxuTmF0aW9uYWwgUmFpbHJvYWQgQ29uc3RydWN0aW9uIGFuZCBNYWludGVuYW5jZSBBc3NvY2lhdGlvbiB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcblwifSx7XCIxXCI6XCJBbXRyYWsgfCBPcGVuIC0gSW5pdGlhbCBSZXNwb25zZSBSZWNlaXZlZCB8IE5BO1xcXFxyXFxcXG5CTlNGIFJhaWx3YXkgfCBPcGVuIC0gSW5pdGlhbCBSZXNwb25zZSBSZWNlaXZlZCB8IE5BO1xcXFxyXFxcXG5DYW5hZGlhbiBOYXRpb25hbCBSYWlsd2F5IHwgT3BlbiAtIEluaXRpYWwgUmVzcG9uc2UgUmVjZWl2ZWQgfCBOQTtcXFxcclxcXFxuQ2FuYWRpYW4gUGFjaWZpYyBLYW5zYXMgQ2l0eSB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcbkNTWCBUcmFuc3BvcnRhdGlvbiwgSW5jLiB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcbk5vcmZvbGsgU291dGhlcm4gQ29ycG9yYXRpb24gfCBPcGVuIC0gSW5pdGlhbCBSZXNwb25zZSBSZWNlaXZlZCB8IE5BO1xcXFxyXFxcXG5VbmlvbiBQYWNpZmljIHwgT3BlbiAtIEluaXRpYWwgUmVzcG9uc2UgUmVjZWl2ZWQgfCBOQTtcXFxcclxcXFxuXCJ9LHtcIjFcIjpcIkJOU0YgUmFpbHdheSB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcbkNhbmFkaWFuIE5hdGlvbmFsIFJhaWx3YXkgfCBPcGVuIC0gSW5pdGlhbCBSZXNwb25zZSBSZWNlaXZlZCB8IE5BO1xcXFxyXFxcXG5DYW5hZGlhbiBQYWNpZmljIEthbnNhcyBDaXR5IHwgT3BlbiAtIEF3YWl0IFJlc3BvbnNlIHwgTkE7XFxcXHJcXFxcbkNTWCBUcmFuc3BvcnRhdGlvbiwgSW5jLiB8IE9wZW4gLSBJbml0aWFsIFJlc3BvbnNlIFJlY2VpdmVkIHwgTkE7XFxcXHJcXFxcbk5vcmZvbGsgU291dGhlcm4gQ29ycG9yYXRpb24gfCBPcGVuIC0gSW5pdGlhbCBSZXNwb25zZSBSZWNlaXZlZCB8IE5BO1xcXFxyXFxcXG5VbmlvbiBQYWNpZmljIHwgT3BlbiAtIEluaXRpYWwgUmVzcG9uc2UgUmVjZWl2ZWQgfCBOQTtcXFxcclxcXFxuXCJ9XSxcIm9wdGlvbnNcIjp7XCJjb2x1bW5zXCI6e1wibWluXCI6e30sXCJtYXhcIjpbMTBdLFwidG90YWxcIjpbMV19LFwicm93c1wiOntcIm1pblwiOlsxMF0sXCJtYXhcIjpbMTBdLFwidG90YWxcIjpbNV19LFwicGFnZXNcIjp7fX19XG4gIDxcL3NjcmlwdD5cbjxcL2Rpdj5cblxuPCEtLSBybmItZnJhbWUtZW5kIC0tPlxuIn0= -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NSwibmNvbCI6MSwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI1IMOXIDEiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBKzFXVVl2VFFCRGVwb2x5QlVYcEg5Z0hINzJDK0NMNFlxMGNpclpLZXdkOU9KQnhzMjJYMjh5RzNjMzFEbnp3eGIvbGl6OUxzRTdTMnpPdGQyRDZaakd3eVdUeWZUT3pzeE5teHErbVR6dlREbU9zemVJa1l1MkVSSmFjSEI4ZFBtTXNqdWlseFdKMlFNODdWcnBDZThhaWJnVm5yRnQ5WGIvSHRCN1UwQThoVFluZ3BQeVlTZzlLTzFMZVd4T3FWUWUzeGNKdXFXSXRaMzRyZ2dRaGsrNEtHQWVsaGs5U0IxYUpDTEsveklPY2dGWnpKT0VuT2V2V0lraXVBTi82bWJSS0FQTEp3bGpQM3ltVUhERGxZemxYQmtIek1lM0JHa2g1M3prakZIaFM4OC84ZlM2UkgvTCtFcFFuc01zTk9rbjZVZi81cVQzRlVZV3Iwd2NFOExZUUZiLzBNQVNGWGlLZ2tEZmJmb1BLcTlKRXNENldRcXB6bWY1MnM5NUZOSHh0Q2dmZW9CSjFoMWtPZU5uSTNsQ2xxWlpPWGhEYjVzWTJqNmlmZVF0bmpTZ3ZSNU9qS3V3bE5JdDJBQWlwb3JQYnlQYk9WajZBVURQSzRGdEFCNDRQbEc5b2FETGx4NWJJbERoZlJmU1lhS0xYeU1qSTJKblJaM3hpQ3IrUUZuYytpQk1zR1dGUHpZdHFQMzZOMXZmL0Jia25CZG42K2srY3kyMWx2emVIVWZYbWFMWFZ0MXRQdHB1MjBPRGNGcXFUZ29mZXpKYmRlaE4rWU0yeUYvcDhPUzlFWCtpMldxMStyTHQzR0Q2dWh4RFNzZnVsZ1JlUFdMaHFjOFpHa08wd2IyUUtyMFc0Q0pGNjQwRnZ1dm5EOUcydWtwMWRsZXRHNmwxaGRKR2hDL01NWlNiSVNRN3pLa04veXkzekhUNlp2Q3dURjd6L0F0cDhOMGtEQ2dBQSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["addressee_details"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"American Short Line and Regional Railroad Association | Open - Await Response | NA;\\r\\nNational Railroad Construction and Maintenance Association | Open - Initial Response Received | NA;\\r\\n"},{"1":"Housatonic Railroad Company | Open - Initial Response Received | NA;\\r\\nMiddlesex Corporation | Open - Initial Response Received | NA;\\r\\nAmtrak | Open - Initial Response Received | NA;\\r\\nBNSF Railway | Open - Initial Response Received | NA;\\r\\nCanadian National Railway | Open - Initial Response Received | NA;\\r\\nCanadian Pacific Kansas City | Open - Initial Response Received | NA;\\r\\nCSX Transportation, Inc. | Open - Initial Response Received | NA;\\r\\nNorfolk Southern Corporation | Open - Initial Response Received | NA;\\r\\nUnion Pacific | Open - Initial Response Received | NA;\\r\\n"},{"1":"American Short Line and Regional Railroad Association | Open - Await Response | NA;\\r\\nNational Railroad Construction and Maintenance Association | Open - Initial Response Received | NA;\\r\\n"},{"1":"Amtrak | Open - Initial Response Received | NA;\\r\\nBNSF Railway | Open - Initial Response Received | NA;\\r\\nCanadian National Railway | Open - Initial Response Received | NA;\\r\\nCanadian Pacific Kansas City | Open - Initial Response Received | NA;\\r\\nCSX Transportation, Inc. | Open - Initial Response Received | NA;\\r\\nNorfolk Southern Corporation | Open - Initial Response Received | NA;\\r\\nUnion Pacific | Open - Initial Response Received | NA;\\r\\n"},{"1":"BNSF Railway | Open - Initial Response Received | NA;\\r\\nCanadian National Railway | Open - Initial Response Received | NA;\\r\\nCanadian Pacific Kansas City | Open - Await Response | NA;\\r\\nCSX Transportation, Inc. | Open - Initial Response Received | NA;\\r\\nNorfolk Southern Corporation | Open - Initial Response Received | NA;\\r\\nUnion Pacific | Open - Initial Response Received | NA;\\r\\n"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[5]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<div id="big-yikes." class="section level4">
+<h4><strong>BIG YIKES.</strong></h4>
+<p>Like … gross. How am I supposed to be able to look at who the NTSB is
+giving recommendations to and how — or if — they’ve responded when all
+of that information is in one messy column?</p>
+</div>
+</div>
+<div id="what-we-know-about-the-data" class="section level3">
+<h3>What we know about the data</h3>
+<p>We can see that the <code>addressee_details</code> column
+contains:</p>
+<ul>
+<li><p>The name of each organization or agency that was sent the
+recommendation</p></li>
+<li><p>The statuses of the recommendation (open vs. closed)</p></li>
+<li><p>How the NTSB has classified their response to the recommendation
+(acceptable vs. unacceptable, etc.)</p></li>
+<li><p>The date the recommendation was closed (if applicable)</p></li>
+</ul>
+<p>All of that info is super useful, but it’s all in one column and it’s
+pretty messy.</p>
+<p>What we we need to do is <strong>clean up that column and separate it
+into distinct columns</strong> for recipient name, recommendation
+status, and recommendation date closed.</p>
+<p>If you look at the <code>addressee_details</code> column, you can see
+two things:</p>
+<ul>
+<li><p>The recipients are separated by semicolons (;)</p></li>
+<li><p>The different pieces of information are separated by a pipe
+character (|)</p></li>
+</ul>
+<p>We can use those characters to help us separate the information.</p>
+</div>
+<div id="creating-distinct-rows-for-each-recipient" class="section level3">
+<h3>Creating distinct rows for each recipient</h3>
+<p>Let’s start with the semicolons. If you look close, in addition to
+the semicolons separating each recipient, there are actually trailing
+semicolons in the <code>addressee_details</code> column. So if we
+separate them as is, we’ll end up with some rows without recipients
+because it will think that last semicolon means it should create a row.
+So let’s clean those up first and then we can use the semicolons to
+separate the recipients into distinct rows.</p>
+<p>Note that many functions we use in R require you to put it inside
+<em>another</em> function called <code>mutate()</code>. This is because
+<code>mutate()</code> is what allows you to create new columns and
+modify existing ones. Basically, you tell R to run a function on a
+column, and then you can assign that mutated version of the column back
+to the original column name to overwrite it, or you can assign it to a
+new column name if you want to keep the original column as well.</p>
+<div id="removing-trailing-semicolons" class="section level4">
+<h4>Removing trailing semicolons</h4>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZMnhsWVc1ZmNtRnBiRjl5WldOeklEd3RJR05zWldGdVgzSmhhV3hmY21WamN5QjhQbHh1SUNCY2JpQWdJeUJ5WlcxdmRtVWdkSEpoYVd4cGJtY2djMlZ0YVdOdmJHOXVjeUJwYmlCeVpXTnBjR2xsYm5RZ1pHVjBZV2xzYzF4dUlDQnRkWFJoZEdVb1lXUmtjbVZ6YzJWbFgyUmxkR0ZwYkhNZ1BTQnpkSEpmY21WdGIzWmxYMkZzYkNoaFpHUnlaWE56WldWZlpHVjBZV2xzY3l3Z1hDSTdKRndpS1NrZ2ZENWNibHh1SUNBaklIVnpaU0J5WlcxaGFXNXBibWNnYzJWdGFXTnZiRzl1Y3lCMGJ5QndkWFFnWVhOemFXZHVJR1ZoWTJnZ2NtVmphWEJwWlc1MElHbDBjeUJ2ZDI0Z2NtVmpiMjF0Wlc1a1lYUnBiMjRnY205M0lIZG9aVzRnWVNCemFXNW5iR1VnY21WamIyMXRaVzVrWVhScGIyNGdhR0Z6SUcxMWJIUnBjR3hsSUhKbFkybHdhV1Z1ZEhOY2JpQWdjMlZ3WVhKaGRHVmZjbTkzY3loaFpHUnlaWE56WldWZlpHVjBZV2xzY3l3Z2MyVndJRDBnWENJN1hDSXBJSHcrWEc0Z0lGeHVJQ0FqSUhKbGJXOTJaU0JsZUhSeVlTQjNhR2wwWlNCemNHRmpaU0JtY205dElHRmtaSEpsYzNObFpTQmtaWFJoYVd4elhHNGdJRzExZEdGMFpTaGhaR1J5WlhOelpXVmZaR1YwWVdsc2N5QTlJSE4wY2w5emNYVnBjMmdvWVdSa2NtVnpjMlZsWDJSbGRHRnBiSE1wS1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG5jbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+XG4gIFxuICAjIHJlbW92ZSB0cmFpbGluZyBzZW1pY29sb25zIGluIHJlY2lwaWVudCBkZXRhaWxzXG4gIG11dGF0ZShhZGRyZXNzZWVfZGV0YWlscyA9IHN0cl9yZW1vdmVfYWxsKGFkZHJlc3NlZV9kZXRhaWxzLCBcIjskXCIpKSB8PlxuXG4gICMgdXNlIHJlbWFpbmluZyBzZW1pY29sb25zIHRvIHB1dCBhc3NpZ24gZWFjaCByZWNpcGllbnQgaXRzIG93biByZWNvbW1lbmRhdGlvbiByb3cgd2hlbiBhIHNpbmdsZSByZWNvbW1lbmRhdGlvbiBoYXMgbXVsdGlwbGUgcmVjaXBpZW50c1xuICBzZXBhcmF0ZV9yb3dzKGFkZHJlc3NlZV9kZXRhaWxzLCBzZXAgPSBcIjtcIikgfD5cbiAgXG4gICMgcmVtb3ZlIGV4dHJhIHdoaXRlIHNwYWNlIGZyb20gYWRkcmVzc2VlIGRldGFpbHNcbiAgbXV0YXRlKGFkZHJlc3NlZV9kZXRhaWxzID0gc3RyX3NxdWlzaChhZGRyZXNzZWVfZGV0YWlscykpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5fcmFpbF9yZWNzIDwtIGNsZWFuX3JhaWxfcmVjcyB8PlxuICBcbiAgIyByZW1vdmUgdHJhaWxpbmcgc2VtaWNvbG9ucyBpbiByZWNpcGllbnQgZGV0YWlsc1xuICBtdXRhdGUoYWRkcmVzc2VlX2RldGFpbHMgPSBzdHJfcmVtb3ZlX2FsbChhZGRyZXNzZWVfZGV0YWlscywgXCI7JFwiKSkgfD5cblxuICAjIHVzZSByZW1haW5pbmcgc2VtaWNvbG9ucyB0byBwdXQgYXNzaWduIGVhY2ggcmVjaXBpZW50IGl0cyBvd24gcmVjb21tZW5kYXRpb24gcm93IHdoZW4gYSBzaW5nbGUgcmVjb21tZW5kYXRpb24gaGFzIG11bHRpcGxlIHJlY2lwaWVudHNcbiAgc2VwYXJhdGVfcm93cyhhZGRyZXNzZWVfZGV0YWlscywgc2VwID0gXCI7XCIpIHw+XG4gIFxuICAjIHJlbW92ZSBleHRyYSB3aGl0ZSBzcGFjZSBmcm9tIGFkZHJlc3NlZSBkZXRhaWxzXG4gIG11dGF0ZShhZGRyZXNzZWVfZGV0YWlscyA9IHN0cl9zcXVpc2goYWRkcmVzc2VlX2RldGFpbHMpKVxuYGBgIn0= -->
-<pre class="r"><code>clean_rail_recs &lt;- clean_rail_recs |&gt;
-  
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJQ01nY21WdGIzWmxJSFJ5WVdsc2FXNW5JSE5sYldsamIyeHZibk1nYVc0Z2NtVmphWEJwWlc1MElHUmxkR0ZwYkhOY2JpQWdiWFYwWVhSbEtHRmtaSEpsYzNObFpWOWtaWFJoYVd4eklEMGdjM1J5WDNKbGJXOTJaVjloYkd3b1lXUmtjbVZ6YzJWbFgyUmxkR0ZwYkhNc0lGd2lPeVJjSWlrcFhHNWNibkpsWTNNZ2ZENWNiaUFnYzJWc1pXTjBLR0ZrWkhKbGMzTmxaVjlrWlhSaGFXeHpLU0I4UGx4dUlDQm9aV0ZrS0RVcFhHNWNiaU1nVGs5VVJUb2dkR2hsSUNRZ2FXNGdkR2hsSUhONWJuUmhlQ0JwY3lCMFpXeHNhVzVuSUZJZ2RHaGhkQ0IzWlNCdmJteDVJSGRoYm5RZ2RHOGdjbVZ0YjNabElITmxiV2xqYjJ4dmJuTWdkR2hoZENCaGNtVWdZWFFnZEdobElHVnVaQ0J2WmlCaElITjBjbWx1Wnk0Z2RHaHBjeUJwY3lCaElIUjVjR1VnYjJZZ2NtVm5kV3hoY2lCbGVIQnlaWE56YVc5dUlDaHlaV2RsZUNrdUlIUm9aWGtuY21VZ1kyOXRjR3hwWTJGMFpXUWdZVzVrSUhWemRXRnNiSGtnYm05dUxXbHVkSFZwZEdsMlpTd2djMjhnWkc5dUozUWdkMjl5Y25rZ1lXSnZkWFFnY21WdFpXMWlaWEpwYm1jZ2RHaGhkQzRnZVc5MUlHTmhiaUFvWVhNZ2FTQnZablJsYmlCa2J5a2dhblZ6ZENCc2IyOXJJSFZ3SUhSb1pTQmpiM0p5WldOMElITjViblJoZUNBNktWeHVZR0JnSW4wPSAtLT5cblxuYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgcmVtb3ZlIHRyYWlsaW5nIHNlbWljb2xvbnMgaW4gcmVjaXBpZW50IGRldGFpbHNcbiAgbXV0YXRlKGFkZHJlc3NlZV9kZXRhaWxzID0gc3RyX3JlbW92ZV9hbGwoYWRkcmVzc2VlX2RldGFpbHMsIFwiOyRcIikpXG5cbnJlY3MgfD5cbiAgc2VsZWN0KGFkZHJlc3NlZV9kZXRhaWxzKSB8PlxuICBoZWFkKDUpXG5cbiMgTk9URTogdGhlICQgaW4gdGhlIHN5bnRheCBpcyB0ZWxsaW5nIFIgdGhhdCB3ZSBvbmx5IHdhbnQgdG8gcmVtb3ZlIHNlbWljb2xvbnMgdGhhdCBhcmUgYXQgdGhlIGVuZCBvZiBhIHN0cmluZy4gdGhpcyBpcyBhIHR5cGUgb2YgcmVndWxhciBleHByZXNzaW9uIChyZWdleCkuIHRoZXkncmUgY29tcGxpY2F0ZWQgYW5kIHVzdWFsbHkgbm9uLWludHVpdGl2ZSwgc28gZG9uJ3Qgd29ycnkgYWJvdXQgcmVtZW1iZXJpbmcgdGhhdC4geW91IGNhbiAoYXMgaSBvZnRlbiBkbykganVzdCBsb29rIHVwIHRoZSBjb3JyZWN0IHN5bnRheCA6KVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgcmVtb3ZlIHRyYWlsaW5nIHNlbWljb2xvbnMgaW4gcmVjaXBpZW50IGRldGFpbHNcbiAgbXV0YXRlKGFkZHJlc3NlZV9kZXRhaWxzID0gc3RyX3JlbW92ZV9hbGwoYWRkcmVzc2VlX2RldGFpbHMsIFwiOyRcIikpXG5cbnJlY3MgfD5cbiAgc2VsZWN0KGFkZHJlc3NlZV9kZXRhaWxzKSB8PlxuICBoZWFkKDUpXG5cbiMgTk9URTogdGhlICQgaW4gdGhlIHN5bnRheCBpcyB0ZWxsaW5nIFIgdGhhdCB3ZSBvbmx5IHdhbnQgdG8gcmVtb3ZlIHNlbWljb2xvbnMgdGhhdCBhcmUgYXQgdGhlIGVuZCBvZiBhIHN0cmluZy4gdGhpcyBpcyBhIHR5cGUgb2YgcmVndWxhciBleHByZXNzaW9uIChyZWdleCkuIHRoZXkncmUgY29tcGxpY2F0ZWQgYW5kIHVzdWFsbHkgbm9uLWludHVpdGl2ZSwgc28gZG9uJ3Qgd29ycnkgYWJvdXQgcmVtZW1iZXJpbmcgdGhhdC4geW91IGNhbiAoYXMgaSBvZnRlbiBkbykganVzdCBsb29rIHVwIHRoZSBjb3JyZWN0IHN5bnRheCA6KVxuYGBgIn0= -->
+<pre class="r"><code>recs &lt;- recs |&gt;
   # remove trailing semicolons in recipient details
-  mutate(addressee_details = str_remove_all(addressee_details, &quot;;$&quot;)) |&gt;
+  mutate(addressee_details = str_remove_all(addressee_details, &quot;;$&quot;))
 
-  # use remaining semicolons to put assign each recipient its own recommendation row when a single recommendation has multiple recipients
-  separate_rows(addressee_details, sep = &quot;;&quot;) |&gt;
-  
-  # remove extra white space from addressee details
-  mutate(addressee_details = str_squish(addressee_details))</code></pre>
+recs |&gt;
+  select(addressee_details) |&gt;
+  head(5)
+
+# NOTE: the $ in the syntax is telling R that we only want to remove semicolons that are at the end of a string. this is a type of regular expression (regex). they&#39;re complicated and usually non-intuitive, so don&#39;t worry about remembering that. you can (as i often do) just look up the correct syntax :)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>No more trailing semicolons! But what are those weird newline
+elements? Those are just the way the data is formatted in the original
+source. Luckily, we can use <code>str_squish()</code> to fix that.</p>
+</div>
+<div id="removing-extra-white-space-with-and-newline-characters-with-str_squish" class="section level4">
+<h4>Removing extra white space with and newline characters with
+<code>str_squish()</code></h4>
+<p><code>str_squish()</code> — the most adorable-sounding function —
+just removes extra white space from the start and end of a string, and
+replaces all internal white spaces with a single space, so it’s perfect
+for this job (not to mention awesome to say).</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVZMnhsWVc1ZmNtRnBiRjl5WldOeklEd3RJR05zWldGdVgzSmhhV3hmY21WamN5QjhQbHh1SUNBaklITmxjR0Z5WVhSbElISmxZMmx3YVdWdWRDQmtaWFJoYVd4eklHbHVkRzhnZEdoeVpXVWdaR2x6ZEdsdVkzUWdZMjlzZFcxdWMxeHVJQ0J6WlhCaGNtRjBaU2hoWkdSeVpYTnpaV1ZmWkdWMFlXbHNjeXdnWEc0Z0lDQWdJQ0FnSUNBZ0lHbHVkRzhnUFNCaktGd2ljbVZqYVhCcFpXNTBYQ0lzSUZ4dUlDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQmNJbkpsWTI5dGJXVnVaR0YwYVc5dVgzTjBZWFIxYzF3aUxDQmNiaUFnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnWENKeVpXTnZiVzFsYm1SaGRHbHZibDlrWVhSbFgyTnNiM05sWkZ3aUtTd2dYRzRnSUNBZ0lDQWdJQ0FnSUhObGNDQTlJRndpSUZ4Y1hGeDhJRndpS1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG5jbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+XG4gICMgc2VwYXJhdGUgcmVjaXBpZW50IGRldGFpbHMgaW50byB0aHJlZSBkaXN0aW5jdCBjb2x1bW5zXG4gIHNlcGFyYXRlKGFkZHJlc3NlZV9kZXRhaWxzLCBcbiAgICAgICAgICAgaW50byA9IGMoXCJyZWNpcGllbnRcIiwgXG4gICAgICAgICAgICAgICAgICAgIFwicmVjb21tZW5kYXRpb25fc3RhdHVzXCIsIFxuICAgICAgICAgICAgICAgICAgICBcInJlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkXCIpLCBcbiAgICAgICAgICAgc2VwID0gXCIgXFxcXHwgXCIpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5fcmFpbF9yZWNzIDwtIGNsZWFuX3JhaWxfcmVjcyB8PlxuICAjIHNlcGFyYXRlIHJlY2lwaWVudCBkZXRhaWxzIGludG8gdGhyZWUgZGlzdGluY3QgY29sdW1uc1xuICBzZXBhcmF0ZShhZGRyZXNzZWVfZGV0YWlscywgXG4gICAgICAgICAgIGludG8gPSBjKFwicmVjaXBpZW50XCIsIFxuICAgICAgICAgICAgICAgICAgICBcInJlY29tbWVuZGF0aW9uX3N0YXR1c1wiLCBcbiAgICAgICAgICAgICAgICAgICAgXCJyZWNvbW1lbmRhdGlvbl9kYXRlX2Nsb3NlZFwiKSwgXG4gICAgICAgICAgIHNlcCA9IFwiIFxcXFx8IFwiKVxuYGBgIn0= -->
-<pre class="r"><code>clean_rail_recs &lt;- clean_rail_recs |&gt;
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJQ01nY21WdGIzWmxJR1Y0ZEhKaElIZG9hWFJsSUhOd1lXTmxJR1p5YjIwZ1lXUmtjbVZ6YzJWbElHUmxkR0ZwYkhOY2JpQWdiWFYwWVhSbEtHRmtaSEpsYzNObFpWOWtaWFJoYVd4eklEMGdjM1J5WDNOeGRXbHphQ2hoWkdSeVpYTnpaV1ZmWkdWMFlXbHNjeWtwWEc1Y2JpTWdiR1YwSjNNZ2RHRnJaU0JoSUd4dmIyc2dZWFFnZEdobElHRmtaSEpsYzNObFpWOWtaWFJoYVd4eklHTnZiSFZ0YmlCdmJtVWdiVzl5WlNCMGFXMWxJSFJ2SUcxaGEyVWdjM1Z5WlNCMGFHVWdaWGgwY21FZ2QyaHBkR1VnYzNCaFkyVWdhWE1nWjI5dVpTRmNibkpsWTNNZ2ZENWNiaUFnWm1sc2RHVnlLR2x6WDIxMWJIUnBjR3hsWDNKbFkybHdhV1Z1ZENBOVBTQlVVbFZGS1NCOFBseHVJQ0J6Wld4bFkzUW9ZV1JrY21WemMyVmxYMlJsZEdGcGJITXBJSHcrWEc0Z0lHaGxZV1FvTlNsY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG5yZWNzIDwtIHJlY3MgfD5cbiAgIyByZW1vdmUgZXh0cmEgd2hpdGUgc3BhY2UgZnJvbSBhZGRyZXNzZWUgZGV0YWlsc1xuICBtdXRhdGUoYWRkcmVzc2VlX2RldGFpbHMgPSBzdHJfc3F1aXNoKGFkZHJlc3NlZV9kZXRhaWxzKSlcblxuIyBsZXQncyB0YWtlIGEgbG9vayBhdCB0aGUgYWRkcmVzc2VlX2RldGFpbHMgY29sdW1uIG9uZSBtb3JlIHRpbWUgdG8gbWFrZSBzdXJlIHRoZSBleHRyYSB3aGl0ZSBzcGFjZSBpcyBnb25lIVxucmVjcyB8PlxuICBmaWx0ZXIoaXNfbXVsdGlwbGVfcmVjaXBpZW50ID09IFRSVUUpIHw+XG4gIHNlbGVjdChhZGRyZXNzZWVfZGV0YWlscykgfD5cbiAgaGVhZCg1KVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgcmVtb3ZlIGV4dHJhIHdoaXRlIHNwYWNlIGZyb20gYWRkcmVzc2VlIGRldGFpbHNcbiAgbXV0YXRlKGFkZHJlc3NlZV9kZXRhaWxzID0gc3RyX3NxdWlzaChhZGRyZXNzZWVfZGV0YWlscykpXG5cbiMgbGV0J3MgdGFrZSBhIGxvb2sgYXQgdGhlIGFkZHJlc3NlZV9kZXRhaWxzIGNvbHVtbiBvbmUgbW9yZSB0aW1lIHRvIG1ha2Ugc3VyZSB0aGUgZXh0cmEgd2hpdGUgc3BhY2UgaXMgZ29uZSFcbnJlY3MgfD5cbiAgZmlsdGVyKGlzX211bHRpcGxlX3JlY2lwaWVudCA9PSBUUlVFKSB8PlxuICBzZWxlY3QoYWRkcmVzc2VlX2RldGFpbHMpIHw+XG4gIGhlYWQoNSlcbmBgYCJ9 -->
+<pre class="r"><code>recs &lt;- recs |&gt;
+  # remove extra white space from addressee details
+  mutate(addressee_details = str_squish(addressee_details))
+
+# let&#39;s take a look at the addressee_details column one more time to make sure the extra white space is gone!
+recs |&gt;
+  filter(is_multiple_recipient == TRUE) |&gt;
+  select(addressee_details) |&gt;
+  head(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="using-separate_rows-to-create-distinct-rows-for-each-recipient" class="section level4">
+<h4>Using <code>separate_rows()</code> to create distinct rows for each
+recipient</h4>
+<p>Now that it looks more normal … well, normal-ish … we can use the
+remaining semicolons to separate the recipients into distinct rows.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJQ01nZFhObElITmxiV2xqYjJ4dmJuTWdkRzhnY0hWMElHRnpjMmxuYmlCbFlXTm9JSEpsWTJsd2FXVnVkQ0JwZEhNZ2IzZHVJSEpsWTI5dGJXVnVaR0YwYVc5dUlISnZkeUIzYUdWdUlHRWdjMmx1WjJ4bElISmxZMjl0YldWdVpHRjBhVzl1SUdoaGN5QnRkV3gwYVhCc1pTQnlaV05wY0dsbGJuUnpYRzRnSUhObGNHRnlZWFJsWDNKdmQzTW9ZV1JrY21WemMyVmxYMlJsZEdGcGJITXNJSE5sY0NBOUlGd2lPMXdpS1Z4dVhHNWNiaU1nYkdWMEozTWdkR0ZyWlNCaElIQmxaV3NnWVhRZ2IzVnlJR1JoZEdFZ1puSmhiV1VnWVdkaGFXNWNibkpsWTNNZ2ZENWNiaUFnWm1sc2RHVnlLR2x6WDIxMWJIUnBjR3hsWDNKbFkybHdhV1Z1ZENBOVBTQlVVbFZGS1NCOFBseHVJQ0J6Wld4bFkzUW9ZV1JrY21WemMyVmxYMlJsZEdGcGJITXBJSHcrWEc0Z0lHaGxZV1FvTlNsY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG5yZWNzIDwtIHJlY3MgfD5cbiAgIyB1c2Ugc2VtaWNvbG9ucyB0byBwdXQgYXNzaWduIGVhY2ggcmVjaXBpZW50IGl0cyBvd24gcmVjb21tZW5kYXRpb24gcm93IHdoZW4gYSBzaW5nbGUgcmVjb21tZW5kYXRpb24gaGFzIG11bHRpcGxlIHJlY2lwaWVudHNcbiAgc2VwYXJhdGVfcm93cyhhZGRyZXNzZWVfZGV0YWlscywgc2VwID0gXCI7XCIpXG5cblxuIyBsZXQncyB0YWtlIGEgcGVlayBhdCBvdXIgZGF0YSBmcmFtZSBhZ2FpblxucmVjcyB8PlxuICBmaWx0ZXIoaXNfbXVsdGlwbGVfcmVjaXBpZW50ID09IFRSVUUpIHw+XG4gIHNlbGVjdChhZGRyZXNzZWVfZGV0YWlscykgfD5cbiAgaGVhZCg1KVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgdXNlIHNlbWljb2xvbnMgdG8gcHV0IGFzc2lnbiBlYWNoIHJlY2lwaWVudCBpdHMgb3duIHJlY29tbWVuZGF0aW9uIHJvdyB3aGVuIGEgc2luZ2xlIHJlY29tbWVuZGF0aW9uIGhhcyBtdWx0aXBsZSByZWNpcGllbnRzXG4gIHNlcGFyYXRlX3Jvd3MoYWRkcmVzc2VlX2RldGFpbHMsIHNlcCA9IFwiO1wiKVxuXG5cbiMgbGV0J3MgdGFrZSBhIHBlZWsgYXQgb3VyIGRhdGEgZnJhbWUgYWdhaW5cbnJlY3MgfD5cbiAgZmlsdGVyKGlzX211bHRpcGxlX3JlY2lwaWVudCA9PSBUUlVFKSB8PlxuICBzZWxlY3QoYWRkcmVzc2VlX2RldGFpbHMpIHw+XG4gIGhlYWQoNSlcbmBgYCJ9 -->
+<pre class="r"><code>recs &lt;- recs |&gt;
+  # use semicolons to put assign each recipient its own recommendation row when a single recommendation has multiple recipients
+  separate_rows(addressee_details, sep = &quot;;&quot;)
+
+
+# let&#39;s take a peek at our data frame again
+recs |&gt;
+  filter(is_multiple_recipient == TRUE) |&gt;
+  select(addressee_details) |&gt;
+  head(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Perfect! We have one row per recipient and no extra white space in
+the <code>addressee_details</code> column.</p>
+</div>
+</div>
+<div id="creating-separate-columns-for-the-information-in-the-addressee_details-column" class="section level3">
+<h3>Creating separate columns for the information in the
+<code>addressee_details</code> column</h3>
+<p>We still have all of the information for that recipient in the
+<code>addressee_details</code> column, which is pretty messy.</p>
+<p>Let’s use the pipe characters and the function
+<code>separate()</code> — which is very similar to
+<code>separate_rows()</code> — to separate that information into three
+columns: recipient name, recommendation status and the date the
+recommendation was closed (if applicable).</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJQ01nYzJWd1lYSmhkR1VnY21WamFYQnBaVzUwSUdSbGRHRnBiSE1nYVc1MGJ5QjBhSEpsWlNCa2FYTjBhVzVqZENCamIyeDFiVzV6WEc0Z0lITmxjR0Z5WVhSbEtHRmtaSEpsYzNObFpWOWtaWFJoYVd4ekxDQmNiaUFnSUNBZ0lDQWdJQ0FnYVc1MGJ5QTlJR01vWENKeVpXTnBjR2xsYm5SY0lpd2dYRzRnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdJQ0FnSUZ3aWNtVmphWEJwWlc1MFgzSmxZMjl0YldWdVpHRjBhVzl1WDNOMFlYUjFjMXdpTENCY2JpQWdJQ0FnSUNBZ0lDQWdJQ0FnSUNBZ0lDQWdYQ0p5WldOcGNHbGxiblJmY21WamIyMXRaVzVrWVhScGIyNWZaR0YwWlY5amJHOXpaV1JjSWlrc0lGeHVJQ0FnSUNBZ0lDQWdJQ0J6WlhBZ1BTQmNJaUJjWEZ4Y2ZDQmNJaWxjYmx4dUl5QmhiR3dnZDJVbmNtVWdaRzlwYm1jZ2FHVnlaU0JwY3lCMFpXeHNhVzVuSUZJZ2RHODZYRzRnSUNNZ2JHOXZheUJoZENCMGFHVWdZV1JrY21WemMyVmxYMlJsZEdGcGJITWdZMjlzZFcxdVhHNGdJQ01nYzJWd1lYSmhkR1VnYVhRZ2FXNTBieUIwYUhKbFpTQnVaWGNnWTI5c2RXMXVjeUJqWVd4c1pXUWdjbVZqYVhCcFpXNTBMQ0J5WldOdmJXMWxibVJoZEdsdmJsOXpkR0YwZFhNZ1lXNWtJSEpsWTI5dGJXVnVaR0YwYVc5dVgyUmhkR1ZmWTJ4dmMyVmtYRzRnSUNNZ2RYTmxJSFJvWlNCd2FYQmxJR05vWVhKaFkzUmxjaUFvZkNrZ1lYTWdkR2hsSUhObGNHRnlZWFJ2Y2x4dVhHNGpJSGRsSUdGc2MyOGdhR0YyWlNCMGJ5QmhaR1FnWVNCemNHRmpaU0JpWldadmNtVWdZVzVrSUdGbWRHVnlJSFJvWlNCd2FYQmxJR05vWVhKaFkzUmxjaUJwYmlCMGFHVWdjMlZ3WVhKaGRHOXlJR0Z5WjNWdFpXNTBJSE5wYm1ObElIUm9aWEpsSUdseklHRWdjM0JoWTJVZ1ltVm1iM0psSUdGdVpDQmhablJsY2lCMGFHVWdjR2x3WlNCamFHRnlZV04wWlhJZ2FXNGdkR2hsSUdGa1pISmxjM05sWlY5a1pYUmhhV3h6SUdOdmJIVnRiaTVjYmx4dVhHNGpJSFJvWlc0Z2QyVWdZMkZ1SUdOb1pXTnJJRzkxZENCMGFHVWdibVYzSUdOdmJIVnRibk1nZDJVZ2FuVnpkQ0JqY21WaGRHVmtJSFJ2SUcxaGEyVWdjM1Z5WlNCMGFHVjVJR3h2YjJzZ2NtbG5hSFFoWEc1eVpXTnpJSHcrWEc0Z0lHWnBiSFJsY2locGMxOXRkV3gwYVhCc1pWOXlaV05wY0dsbGJuUWdQVDBnVkZKVlJTa2dmRDVjYmlBZ2MyVnNaV04wS0hKbFkybHdhV1Z1ZEN3Z2NtVmphWEJwWlc1MFgzSmxZMjl0YldWdVpHRjBhVzl1WDNOMFlYUjFjeXdnY21WamFYQnBaVzUwWDNKbFkyOXRiV1Z1WkdGMGFXOXVYMlJoZEdWZlkyeHZjMlZrS1NCOFBseHVJQ0JvWldGa0tEVXBYRzVnWUdBaWZRPT0gLS0+XG5cbmBgYHJcbnJlY3MgPC0gcmVjcyB8PlxuICAjIHNlcGFyYXRlIHJlY2lwaWVudCBkZXRhaWxzIGludG8gdGhyZWUgZGlzdGluY3QgY29sdW1uc1xuICBzZXBhcmF0ZShhZGRyZXNzZWVfZGV0YWlscywgXG4gICAgICAgICAgIGludG8gPSBjKFwicmVjaXBpZW50XCIsIFxuICAgICAgICAgICAgICAgICAgICBcInJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXNcIiwgXG4gICAgICAgICAgICAgICAgICAgIFwicmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkXCIpLCBcbiAgICAgICAgICAgc2VwID0gXCIgXFxcXHwgXCIpXG5cbiMgYWxsIHdlJ3JlIGRvaW5nIGhlcmUgaXMgdGVsbGluZyBSIHRvOlxuICAjIGxvb2sgYXQgdGhlIGFkZHJlc3NlZV9kZXRhaWxzIGNvbHVtblxuICAjIHNlcGFyYXRlIGl0IGludG8gdGhyZWUgbmV3IGNvbHVtbnMgY2FsbGVkIHJlY2lwaWVudCwgcmVjb21tZW5kYXRpb25fc3RhdHVzIGFuZCByZWNvbW1lbmRhdGlvbl9kYXRlX2Nsb3NlZFxuICAjIHVzZSB0aGUgcGlwZSBjaGFyYWN0ZXIgKHwpIGFzIHRoZSBzZXBhcmF0b3JcblxuIyB3ZSBhbHNvIGhhdmUgdG8gYWRkIGEgc3BhY2UgYmVmb3JlIGFuZCBhZnRlciB0aGUgcGlwZSBjaGFyYWN0ZXIgaW4gdGhlIHNlcGFyYXRvciBhcmd1bWVudCBzaW5jZSB0aGVyZSBpcyBhIHNwYWNlIGJlZm9yZSBhbmQgYWZ0ZXIgdGhlIHBpcGUgY2hhcmFjdGVyIGluIHRoZSBhZGRyZXNzZWVfZGV0YWlscyBjb2x1bW4uXG5cblxuIyB0aGVuIHdlIGNhbiBjaGVjayBvdXQgdGhlIG5ldyBjb2x1bW5zIHdlIGp1c3QgY3JlYXRlZCB0byBtYWtlIHN1cmUgdGhleSBsb29rIHJpZ2h0IVxucmVjcyB8PlxuICBmaWx0ZXIoaXNfbXVsdGlwbGVfcmVjaXBpZW50ID09IFRSVUUpIHw+XG4gIHNlbGVjdChyZWNpcGllbnQsIHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMsIHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9kYXRlX2Nsb3NlZCkgfD5cbiAgaGVhZCg1KVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgc2VwYXJhdGUgcmVjaXBpZW50IGRldGFpbHMgaW50byB0aHJlZSBkaXN0aW5jdCBjb2x1bW5zXG4gIHNlcGFyYXRlKGFkZHJlc3NlZV9kZXRhaWxzLCBcbiAgICAgICAgICAgaW50byA9IGMoXCJyZWNpcGllbnRcIiwgXG4gICAgICAgICAgICAgICAgICAgIFwicmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3N0YXR1c1wiLCBcbiAgICAgICAgICAgICAgICAgICAgXCJyZWNpcGllbnRfcmVjb21tZW5kYXRpb25fZGF0ZV9jbG9zZWRcIiksIFxuICAgICAgICAgICBzZXAgPSBcIiBcXFxcfCBcIilcblxuIyBhbGwgd2UncmUgZG9pbmcgaGVyZSBpcyB0ZWxsaW5nIFIgdG86XG4gICMgbG9vayBhdCB0aGUgYWRkcmVzc2VlX2RldGFpbHMgY29sdW1uXG4gICMgc2VwYXJhdGUgaXQgaW50byB0aHJlZSBuZXcgY29sdW1ucyBjYWxsZWQgcmVjaXBpZW50LCByZWNvbW1lbmRhdGlvbl9zdGF0dXMgYW5kIHJlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkXG4gICMgdXNlIHRoZSBwaXBlIGNoYXJhY3RlciAofCkgYXMgdGhlIHNlcGFyYXRvclxuXG4jIHdlIGFsc28gaGF2ZSB0byBhZGQgYSBzcGFjZSBiZWZvcmUgYW5kIGFmdGVyIHRoZSBwaXBlIGNoYXJhY3RlciBpbiB0aGUgc2VwYXJhdG9yIGFyZ3VtZW50IHNpbmNlIHRoZXJlIGlzIGEgc3BhY2UgYmVmb3JlIGFuZCBhZnRlciB0aGUgcGlwZSBjaGFyYWN0ZXIgaW4gdGhlIGFkZHJlc3NlZV9kZXRhaWxzIGNvbHVtbi5cblxuXG4jIHRoZW4gd2UgY2FuIGNoZWNrIG91dCB0aGUgbmV3IGNvbHVtbnMgd2UganVzdCBjcmVhdGVkIHRvIG1ha2Ugc3VyZSB0aGV5IGxvb2sgcmlnaHQhXG5yZWNzIHw+XG4gIGZpbHRlcihpc19tdWx0aXBsZV9yZWNpcGllbnQgPT0gVFJVRSkgfD5cbiAgc2VsZWN0KHJlY2lwaWVudCwgcmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3N0YXR1cywgcmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkKSB8PlxuICBoZWFkKDUpXG5gYGAifQ== -->
+<pre class="r"><code>recs &lt;- recs |&gt;
   # separate recipient details into three distinct columns
   separate(addressee_details, 
            into = c(&quot;recipient&quot;, 
-                    &quot;recommendation_status&quot;, 
-                    &quot;recommendation_date_closed&quot;), 
-           sep = &quot; \\| &quot;)</code></pre>
+                    &quot;recipient_recommendation_status&quot;, 
+                    &quot;recipient_recommendation_date_closed&quot;), 
+           sep = &quot; \\| &quot;)
+
+# all we&#39;re doing here is telling R to:
+  # look at the addressee_details column
+  # separate it into three new columns called recipient, recommendation_status and recommendation_date_closed
+  # use the pipe character (|) as the separator
+
+# we also have to add a space before and after the pipe character in the separator argument since there is a space before and after the pipe character in the addressee_details column.
+
+
+# then we can check out the new columns we just created to make sure they look right!
+recs |&gt;
+  filter(is_multiple_recipient == TRUE) |&gt;
+  select(recipient, recipient_recommendation_status, recipient_recommendation_date_closed) |&gt;
+  head(5)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Look at that! Now we have separate columns for recipient name,
+recommendation status and the date for when the recommendation was
+closed (if applicable).</p>
+<div id="removing-unnecessary-columns" class="section level4">
+<h4>Removing unnecessary columns</h4>
+<p>And because we have the recipient-specific columns now, we actually
+don’t need the <code>overall_date_closed</code> or
+<code>overall_status</code> column anymore, so we can drop that using
+<code>select()</code> with a minus sign to essentially tell R to
+<em>deselect</em> those columns.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJQ01nYzJsdVkyVWdjMjl0WlNCeVpXTnZiVzFsYm1SaGRHbHZibk1nYUdGMlpTQnRkV3gwYVhCc1pTQnlaV05wY0dsbGJuUnpJSGRwZEdnZ1pHbG1abVZ5Wlc1MElITjBZWFIxYzJWekxDQjNaU0J1WldWa0lIUnZJSEJoY25ObElIUm9aU0J5WldOcGNHbGxiblFnYzNSaGRIVnpJR052YkhWdGJpQjBieUJuWlhRZ1lTQnRiM0psSUdGalkzVnlZWFJsSUhCcFkzUjFjbVVnYjJZZ2QyaHBZMmdnY21WamIyMXRaVzVrWVhScGIyNXpJR0Z5WlNCdmNHVnVJSFp6TGlCamJHOXpaV1FnWm05eUlHVmhZMmdnY21WamFYQnBaVzUwWEc1Y2JtTnNaV0Z1WDNKaGFXeGZjbVZqY3lBOExTQmpiR1ZoYmw5eVlXbHNYM0psWTNNZ2ZENWNiaUFnYlhWMFlYUmxLRnh1SUNBZ0lGeHVJQ0FnSUNNZ2MzUmxjQ0F4SU9LQWxDQmpjbVZoZEdVZ2IzQmxiaTlqYkc5elpXUWdZMjlzZFcxdUlIVnphVzVuSUdOaGMyVmZkMmhsYmlncFhHNGdJQ0FnY21WamIyMXRaVzVrWVhScGIyNWZiM0JsYmw5amJHOXpaV1FnUFNCallYTmxYM2RvWlc0b1hHNGdJQ0FnSUNCemRISmZaR1YwWldOMEtISmxZMjl0YldWdVpHRjBhVzl1WDNOMFlYUjFjeXdnWENKRFRFOVRSVVJjSWlrZ2ZpQmNJa05NVDFORlJGd2lMRnh1SUNBZ0lDQWdjM1J5WDJSbGRHVmpkQ2h5WldOdmJXMWxibVJoZEdsdmJsOXpkR0YwZFhNc0lGd2lUMUJGVGx3aUtTQitJRndpVDFCRlRsd2lLU3hjYmlBZ0lDQmNiaUFnSUNBaklITjBaWEFnTWlEaWdKUWdjbVZ6Y0c5dWMyVWdjM1JoZEhWeklHTnZiSFZ0YmlCMWMybHVaeUJ6ZEhKZmNtVnRiM1psWDJGc2JDZ3BJQ1lnYzNSeVgzUnlhVzBvS1Z4dUlDQWdJSEpsWTI5dGJXVnVaR0YwYVc5dVgzSmxjM0J2Ym5ObFgzTjBZWFIxY3lBOUlITjBjbDkwY21sdEtITjBjbDl5WlcxdmRtVmZZV3hzS0hKbFkyOXRiV1Z1WkdGMGFXOXVYM04wWVhSMWN5d2dYQ0pEVEU5VFJVUjhUMUJGVG53dFhDSXBLU2xjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbiAjIHNpbmNlIHNvbWUgcmVjb21tZW5kYXRpb25zIGhhdmUgbXVsdGlwbGUgcmVjaXBpZW50cyB3aXRoIGRpZmZlcmVudCBzdGF0dXNlcywgd2UgbmVlZCB0byBwYXJzZSB0aGUgcmVjaXBpZW50IHN0YXR1cyBjb2x1bW4gdG8gZ2V0IGEgbW9yZSBhY2N1cmF0ZSBwaWN0dXJlIG9mIHdoaWNoIHJlY29tbWVuZGF0aW9ucyBhcmUgb3BlbiB2cy4gY2xvc2VkIGZvciBlYWNoIHJlY2lwaWVudFxuXG5jbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+XG4gIG11dGF0ZShcbiAgICBcbiAgICAjIHN0ZXAgMSDigJQgY3JlYXRlIG9wZW4vY2xvc2VkIGNvbHVtbiB1c2luZyBjYXNlX3doZW4oKVxuICAgIHJlY29tbWVuZGF0aW9uX29wZW5fY2xvc2VkID0gY2FzZV93aGVuKFxuICAgICAgc3RyX2RldGVjdChyZWNvbW1lbmRhdGlvbl9zdGF0dXMsIFwiQ0xPU0VEXCIpIH4gXCJDTE9TRURcIixcbiAgICAgIHN0cl9kZXRlY3QocmVjb21tZW5kYXRpb25fc3RhdHVzLCBcIk9QRU5cIikgfiBcIk9QRU5cIiksXG4gICAgXG4gICAgIyBzdGVwIDIg4oCUIHJlc3BvbnNlIHN0YXR1cyBjb2x1bW4gdXNpbmcgc3RyX3JlbW92ZV9hbGwoKSAmIHN0cl90cmltKClcbiAgICByZWNvbW1lbmRhdGlvbl9yZXNwb25zZV9zdGF0dXMgPSBzdHJfdHJpbShzdHJfcmVtb3ZlX2FsbChyZWNvbW1lbmRhdGlvbl9zdGF0dXMsIFwiQ0xPU0VEfE9QRU58LVwiKSkpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuICMgc2luY2Ugc29tZSByZWNvbW1lbmRhdGlvbnMgaGF2ZSBtdWx0aXBsZSByZWNpcGllbnRzIHdpdGggZGlmZmVyZW50IHN0YXR1c2VzLCB3ZSBuZWVkIHRvIHBhcnNlIHRoZSByZWNpcGllbnQgc3RhdHVzIGNvbHVtbiB0byBnZXQgYSBtb3JlIGFjY3VyYXRlIHBpY3R1cmUgb2Ygd2hpY2ggcmVjb21tZW5kYXRpb25zIGFyZSBvcGVuIHZzLiBjbG9zZWQgZm9yIGVhY2ggcmVjaXBpZW50XG5cbmNsZWFuX3JhaWxfcmVjcyA8LSBjbGVhbl9yYWlsX3JlY3MgfD5cbiAgbXV0YXRlKFxuICAgIFxuICAgICMgc3RlcCAxIOKAlCBjcmVhdGUgb3Blbi9jbG9zZWQgY29sdW1uIHVzaW5nIGNhc2Vfd2hlbigpXG4gICAgcmVjb21tZW5kYXRpb25fb3Blbl9jbG9zZWQgPSBjYXNlX3doZW4oXG4gICAgICBzdHJfZGV0ZWN0KHJlY29tbWVuZGF0aW9uX3N0YXR1cywgXCJDTE9TRURcIikgfiBcIkNMT1NFRFwiLFxuICAgICAgc3RyX2RldGVjdChyZWNvbW1lbmRhdGlvbl9zdGF0dXMsIFwiT1BFTlwiKSB+IFwiT1BFTlwiKSxcbiAgICBcbiAgICAjIHN0ZXAgMiDigJQgcmVzcG9uc2Ugc3RhdHVzIGNvbHVtbiB1c2luZyBzdHJfcmVtb3ZlX2FsbCgpICYgc3RyX3RyaW0oKVxuICAgIHJlY29tbWVuZGF0aW9uX3Jlc3BvbnNlX3N0YXR1cyA9IHN0cl90cmltKHN0cl9yZW1vdmVfYWxsKHJlY29tbWVuZGF0aW9uX3N0YXR1cywgXCJDTE9TRUR8T1BFTnwtXCIpKSlcbmBgYCJ9 -->
-<pre class="r"><code> # since some recommendations have multiple recipients with different statuses, we need to parse the recipient status column to get a more accurate picture of which recommendations are open vs. closed for each recipient
-
-clean_rail_recs &lt;- clean_rail_recs |&gt;
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJQ01nWkhKdmNDQnZkbVZ5WVd4c0lITjBZWFIxY3lCaGJtUWdaR0YwWlNCamJHOXpaV1FnWTI5c2RXMXVjeUJ6YVc1alpTQjNaU0J1YjNjZ2FHRjJaU0J5WldOcGNHbGxiblF0YzNCbFkybG1hV01nYzNSaGRIVnpJR0Z1WkNCa1lYUmxJR05zYjNObFpDQmpiMngxYlc1elhHNGdJSE5sYkdWamRDZ3RiM1psY21Gc2JGOXpkR0YwZFhNc0lDMXZkbVZ5WVd4c1gyUmhkR1ZmWTJ4dmMyVmtLVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbnJlY3MgPC0gcmVjcyB8PlxuICAjIGRyb3Agb3ZlcmFsbCBzdGF0dXMgYW5kIGRhdGUgY2xvc2VkIGNvbHVtbnMgc2luY2Ugd2Ugbm93IGhhdmUgcmVjaXBpZW50LXNwZWNpZmljIHN0YXR1cyBhbmQgZGF0ZSBjbG9zZWQgY29sdW1uc1xuICBzZWxlY3QoLW92ZXJhbGxfc3RhdHVzLCAtb3ZlcmFsbF9kYXRlX2Nsb3NlZClcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgZHJvcCBvdmVyYWxsIHN0YXR1cyBhbmQgZGF0ZSBjbG9zZWQgY29sdW1ucyBzaW5jZSB3ZSBub3cgaGF2ZSByZWNpcGllbnQtc3BlY2lmaWMgc3RhdHVzIGFuZCBkYXRlIGNsb3NlZCBjb2x1bW5zXG4gIHNlbGVjdCgtb3ZlcmFsbF9zdGF0dXMsIC1vdmVyYWxsX2RhdGVfY2xvc2VkKVxuYGBgIn0= -->
+<pre class="r"><code>recs &lt;- recs |&gt;
+  # drop overall status and date closed columns since we now have recipient-specific status and date closed columns
+  select(-overall_status, -overall_date_closed)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="transforming-the-newly-created-date-column-to-date-format" class="section level4">
+<h4>Transforming the newly created date column to date format</h4>
+<p>Because we extracted the new date column from the
+<code>addressee_details</code> column, it’s in character format instead
+of date format, which means we won’t be able to do any date calculations
+with it. The date is in a mm/dd/yyyy format, so we’ll adjust it using
+the <code>mdy()</code> function. This is another function that needs to
+be put within a <code>mutate()</code> statement.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJQ01nWTI5dWRtVnlkQ0J5WldOcGNHbGxiblFnWkdGMFpTQmpiMngxYlc0Z2RHOGdaR0YwWlNCbWIzSnRZWFFnZFhOcGJtY2diV1I1S0NrZ2MybHVZMlVnYVhRZ2QyRnpJR1Y0ZEhKaFkzUmxaQ0JtY205dElIUm9aU0JoWkdSeVpYTnpaV1ZmWkdWMFlXbHNjeUJqYjJ4MWJXNGdZVzVrSUdseklHbHVJR0VnWkdsbVptVnlaVzUwSUdadmNtMWhkQ0IwYUdGdUlIUm9aU0J2ZG1WeVlXeHNJR1JoZEdVZ1kyOXNkVzF1YzF4dUlDQnRkWFJoZEdVb2NtVmphWEJwWlc1MFgzSmxZMjl0YldWdVpHRjBhVzl1WDJSaGRHVmZZMnh2YzJWa0lEMGdiV1I1S0hKbFkybHdhV1Z1ZEY5eVpXTnZiVzFsYm1SaGRHbHZibDlrWVhSbFgyTnNiM05sWkNrcFhHNWdZR0FpZlE9PSAtLT5cblxuYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgY29udmVydCByZWNpcGllbnQgZGF0ZSBjb2x1bW4gdG8gZGF0ZSBmb3JtYXQgdXNpbmcgbWR5KCkgc2luY2UgaXQgd2FzIGV4dHJhY3RlZCBmcm9tIHRoZSBhZGRyZXNzZWVfZGV0YWlscyBjb2x1bW4gYW5kIGlzIGluIGEgZGlmZmVyZW50IGZvcm1hdCB0aGFuIHRoZSBvdmVyYWxsIGRhdGUgY29sdW1uc1xuICBtdXRhdGUocmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkID0gbWR5KHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9kYXRlX2Nsb3NlZCkpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgY29udmVydCByZWNpcGllbnQgZGF0ZSBjb2x1bW4gdG8gZGF0ZSBmb3JtYXQgdXNpbmcgbWR5KCkgc2luY2UgaXQgd2FzIGV4dHJhY3RlZCBmcm9tIHRoZSBhZGRyZXNzZWVfZGV0YWlscyBjb2x1bW4gYW5kIGlzIGluIGEgZGlmZmVyZW50IGZvcm1hdCB0aGFuIHRoZSBvdmVyYWxsIGRhdGUgY29sdW1uc1xuICBtdXRhdGUocmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkID0gbWR5KHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9kYXRlX2Nsb3NlZCkpXG5gYGAifQ== -->
+<pre class="r"><code>recs &lt;- recs |&gt;
+  # convert recipient date column to date format using mdy() since it was extracted from the addressee_details column and is in a different format than the overall date columns
+  mutate(recipient_recommendation_date_closed = mdy(recipient_recommendation_date_closed))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Honestly, this is already a much more usable dataset than what we
+started with, but we can make it even better by parsing the recipient
+recommendation status column to get a more accurate picture of which
+whether each recipient’s recommendation is open or closed and how the
+NTSB has classified their response to the recommendation.</p>
+<p>Here, we’re going to use <code>case_when()</code> to analyze the
+current column and create a new column that just tells us whether the
+recommendation is open or closed.</p>
+<p>All a <code>case_when()</code> does is parse one column and create a
+new column based on whether certain conditions are met. In this case,
+the conditions are whether the
+<code>recipient_recommendation_status</code> column contains the word
+“CLOSED” or “OPEN”, so we’re going to use <code>str_detect()</code> —
+literally, detect “what_i_want_to_look_for” in a given string — to check
+for those words in the column and then create a new column called
+<code>recipient_recommendation_open_closed</code> that just tells us
+whether the recommendation is open or closed for each recipient.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJQ01nYzNSbGNDQXhJT0tBbENCamNtVmhkR1VnYjNCbGJpOWpiRzl6WldRZ1kyOXNkVzF1SUhWemFXNW5JR05oYzJWZmQyaGxiaWdwWEc0Z0lHMTFkR0YwWlNoY2JpQWdJQ0J5WldOcGNHbGxiblJmY21WamIyMXRaVzVrWVhScGIyNWZiM0JsYmw5amJHOXpaV1FnUFNCallYTmxYM2RvWlc0b1hHNGdJQ0FnSUNCY2JpQWdJQ0FnSUhOMGNsOWtaWFJsWTNRb2NtVmphWEJwWlc1MFgzSmxZMjl0YldWdVpHRjBhVzl1WDNOMFlYUjFjeXdnWENKRGJHOXpaV1JjSWlrZ2ZpQmNJa05zYjNObFpGd2lMRnh1SUNBZ0lDQWdYRzRnSUNBZ0lDQnpkSEpmWkdWMFpXTjBLSEpsWTJsd2FXVnVkRjl5WldOdmJXMWxibVJoZEdsdmJsOXpkR0YwZFhNc0lGd2lUM0JsYmx3aUtTQitJRndpVDNCbGJsd2lLVnh1SUNBZ0lDbGNibUJnWUNKOSAtLT5cblxuYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgc3RlcCAxIOKAlCBjcmVhdGUgb3Blbi9jbG9zZWQgY29sdW1uIHVzaW5nIGNhc2Vfd2hlbigpXG4gIG11dGF0ZShcbiAgICByZWNpcGllbnRfcmVjb21tZW5kYXRpb25fb3Blbl9jbG9zZWQgPSBjYXNlX3doZW4oXG4gICAgICBcbiAgICAgIHN0cl9kZXRlY3QocmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3N0YXR1cywgXCJDbG9zZWRcIikgfiBcIkNsb3NlZFwiLFxuICAgICAgXG4gICAgICBzdHJfZGV0ZWN0KHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMsIFwiT3BlblwiKSB+IFwiT3BlblwiKVxuICAgIClcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgc3RlcCAxIOKAlCBjcmVhdGUgb3Blbi9jbG9zZWQgY29sdW1uIHVzaW5nIGNhc2Vfd2hlbigpXG4gIG11dGF0ZShcbiAgICByZWNpcGllbnRfcmVjb21tZW5kYXRpb25fb3Blbl9jbG9zZWQgPSBjYXNlX3doZW4oXG4gICAgICBcbiAgICAgIHN0cl9kZXRlY3QocmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3N0YXR1cywgXCJDbG9zZWRcIikgfiBcIkNsb3NlZFwiLFxuICAgICAgXG4gICAgICBzdHJfZGV0ZWN0KHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMsIFwiT3BlblwiKSB+IFwiT3BlblwiKVxuICAgIClcbmBgYCJ9 -->
+<pre class="r"><code>recs &lt;- recs |&gt;
+  # step 1 — create open/closed column using case_when()
   mutate(
-    
-    # step 1 — create open/closed column using case_when()
-    recommendation_open_closed = case_when(
-      str_detect(recommendation_status, &quot;CLOSED&quot;) ~ &quot;CLOSED&quot;,
-      str_detect(recommendation_status, &quot;OPEN&quot;) ~ &quot;OPEN&quot;),
-    
-    # step 2 — response status column using str_remove_all() &amp; str_trim()
-    recommendation_response_status = str_trim(str_remove_all(recommendation_status, &quot;CLOSED|OPEN|-&quot;)))</code></pre>
+    recipient_recommendation_open_closed = case_when(
+      
+      str_detect(recipient_recommendation_status, &quot;Closed&quot;) ~ &quot;Closed&quot;,
+      
+      str_detect(recipient_recommendation_status, &quot;Open&quot;) ~ &quot;Open&quot;)
+    )</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Now we’ll use <code>str_remove_all()</code> and
+<code>str_squish()</code> — the first of which does what you think,
+remove elements of a string — to create another column that
+<em>just</em> tells us how the NTSB has classified the recipient’s
+response to the recommendation (acceptable, unacceptable, etc.) without
+all of the extra information about whether it’s open or closed.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJrY205d0lHOXlhV2RwYm1Gc0lHOTJaWEpoYkd4ZmMzUmhkSFZ6SUdGdVpDQnlaV052YlcxbGJtUmhkR2x2Ymw5emRHRjBkWE1nWTI5c2RXMXVjeUJ6YVc1alpTQjNaU2QyWlNCd1lYSnpaV1FnYjNWMElIUm9aU0J5Wld4bGRtRnVkQ0JwYm1admNtMWhkR2x2YmlCcGJuUnZJRzVsZHlCamIyeDFiVzV6SVZ4dVkyeGxZVzVmY21GcGJGOXlaV056SUR3dElHTnNaV0Z1WDNKaGFXeGZjbVZqY3lCOFBseHVJQ0J6Wld4bFkzUW9MVzkyWlhKaGJHeGZjM1JoZEhWekxDQXRjbVZqYjIxdFpXNWtZWFJwYjI1ZmMzUmhkSFZ6S1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG4jIGRyb3Agb3JpZ2luYWwgb3ZlcmFsbF9zdGF0dXMgYW5kIHJlY29tbWVuZGF0aW9uX3N0YXR1cyBjb2x1bW5zIHNpbmNlIHdlJ3ZlIHBhcnNlZCBvdXQgdGhlIHJlbGV2YW50IGluZm9ybWF0aW9uIGludG8gbmV3IGNvbHVtbnMhXG5jbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+XG4gIHNlbGVjdCgtb3ZlcmFsbF9zdGF0dXMsIC1yZWNvbW1lbmRhdGlvbl9zdGF0dXMpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkcm9wIG9yaWdpbmFsIG92ZXJhbGxfc3RhdHVzIGFuZCByZWNvbW1lbmRhdGlvbl9zdGF0dXMgY29sdW1ucyBzaW5jZSB3ZSd2ZSBwYXJzZWQgb3V0IHRoZSByZWxldmFudCBpbmZvcm1hdGlvbiBpbnRvIG5ldyBjb2x1bW5zIVxuY2xlYW5fcmFpbF9yZWNzIDwtIGNsZWFuX3JhaWxfcmVjcyB8PlxuICBzZWxlY3QoLW92ZXJhbGxfc3RhdHVzLCAtcmVjb21tZW5kYXRpb25fc3RhdHVzKVxuYGBgIn0= -->
-<pre class="r"><code># drop original overall_status and recommendation_status columns since we&#39;ve parsed out the relevant information into new columns!
-clean_rail_recs &lt;- clean_rail_recs |&gt;
-  select(-overall_status, -recommendation_status)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJqYjI1MlpYSjBJR1JoZEdVZ1kyOXNkVzF1Y3lCMGJ5QmtZWFJsSUdadmNtMWhkQ0IxYzJsdVp5QmhjeTVFWVhSbEtDa2dZVzVrSUcxa2VTZ3BJR1p5YjIwZ2JIVmljbWxrWVhSbElIQmhZMnRoWjJVZ0tITnBibU5sSUhOdmJXVWdiMllnZEdobElHUmhkR1VnWm05eWJXRjBjeUJoY21VZ2FXNWpiMjV6YVhOMFpXNTBJR0ZqY205emN5QmpiMngxYlc1ektWeHVYRzVqYkdWaGJsOXlZV2xzWDNKbFkzTWdQQzBnWTJ4bFlXNWZjbUZwYkY5eVpXTnpJSHcrWEc0Z0lHMTFkR0YwWlNoY2JpQWdJQ0FqSUdOdmJuWmxjblFnYjNabGNtRnNiQ0JrWVhSbElHTnZiSFZ0Ym5NZ2RHOGdaR0YwWlNCbWIzSnRZWFFnZFhOcGJtY2dZWE11UkdGMFpTZ3BJSE5wYm1ObElIUm9aWGtnWVhKbElHbHVJR0VnWTI5dWMybHpkR1Z1ZENCbWIzSnRZWFJjYmlBZ0lDQmhZM0p2YzNNb1l5aGxkbVZ1ZEY5a1lYUmxMQ0J5WldOdmJXMWxibVJoZEdsdmJsOWtZWFJsWDJsemMzVmxaQ2tzSUg1aGN5NUVZWFJsS0M0cEtTeGNiaUFnSUNCY2JpQWdJQ0FqSUdOdmJuWmxjblFnY21WamFYQnBaVzUwSUdSaGRHVWdZMjlzZFcxdUlIUnZJR1JoZEdVZ1ptOXliV0YwSUhWemFXNW5JRzFrZVNncElITnBibU5sSUdsMElIZGhjeUJsZUhSeVlXTjBaV1FnWm5KdmJTQjBhR1VnWVdSa2NtVnpjMlZsWDJSbGRHRnBiSE1nWTI5c2RXMXVJR0Z1WkNCcGN5QnBiaUJoSUdScFptWmxjbVZ1ZENCbWIzSnRZWFFnZEdoaGJpQjBhR1VnYjNabGNtRnNiQ0JrWVhSbElHTnZiSFZ0Ym5OY2JpQWdJSEpsWTI5dGJXVnVaR0YwYVc5dVgyUmhkR1ZmWTJ4dmMyVmtJRDBnYldSNUtISmxZMjl0YldWdVpHRjBhVzl1WDJSaGRHVmZZMnh2YzJWa0tTeGNiaUFnSUNCY2JpQWdJQ0FqSUdGa1pDQjVaV0Z5SUdOdmJIVnRibk5jYmlBZ0lDQmxkbVZ1ZEY5NVpXRnlJRDBnZVdWaGNpaGxkbVZ1ZEY5a1lYUmxLU3hjYmlBZ0lDQnlaV052YlcxbGJtUmhkR2x2Ymw5NVpXRnlYMmx6YzNWbFpDQTlJSGxsWVhJb2NtVmpiMjF0Wlc1a1lYUnBiMjVmWkdGMFpWOXBjM04xWldRcExGeHVJQ0FnSUhKbFkyOXRiV1Z1WkdGMGFXOXVYM2xsWVhKZlkyeHZjMlZrSUQwZ2VXVmhjaWh5WldOdmJXMWxibVJoZEdsdmJsOWtZWFJsWDJOc2IzTmxaQ2xjYmlBZ0tWeHVYRzRqSUNwdWIzUmxPaUI1YjNVZ2QybHNiQ0JuWlhRZ1lTQjNZWEp1YVc1bklHWnZjaUIwYUdVZ2NtVmphWEJwWlc1MFgyUmhkR1ZmWTJ4dmMyVmtJR052YkhWdGJpNGdkR2hoZENkeklHOXJJU0IwYUdVZ1kyOXNkVzF1Y3lCcGRDZHpJR1poYVd4cGJtY2dkRzhnWTI5dWRtVnlkQ0JoY21VZ2RHaGxJRzl1WlhNZ2RHaGhkQ0JvWVhabElFNUJJSFpoYkhWbGN5QnBiaUIwYUdWdExDQjNhR2xqYUNCcGN5QmxlSEJsWTNSbFpDQnphVzVqWlNCdWIzUWdZV3hzSUhKbFkyOXRiV1Z1WkdGMGFXOXVjeUJoY21VZ1kyeHZjMlZrWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIGNvbnZlcnQgZGF0ZSBjb2x1bW5zIHRvIGRhdGUgZm9ybWF0IHVzaW5nIGFzLkRhdGUoKSBhbmQgbWR5KCkgZnJvbSBsdWJyaWRhdGUgcGFja2FnZSAoc2luY2Ugc29tZSBvZiB0aGUgZGF0ZSBmb3JtYXRzIGFyZSBpbmNvbnNpc3RlbnQgYWNyb3NzIGNvbHVtbnMpXG5cbmNsZWFuX3JhaWxfcmVjcyA8LSBjbGVhbl9yYWlsX3JlY3MgfD5cbiAgbXV0YXRlKFxuICAgICMgY29udmVydCBvdmVyYWxsIGRhdGUgY29sdW1ucyB0byBkYXRlIGZvcm1hdCB1c2luZyBhcy5EYXRlKCkgc2luY2UgdGhleSBhcmUgaW4gYSBjb25zaXN0ZW50IGZvcm1hdFxuICAgIGFjcm9zcyhjKGV2ZW50X2RhdGUsIHJlY29tbWVuZGF0aW9uX2RhdGVfaXNzdWVkKSwgfmFzLkRhdGUoLikpLFxuICAgIFxuICAgICMgY29udmVydCByZWNpcGllbnQgZGF0ZSBjb2x1bW4gdG8gZGF0ZSBmb3JtYXQgdXNpbmcgbWR5KCkgc2luY2UgaXQgd2FzIGV4dHJhY3RlZCBmcm9tIHRoZSBhZGRyZXNzZWVfZGV0YWlscyBjb2x1bW4gYW5kIGlzIGluIGEgZGlmZmVyZW50IGZvcm1hdCB0aGFuIHRoZSBvdmVyYWxsIGRhdGUgY29sdW1uc1xuICAgcmVjb21tZW5kYXRpb25fZGF0ZV9jbG9zZWQgPSBtZHkocmVjb21tZW5kYXRpb25fZGF0ZV9jbG9zZWQpLFxuICAgIFxuICAgICMgYWRkIHllYXIgY29sdW1uc1xuICAgIGV2ZW50X3llYXIgPSB5ZWFyKGV2ZW50X2RhdGUpLFxuICAgIHJlY29tbWVuZGF0aW9uX3llYXJfaXNzdWVkID0geWVhcihyZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCksXG4gICAgcmVjb21tZW5kYXRpb25feWVhcl9jbG9zZWQgPSB5ZWFyKHJlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkKVxuICApXG5cbiMgKm5vdGU6IHlvdSB3aWxsIGdldCBhIHdhcm5pbmcgZm9yIHRoZSByZWNpcGllbnRfZGF0ZV9jbG9zZWQgY29sdW1uLiB0aGF0J3Mgb2shIHRoZSBjb2x1bW5zIGl0J3MgZmFpbGluZyB0byBjb252ZXJ0IGFyZSB0aGUgb25lcyB0aGF0IGhhdmUgTkEgdmFsdWVzIGluIHRoZW0sIHdoaWNoIGlzIGV4cGVjdGVkIHNpbmNlIG5vdCBhbGwgcmVjb21tZW5kYXRpb25zIGFyZSBjbG9zZWRcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjb252ZXJ0IGRhdGUgY29sdW1ucyB0byBkYXRlIGZvcm1hdCB1c2luZyBhcy5EYXRlKCkgYW5kIG1keSgpIGZyb20gbHVicmlkYXRlIHBhY2thZ2UgKHNpbmNlIHNvbWUgb2YgdGhlIGRhdGUgZm9ybWF0cyBhcmUgaW5jb25zaXN0ZW50IGFjcm9zcyBjb2x1bW5zKVxuXG5jbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+XG4gIG11dGF0ZShcbiAgICAjIGNvbnZlcnQgb3ZlcmFsbCBkYXRlIGNvbHVtbnMgdG8gZGF0ZSBmb3JtYXQgdXNpbmcgYXMuRGF0ZSgpIHNpbmNlIHRoZXkgYXJlIGluIGEgY29uc2lzdGVudCBmb3JtYXRcbiAgICBhY3Jvc3MoYyhldmVudF9kYXRlLCByZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCksIH5hcy5EYXRlKC4pKSxcbiAgICBcbiAgICAjIGNvbnZlcnQgcmVjaXBpZW50IGRhdGUgY29sdW1uIHRvIGRhdGUgZm9ybWF0IHVzaW5nIG1keSgpIHNpbmNlIGl0IHdhcyBleHRyYWN0ZWQgZnJvbSB0aGUgYWRkcmVzc2VlX2RldGFpbHMgY29sdW1uIGFuZCBpcyBpbiBhIGRpZmZlcmVudCBmb3JtYXQgdGhhbiB0aGUgb3ZlcmFsbCBkYXRlIGNvbHVtbnNcbiAgIHJlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkID0gbWR5KHJlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkKSxcbiAgICBcbiAgICAjIGFkZCB5ZWFyIGNvbHVtbnNcbiAgICBldmVudF95ZWFyID0geWVhcihldmVudF9kYXRlKSxcbiAgICByZWNvbW1lbmRhdGlvbl95ZWFyX2lzc3VlZCA9IHllYXIocmVjb21tZW5kYXRpb25fZGF0ZV9pc3N1ZWQpLFxuICAgIHJlY29tbWVuZGF0aW9uX3llYXJfY2xvc2VkID0geWVhcihyZWNvbW1lbmRhdGlvbl9kYXRlX2Nsb3NlZClcbiAgKVxuXG4jICpub3RlOiB5b3Ugd2lsbCBnZXQgYSB3YXJuaW5nIGZvciB0aGUgcmVjaXBpZW50X2RhdGVfY2xvc2VkIGNvbHVtbi4gdGhhdCdzIG9rISB0aGUgY29sdW1ucyBpdCdzIGZhaWxpbmcgdG8gY29udmVydCBhcmUgdGhlIG9uZXMgdGhhdCBoYXZlIE5BIHZhbHVlcyBpbiB0aGVtLCB3aGljaCBpcyBleHBlY3RlZCBzaW5jZSBub3QgYWxsIHJlY29tbWVuZGF0aW9ucyBhcmUgY2xvc2VkXG5gYGAifQ== -->
-<pre class="r"><code># convert date columns to date format using as.Date() and mdy() from lubridate package (since some of the date formats are inconsistent across columns)
-
-clean_rail_recs &lt;- clean_rail_recs |&gt;
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K0lDQmNiaUFnSXlCemRHVndJRElnNG9DVUlISmxjM0J2Ym5ObElITjBZWFIxY3lCamIyeDFiVzRnZFhOcGJtY2djM1J5WDNKbGJXOTJaVjloYkd3b0tTQW1JSE4wY2w5MGNtbHRLQ2xjYmlBZ2JYVjBZWFJsS0Z4dUlDQWdJSEpsWTJsd2FXVnVkRjl5WldOdmJXMWxibVJoZEdsdmJsOXlaWE53YjI1elpWOXpkR0YwZFhNZ1BTQnpkSEpmYzNGMWFYTm9LRnh1SUNBZ0lDQWdjM1J5WDNKbGJXOTJaVjloYkd3b1hHNGdJQ0FnSUNBZ0lISmxZMmx3YVdWdWRGOXlaV052YlcxbGJtUmhkR2x2Ymw5emRHRjBkWE1zSUZ4dUlDQWdJQ0FnSUNCY0lrTnNiM05sWkh4UGNHVnVmQzFjSWlsY2JpQWdJQ0FnSUNNZ2RHaHBjeUJwY3lCMGFHVWdjR0Z5ZENCM2FHVnlaU0IzWlNCMFpXeHNJRklnZEc4Z2NtVnRiM1psSUhSb1pTQjNiM0prY3lCY0lrTk1UMU5GUkZ3aUxDQmNJazlRUlU1Y0lpQmhibVFnWVc1NUlHUmhjMmhsY3lCbWNtOXRJSFJvWlNCeVpXTnBjR2xsYm5SZmNtVmpiMjF0Wlc1a1lYUnBiMjVmYzNSaGRIVnpJR052YkhWdGJseHVJQ0FnSUNBZ0tWeHVJQ0FnSUNsY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG5yZWNzIDwtIHJlY3MgfD4gIFxuICAjIHN0ZXAgMiDigJQgcmVzcG9uc2Ugc3RhdHVzIGNvbHVtbiB1c2luZyBzdHJfcmVtb3ZlX2FsbCgpICYgc3RyX3RyaW0oKVxuICBtdXRhdGUoXG4gICAgcmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3Jlc3BvbnNlX3N0YXR1cyA9IHN0cl9zcXVpc2goXG4gICAgICBzdHJfcmVtb3ZlX2FsbChcbiAgICAgICAgcmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3N0YXR1cywgXG4gICAgICAgIFwiQ2xvc2VkfE9wZW58LVwiKVxuICAgICAgIyB0aGlzIGlzIHRoZSBwYXJ0IHdoZXJlIHdlIHRlbGwgUiB0byByZW1vdmUgdGhlIHdvcmRzIFwiQ0xPU0VEXCIsIFwiT1BFTlwiIGFuZCBhbnkgZGFzaGVzIGZyb20gdGhlIHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMgY29sdW1uXG4gICAgICApXG4gICAgKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+ICBcbiAgIyBzdGVwIDIg4oCUIHJlc3BvbnNlIHN0YXR1cyBjb2x1bW4gdXNpbmcgc3RyX3JlbW92ZV9hbGwoKSAmIHN0cl90cmltKClcbiAgbXV0YXRlKFxuICAgIHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9yZXNwb25zZV9zdGF0dXMgPSBzdHJfc3F1aXNoKFxuICAgICAgc3RyX3JlbW92ZV9hbGwoXG4gICAgICAgIHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMsIFxuICAgICAgICBcIkNsb3NlZHxPcGVufC1cIilcbiAgICAgICMgdGhpcyBpcyB0aGUgcGFydCB3aGVyZSB3ZSB0ZWxsIFIgdG8gcmVtb3ZlIHRoZSB3b3JkcyBcIkNMT1NFRFwiLCBcIk9QRU5cIiBhbmQgYW55IGRhc2hlcyBmcm9tIHRoZSByZWNpcGllbnRfcmVjb21tZW5kYXRpb25fc3RhdHVzIGNvbHVtblxuICAgICAgKVxuICAgIClcbmBgYCJ9 -->
+<pre class="r"><code>recs &lt;- recs |&gt;  
+  # step 2 — response status column using str_remove_all() &amp; str_trim()
   mutate(
-    # convert overall date columns to date format using as.Date() since they are in a consistent format
-    across(c(event_date, recommendation_date_issued), ~as.Date(.)),
-    
-    # convert recipient date column to date format using mdy() since it was extracted from the addressee_details column and is in a different format than the overall date columns
-   recommendation_date_closed = mdy(recommendation_date_closed),
-    
-    # add year columns
-    event_year = year(event_date),
-    recommendation_year_issued = year(recommendation_date_issued),
-    recommendation_year_closed = year(recommendation_date_closed)
-  )
-
-# *note: you will get a warning for the recipient_date_closed column. that&#39;s ok! the columns it&#39;s failing to convert are the ones that have NA values in them, which is expected since not all recommendations are closed</code></pre>
+    recipient_recommendation_response_status = str_squish(
+      str_remove_all(
+        recipient_recommendation_status, 
+        &quot;Closed|Open|-&quot;)
+      # this is the part where we tell R to remove the words &quot;CLOSED&quot;, &quot;OPEN&quot; and any dashes from the recipient_recommendation_status column
+      )
+    )</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Since we now have separate columns for whether the recommendation is
+open or closed and how the NTSB has classified the recipient’s response
+to the recommendation, we can drop the original
+<code>recipient_recommendation_status</code> column since it contains
+all of that information in one messy string.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJ5Wlc5eVoyRnVhWHBsSUdOdmJIVnRibk5jYm1Oc1pXRnVYM0poYVd4ZmNtVmpjeUE4TFNCamJHVmhibDl5WVdsc1gzSmxZM01nZkQ1Y2JpQWdjMlZzWldOMEtISmxZMjl0YldWdVpHRjBhVzl1WDJsa0xDQmNiaUFnSUNBZ0lDQWdJRzUwYzJKZmJtOHNYRzRnSUNBZ0lDQWdJQ0J0YTJWNUxGeHVJQ0FnSUNBZ0lDQWdjbVZ3YjNKMFgyNXZMRnh1SUNBZ0lDQWdJQ0FnY21WamIyMXRaVzVrWVhScGIyNWZiVzlrWlN4Y2JpQWdJQ0FnSUNBZ0lITjFiVzFoY25rc1hHNGdJQ0FnSUNBZ0lDQmxkbVZ1ZEY5a1lYUmxMRnh1SUNBZ0lDQWdJQ0FnWlhabGJuUmZlV1ZoY2l4Y2JpQWdJQ0FnSUNBZ0lHTnBkSGtzWEc0Z0lDQWdJQ0FnSUNCemRHRjBaU3hjYmlBZ0lDQWdJQ0FnSUdOdmRXNTBjbmtzWEc0Z0lDQWdJQ0FnSUNCeVpXTnZiVzFsYm1SaGRHbHZiaXhjYmlBZ0lDQWdJQ0FnSUhKbFkyOXRiV1Z1WkdGMGFXOXVYMlZ1WTI5a2FXNW5jeXhjYmlBZ0lDQWdJQ0FnSUhKbFkyOXRiV1Z1WkdGMGFXOXVYMk5oZEdWbmIzSjVMRnh1SUNBZ0lDQWdJQ0FnY21WamIyMXRaVzVrWVhScGIyNWZjM1ZpWTJGMFpXZHZjbmtzWEc0Z0lDQWdJQ0FnSUNCeVpXTnZiVzFsYm1SaGRHbHZibDlrWVhSbFgybHpjM1ZsWkN4Y2JpQWdJQ0FnSUNBZ0lISmxZMjl0YldWdVpHRjBhVzl1WDNsbFlYSmZhWE56ZFdWa0xGeHVJQ0FnSUNBZ0lDQWdjbVZqYVhCcFpXNTBMRnh1SUNBZ0lDQWdJQ0FnYVhOZmJYVnNkR2x3YkdWZmNtVmphWEJwWlc1MExGeHVJQ0FnSUNBZ0lDQWdjbVZqYjIxdFpXNWtZWFJwYjI1ZmNtVnpjRzl1YzJWZmMzUmhkSFZ6TEZ4dUlDQWdJQ0FnSUNBZ2NtVmpiMjF0Wlc1a1lYUnBiMjVmYjNCbGJsOWpiRzl6WldRc1hHNGdJQ0FnSUNBZ0lDQnlaV052YlcxbGJtUmhkR2x2Ymw5a1lYUmxYMk5zYjNObFpDeGNiaUFnSUNBZ0lDQWdJSEpsWTI5dGJXVnVaR0YwYVc5dVgzbGxZWEpmWTJ4dmMyVmtMRnh1SUNBZ0lDQWdJQ0FnY21WamIyMXRaVzVrWVhScGIyNWZkWEpzTEZ4dUlDQWdJQ0FnSUNBZ1lXTmphV1JsYm5SZmNtVndiM0owWDNWeWJGeHVJQ0FnSUNBZ0lDQWdLVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbiMgcmVvcmdhbml6ZSBjb2x1bW5zXG5jbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+XG4gIHNlbGVjdChyZWNvbW1lbmRhdGlvbl9pZCwgXG4gICAgICAgICBudHNiX25vLFxuICAgICAgICAgbWtleSxcbiAgICAgICAgIHJlcG9ydF9ubyxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX21vZGUsXG4gICAgICAgICBzdW1tYXJ5LFxuICAgICAgICAgZXZlbnRfZGF0ZSxcbiAgICAgICAgIGV2ZW50X3llYXIsXG4gICAgICAgICBjaXR5LFxuICAgICAgICAgc3RhdGUsXG4gICAgICAgICBjb3VudHJ5LFxuICAgICAgICAgcmVjb21tZW5kYXRpb24sXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl9lbmNvZGluZ3MsXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl9jYXRlZ29yeSxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX3N1YmNhdGVnb3J5LFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fZGF0ZV9pc3N1ZWQsXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl95ZWFyX2lzc3VlZCxcbiAgICAgICAgIHJlY2lwaWVudCxcbiAgICAgICAgIGlzX211bHRpcGxlX3JlY2lwaWVudCxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX3Jlc3BvbnNlX3N0YXR1cyxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX29wZW5fY2xvc2VkLFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fZGF0ZV9jbG9zZWQsXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl95ZWFyX2Nsb3NlZCxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX3VybCxcbiAgICAgICAgIGFjY2lkZW50X3JlcG9ydF91cmxcbiAgICAgICAgIClcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyByZW9yZ2FuaXplIGNvbHVtbnNcbmNsZWFuX3JhaWxfcmVjcyA8LSBjbGVhbl9yYWlsX3JlY3MgfD5cbiAgc2VsZWN0KHJlY29tbWVuZGF0aW9uX2lkLCBcbiAgICAgICAgIG50c2Jfbm8sXG4gICAgICAgICBta2V5LFxuICAgICAgICAgcmVwb3J0X25vLFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fbW9kZSxcbiAgICAgICAgIHN1bW1hcnksXG4gICAgICAgICBldmVudF9kYXRlLFxuICAgICAgICAgZXZlbnRfeWVhcixcbiAgICAgICAgIGNpdHksXG4gICAgICAgICBzdGF0ZSxcbiAgICAgICAgIGNvdW50cnksXG4gICAgICAgICByZWNvbW1lbmRhdGlvbixcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX2VuY29kaW5ncyxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX2NhdGVnb3J5LFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fc3ViY2F0ZWdvcnksXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX3llYXJfaXNzdWVkLFxuICAgICAgICAgcmVjaXBpZW50LFxuICAgICAgICAgaXNfbXVsdGlwbGVfcmVjaXBpZW50LFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fcmVzcG9uc2Vfc3RhdHVzLFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fb3Blbl9jbG9zZWQsXG4gICAgICAgICByZWNvbW1lbmRhdGlvbl9kYXRlX2Nsb3NlZCxcbiAgICAgICAgIHJlY29tbWVuZGF0aW9uX3llYXJfY2xvc2VkLFxuICAgICAgICAgcmVjb21tZW5kYXRpb25fdXJsLFxuICAgICAgICAgYWNjaWRlbnRfcmVwb3J0X3VybFxuICAgICAgICAgKVxuYGBgIn0= -->
-<pre class="r"><code># reorganize columns
-clean_rail_recs &lt;- clean_rail_recs |&gt;
-  select(recommendation_id, 
-         ntsb_no,
-         mkey,
-         report_no,
-         recommendation_mode,
-         summary,
-         event_date,
-         event_year,
-         city,
-         state,
-         country,
-         recommendation,
-         recommendation_encodings,
-         recommendation_category,
-         recommendation_subcategory,
-         recommendation_date_issued,
-         recommendation_year_issued,
-         recipient,
-         is_multiple_recipient,
-         recommendation_response_status,
-         recommendation_open_closed,
-         recommendation_date_closed,
-         recommendation_year_closed,
-         recommendation_url,
-         accident_report_url
-         )</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVjbVZqY3lBOExTQnlaV056SUh3K1hHNGdJQ01nWkhKdmNDQnZjbWxuYVc1aGJDQnlaV05wY0dsbGJuUWdjbVZqYjIxdFpXNWtZWFJwYjI0Z2MzUmhkSFZ6SUdOdmJIVnRiaUJ6YVc1alpTQjNaU0J1YjNjZ2FHRjJaU0J6WlhCaGNtRjBaU0JqYjJ4MWJXNXpJR1p2Y2lCdmNHVnVMMk5zYjNObFpDQnpkR0YwZFhOY2JpQWdjMlZzWldOMEtDMXlaV05wY0dsbGJuUmZjbVZqYjIxdFpXNWtZWFJwYjI1ZmMzUmhkSFZ6S1Z4dVlHQmdJbjA9IC0tPlxuXG5gYGByXG5yZWNzIDwtIHJlY3MgfD5cbiAgIyBkcm9wIG9yaWdpbmFsIHJlY2lwaWVudCByZWNvbW1lbmRhdGlvbiBzdGF0dXMgY29sdW1uIHNpbmNlIHdlIG5vdyBoYXZlIHNlcGFyYXRlIGNvbHVtbnMgZm9yIG9wZW4vY2xvc2VkIHN0YXR1c1xuICBzZWxlY3QoLXJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMpXG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVjcyA8LSByZWNzIHw+XG4gICMgZHJvcCBvcmlnaW5hbCByZWNpcGllbnQgcmVjb21tZW5kYXRpb24gc3RhdHVzIGNvbHVtbiBzaW5jZSB3ZSBub3cgaGF2ZSBzZXBhcmF0ZSBjb2x1bW5zIGZvciBvcGVuL2Nsb3NlZCBzdGF0dXNcbiAgc2VsZWN0KC1yZWNpcGllbnRfcmVjb21tZW5kYXRpb25fc3RhdHVzKVxuYGBgIn0= -->
+<pre class="r"><code>recs &lt;- recs |&gt;
+  # drop original recipient recommendation status column since we now have separate columns for open/closed status
+  select(-recipient_recommendation_status)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Well, now that we’ve got all this cleaned up, we can write it back
+into a csv and save it — that way we have a cleaned version saved, and
+we can import it into Google Sheets if we want to.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVhbk52Ymw5a1lYUmhJRHd0SUhKbFlXUmZZM04yS0Z3aVpHRjBZUzl5WVdsc1gzTmhabVYwZVY5cWMyOXVYMlJoZEdFdVkzTjJYQ0lwWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG5qc29uX2RhdGEgPC0gcmVhZF9jc3YoXCJkYXRhL3JhaWxfc2FmZXR5X2pzb25fZGF0YS5jc3ZcIilcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuanNvbl9kYXRhIDwtIHJlYWRfY3N2KFwiZGF0YS9yYWlsX3NhZmV0eV9qc29uX2RhdGEuY3N2XCIpXG5gYGAifQ== -->
-<pre class="r"><code>json_data &lt;- read_csv(&quot;data/rail_safety_json_data.csv&quot;)</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUIzY21sMFpTQjBieUJqYzNaY2JuZHlhWFJsWDJOemRpaHlaV056TENCY0ltUmhkR0V2WTJ4bFlXNWZjbUZwYkY5ellXWmxkSGxmY21WamN5NWpjM1pjSWlsY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIHdyaXRlIHRvIGNzdlxud3JpdGVfY3N2KHJlY3MsIFwiZGF0YS9jbGVhbl9yYWlsX3NhZmV0eV9yZWNzLmNzdlwiKVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB3cml0ZSB0byBjc3ZcbndyaXRlX2NzdihyZWNzLCBcImRhdGEvY2xlYW5fcmFpbF9zYWZldHlfcmVjcy5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code># write to csv
+write_csv(recs, &quot;data/clean_rail_safety_recs.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+</div>
+</div>
+<div id="bonus-exploring-the-full-data" class="section level2">
+<h2>BONUS: Exploring the Full Data</h2>
+<div id="go-through-these-next-steps-on-your-own-if-you-want-to-try-getting-some-additional-information-out-of-the-data" class="section level3">
+<h3>Go through these next steps on your own, if you want to try getting
+some additional information out of the data!</h3>
+<p>Note that this is <em>summary</em> data from NTSB’s CAROL database,
+which means it’s missing some of the contextual information that you can
+see online — like a recommendation’s priority level, hazmat status,
+etc.</p>
+<p>The reason? The full data is in a nested JSON file that by itself is
+pretty unmanageable. We’ll come back to this, but for now, the summary
+data is what we’re going to focus on.</p>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVlQ0E4TFNCamJHVmhibDl5WVdsc1gzSmxZM01nZkQ1Y2JpQWdiR1ZtZEY5cWIybHVLR3B6YjI1ZlpHRjBZU3dnYW05cGJsOWllU2h5WldOdmJXMWxibVJoZEdsdmJsOXBaQ3dnY21WamIyMXRaVzVrWVhScGIyNHBLVnh1WUdCZ0luMD0gLS0+XG5cbmBgYHJcbnggPC0gY2xlYW5fcmFpbF9yZWNzIHw+XG4gIGxlZnRfam9pbihqc29uX2RhdGEsIGpvaW5fYnkocmVjb21tZW5kYXRpb25faWQsIHJlY29tbWVuZGF0aW9uKSlcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBjbGVhbl9yYWlsX3JlY3MgfD5cbiAgbGVmdF9qb2luKGpzb25fZGF0YSwgam9pbl9ieShyZWNvbW1lbmRhdGlvbl9pZCwgcmVjb21tZW5kYXRpb24pKVxuYGBgIn0= -->
-<pre class="r"><code>x &lt;- clean_rail_recs |&gt;
-  left_join(json_data, join_by(recommendation_id, recommendation))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluZGluZyB0aGUgU3Rvcnk6IFRyYW5zcG9ydGF0aW9uIERhdGEiCmF1dGhvcjogIkNhdCBNdXJwaHkiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgRmluZGluZyB0aGUgU3Rvcnk6IFRyYW5zcG9ydGF0aW9uIERhdGEKCiMjIEluc3RhbGwgJiBMb2FkIFBhY2thZ2VzCgpgYGB7ciBpbnN0YWxsX3BhY2thZ2VzfQojIGluc3RhbGwucGFja2FnZXMoInRpZHl2ZXJzZSIpCmxpYnJhcnkodGlkeXZlcnNlKQoKIyBpbnN0YWxsLnBhY2thZ2VzKCJkcGx5ciIpCmxpYnJhcnkoZHBseXIpCgojIGluc3RhbGwucGFja2FnZXMoImphbml0b3IiKQpsaWJyYXJ5KGphbml0b3IpCgojIGluc3RhbGwucGFja2FnZXMoImx1YnJpZGF0ZSIpCmxpYnJhcnkobHVicmlkYXRlKQpgYGAKCiMjIExvYWQgUmFpbCBTYWZldHkgUmVjb21tZW5kYXRpb25zICgyMDAwLXByZXNlbnQpCgoqU291cmNlOiBOYXRpb25hbCBUcmFuc3BvcnRhdGlvbiBTYWZldHkgQm9hcmQncyBDQVJPTCBEYXRhYmFzZSoKCipMaW5rIHRvIEN1c3RvbSBTZWFyY2ggQnVpbGRlcjogPGh0dHBzOi8vZGF0YS5udHNiLmdvdi9jYXJvbC1tYWluLXB1YmxpYy9xdWVyeS1idWlsZGVyPioKClRoZSBmaXJzdCBzdGVwIGluIG91ciBkYXRhIGV4cGxvcmF0aW9uIHByb2Nlc3MgaXMgdG8gbG9hZCB0aGUgcmF3IC5jc3YgZGF0YSBmcm9tIHRoZSBOVFNCJ3MgZGF0YWJhc2UgdG8gZ2V0IGEgc2Vuc2Ugb2Ygd2hhdCB3ZSdyZSB3b3JraW5nIHdpdGguCgpOb3RlIHRoYXQgdGhpcyBpcyAqc3VtbWFyeSogZGF0YSBmcm9tIE5UU0IncyBDQVJPTCBkYXRhYmFzZSwgd2hpY2ggbWVhbnMgaXQncyBtaXNzaW5nIHNvbWUgb2YgdGhlIGNvbnRleHR1YWwgaW5mb3JtYXRpb24gdGhhdCB5b3UgY2FuIHNlZSBvbmxpbmUg4oCUIGxpa2UgYSByZWNvbW1lbmRhdGlvbidzIHByaW9yaXR5IGxldmVsLCBoYXptYXQgc3RhdHVzLCBldGMuCgpUaGUgcmVhc29uPyBUaGUgZnVsbCBkYXRhIGlzIGluIGEgbmVzdGVkIEpTT04gZmlsZSB0aGF0IGJ5IGl0c2VsZiBpcyBwcmV0dHkgdW5tYW5hZ2VhYmxlLiBXZSdsbCBjb21lIGJhY2sgdG8gdGhpcywgYnV0IGZvciBub3csIHRoZSBzdW1tYXJ5IGRhdGEgaXMgd2hhdCB3ZSdyZSBnb2luZyB0byBmb2N1cyBvbi4KCmBgYHtyIGxvYWRfZGF0YX0KIyBsb2FkIHJhdyBjc3YKcmF3X3JhaWxfcmVjcyA8LSByZWFkX2NzdigiZGF0YS9yYWlsX3NhZmV0eV9yZWNzLmNzdiIpIHw+CiAgCiAgIyBjbGVhbiBuYW1lcwogIGNsZWFuX25hbWVzKCkgfD4KICAKICAjIHBlZWsgYXQgZGF0YQogIGdsaW1wc2UoKQpgYGAKCk9LLCBzbyBgZ2xpbXBzZSgpYCBzaG93cyB1cyB3ZSd2ZSBnb3QgYWJvdXQgNzMwIHJlY29yZHMgYWNyb3NzIDIxIGNvbHVtbnMsIG1vc3Qgb2Ygd2hpY2ggYXJlIGNoYXJhY3RlciBjb2x1bW5zLiAKCk1vc3Qgb2YgdGhlIGNvbHVtbiBuYW1lcyBhcmUgcHJldHR5IHNlbGYtZXhwbGFuYXRvcnksIGJ1dCBub3QgYWxsIG9mIHRoZW0uIExldCdzIGZpeCB0aGF0LgoKIyMgSW5pdGlhbCBDb2x1bW4gQ2xlYW5pbmcKCmBgYHtyIGNsZWFuaW5nX2FuZF9yZW5hbWluZ30KY2xlYW5fcmFpbF9yZWNzIDwtIHJhd19yYWlsX3JlY3MgfD4KICAKICAjIHJlbmFtZSBjb2x1bW5zCiAgcmVuYW1lKHJlY29tbWVuZGF0aW9uX2lkID0gc3JpZCwKICAgICAgICAgc3VtbWFyeSA9IGFic3RyYWN0LAogICAgICAgICByZWNvbW1lbmRhdGlvbl9lbmNvZGluZ3MgPSBzcl9jb2RpbmdfbW9kZSwKICAgICAgICAgcmVjb21tZW5kYXRpb25fY2F0ZWdvcnkgPSBzcl9jb2RpbmdfdGllcl8xLAogICAgICAgICByZWNvbW1lbmRhdGlvbl9zdWJjYXRlZ29yeSA9IHNyX2NvZGluZ190aWVyMiwKICAgICAgICAgcmVjb21tZW5kYXRpb25fdXJsID0gc3JfdXJsLAogICAgICAgICByZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCA9IGRhdGVfaXNzdWVkLAogICAgICAgICApIHw+CgogICMgc3RhbmRhcmRpemUgYWxsIHRleHQgdG8gdXBwZXJjYXNlCiAgbXV0YXRlKGFjcm9zcyhldmVyeXRoaW5nKCksIH5zdHJfdG9fdXBwZXIoLikpKQpgYGAKCmBgYHtyIHNlcGFyYXRlX3JlY29tbWVuZGF0aW9uc19ieV9hZGRyZXNzZWV9CmNsZWFuX3JhaWxfcmVjcyA8LSBjbGVhbl9yYWlsX3JlY3MgfD4KICAKICAjIHJlbW92ZSB0cmFpbGluZyBzZW1pY29sb25zIGluIHJlY2lwaWVudCBkZXRhaWxzCiAgbXV0YXRlKGFkZHJlc3NlZV9kZXRhaWxzID0gc3RyX3JlbW92ZV9hbGwoYWRkcmVzc2VlX2RldGFpbHMsICI7JCIpKSB8PgoKICAjIHVzZSByZW1haW5pbmcgc2VtaWNvbG9ucyB0byBwdXQgYXNzaWduIGVhY2ggcmVjaXBpZW50IGl0cyBvd24gcmVjb21tZW5kYXRpb24gcm93IHdoZW4gYSBzaW5nbGUgcmVjb21tZW5kYXRpb24gaGFzIG11bHRpcGxlIHJlY2lwaWVudHMKICBzZXBhcmF0ZV9yb3dzKGFkZHJlc3NlZV9kZXRhaWxzLCBzZXAgPSAiOyIpIHw+CiAgCiAgIyByZW1vdmUgZXh0cmEgd2hpdGUgc3BhY2UgZnJvbSBhZGRyZXNzZWUgZGV0YWlscwogIG11dGF0ZShhZGRyZXNzZWVfZGV0YWlscyA9IHN0cl9zcXVpc2goYWRkcmVzc2VlX2RldGFpbHMpKQpgYGAKCmBgYHtyIHNlcGFyYXRlX2FkZHJlc3NlZV9kZXRhaWxzfQpjbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+CiAgIyBzZXBhcmF0ZSByZWNpcGllbnQgZGV0YWlscyBpbnRvIHRocmVlIGRpc3RpbmN0IGNvbHVtbnMKICBzZXBhcmF0ZShhZGRyZXNzZWVfZGV0YWlscywgCiAgICAgICAgICAgaW50byA9IGMoInJlY2lwaWVudCIsIAogICAgICAgICAgICAgICAgICAgICJyZWNvbW1lbmRhdGlvbl9zdGF0dXMiLCAKICAgICAgICAgICAgICAgICAgICAicmVjb21tZW5kYXRpb25fZGF0ZV9jbG9zZWQiKSwgCiAgICAgICAgICAgc2VwID0gIiBcXHwgIikKYGBgCgpgYGB7cn0KICMgc2luY2Ugc29tZSByZWNvbW1lbmRhdGlvbnMgaGF2ZSBtdWx0aXBsZSByZWNpcGllbnRzIHdpdGggZGlmZmVyZW50IHN0YXR1c2VzLCB3ZSBuZWVkIHRvIHBhcnNlIHRoZSByZWNpcGllbnQgc3RhdHVzIGNvbHVtbiB0byBnZXQgYSBtb3JlIGFjY3VyYXRlIHBpY3R1cmUgb2Ygd2hpY2ggcmVjb21tZW5kYXRpb25zIGFyZSBvcGVuIHZzLiBjbG9zZWQgZm9yIGVhY2ggcmVjaXBpZW50CgpjbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+CiAgbXV0YXRlKAogICAgCiAgICAjIHN0ZXAgMSDigJQgY3JlYXRlIG9wZW4vY2xvc2VkIGNvbHVtbiB1c2luZyBjYXNlX3doZW4oKQogICAgcmVjb21tZW5kYXRpb25fb3Blbl9jbG9zZWQgPSBjYXNlX3doZW4oCiAgICAgIHN0cl9kZXRlY3QocmVjb21tZW5kYXRpb25fc3RhdHVzLCAiQ0xPU0VEIikgfiAiQ0xPU0VEIiwKICAgICAgc3RyX2RldGVjdChyZWNvbW1lbmRhdGlvbl9zdGF0dXMsICJPUEVOIikgfiAiT1BFTiIpLAogICAgCiAgICAjIHN0ZXAgMiDigJQgcmVzcG9uc2Ugc3RhdHVzIGNvbHVtbiB1c2luZyBzdHJfcmVtb3ZlX2FsbCgpICYgc3RyX3RyaW0oKQogICAgcmVjb21tZW5kYXRpb25fcmVzcG9uc2Vfc3RhdHVzID0gc3RyX3RyaW0oc3RyX3JlbW92ZV9hbGwocmVjb21tZW5kYXRpb25fc3RhdHVzLCAiQ0xPU0VEfE9QRU58LSIpKSkKYGBgCgpgYGB7cn0KIyBkcm9wIG9yaWdpbmFsIG92ZXJhbGxfc3RhdHVzIGFuZCByZWNvbW1lbmRhdGlvbl9zdGF0dXMgY29sdW1ucyBzaW5jZSB3ZSd2ZSBwYXJzZWQgb3V0IHRoZSByZWxldmFudCBpbmZvcm1hdGlvbiBpbnRvIG5ldyBjb2x1bW5zIQpjbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+CiAgc2VsZWN0KC1vdmVyYWxsX3N0YXR1cywgLXJlY29tbWVuZGF0aW9uX3N0YXR1cykKYGBgCgpgYGB7ciBkYXRlX2hhbmRsaW5nfQojIGNvbnZlcnQgZGF0ZSBjb2x1bW5zIHRvIGRhdGUgZm9ybWF0IHVzaW5nIGFzLkRhdGUoKSBhbmQgbWR5KCkgZnJvbSBsdWJyaWRhdGUgcGFja2FnZSAoc2luY2Ugc29tZSBvZiB0aGUgZGF0ZSBmb3JtYXRzIGFyZSBpbmNvbnNpc3RlbnQgYWNyb3NzIGNvbHVtbnMpCgpjbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+CiAgbXV0YXRlKAogICAgIyBjb252ZXJ0IG92ZXJhbGwgZGF0ZSBjb2x1bW5zIHRvIGRhdGUgZm9ybWF0IHVzaW5nIGFzLkRhdGUoKSBzaW5jZSB0aGV5IGFyZSBpbiBhIGNvbnNpc3RlbnQgZm9ybWF0CiAgICBhY3Jvc3MoYyhldmVudF9kYXRlLCByZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCksIH5hcy5EYXRlKC4pKSwKICAgIAogICAgIyBjb252ZXJ0IHJlY2lwaWVudCBkYXRlIGNvbHVtbiB0byBkYXRlIGZvcm1hdCB1c2luZyBtZHkoKSBzaW5jZSBpdCB3YXMgZXh0cmFjdGVkIGZyb20gdGhlIGFkZHJlc3NlZV9kZXRhaWxzIGNvbHVtbiBhbmQgaXMgaW4gYSBkaWZmZXJlbnQgZm9ybWF0IHRoYW4gdGhlIG92ZXJhbGwgZGF0ZSBjb2x1bW5zCiAgIHJlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkID0gbWR5KHJlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkKSwKICAgIAogICAgIyBhZGQgeWVhciBjb2x1bW5zCiAgICBldmVudF95ZWFyID0geWVhcihldmVudF9kYXRlKSwKICAgIHJlY29tbWVuZGF0aW9uX3llYXJfaXNzdWVkID0geWVhcihyZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCksCiAgICByZWNvbW1lbmRhdGlvbl95ZWFyX2Nsb3NlZCA9IHllYXIocmVjb21tZW5kYXRpb25fZGF0ZV9jbG9zZWQpCiAgKQoKIyAqbm90ZTogeW91IHdpbGwgZ2V0IGEgd2FybmluZyBmb3IgdGhlIHJlY2lwaWVudF9kYXRlX2Nsb3NlZCBjb2x1bW4uIHRoYXQncyBvayEgdGhlIGNvbHVtbnMgaXQncyBmYWlsaW5nIHRvIGNvbnZlcnQgYXJlIHRoZSBvbmVzIHRoYXQgaGF2ZSBOQSB2YWx1ZXMgaW4gdGhlbSwgd2hpY2ggaXMgZXhwZWN0ZWQgc2luY2Ugbm90IGFsbCByZWNvbW1lbmRhdGlvbnMgYXJlIGNsb3NlZApgYGAKCmBgYHtyfQojIHJlb3JnYW5pemUgY29sdW1ucwpjbGVhbl9yYWlsX3JlY3MgPC0gY2xlYW5fcmFpbF9yZWNzIHw+CiAgc2VsZWN0KHJlY29tbWVuZGF0aW9uX2lkLCAKICAgICAgICAgbnRzYl9ubywKICAgICAgICAgbWtleSwKICAgICAgICAgcmVwb3J0X25vLAogICAgICAgICByZWNvbW1lbmRhdGlvbl9tb2RlLAogICAgICAgICBzdW1tYXJ5LAogICAgICAgICBldmVudF9kYXRlLAogICAgICAgICBldmVudF95ZWFyLAogICAgICAgICBjaXR5LAogICAgICAgICBzdGF0ZSwKICAgICAgICAgY291bnRyeSwKICAgICAgICAgcmVjb21tZW5kYXRpb24sCiAgICAgICAgIHJlY29tbWVuZGF0aW9uX2VuY29kaW5ncywKICAgICAgICAgcmVjb21tZW5kYXRpb25fY2F0ZWdvcnksCiAgICAgICAgIHJlY29tbWVuZGF0aW9uX3N1YmNhdGVnb3J5LAogICAgICAgICByZWNvbW1lbmRhdGlvbl9kYXRlX2lzc3VlZCwKICAgICAgICAgcmVjb21tZW5kYXRpb25feWVhcl9pc3N1ZWQsCiAgICAgICAgIHJlY2lwaWVudCwKICAgICAgICAgaXNfbXVsdGlwbGVfcmVjaXBpZW50LAogICAgICAgICByZWNvbW1lbmRhdGlvbl9yZXNwb25zZV9zdGF0dXMsCiAgICAgICAgIHJlY29tbWVuZGF0aW9uX29wZW5fY2xvc2VkLAogICAgICAgICByZWNvbW1lbmRhdGlvbl9kYXRlX2Nsb3NlZCwKICAgICAgICAgcmVjb21tZW5kYXRpb25feWVhcl9jbG9zZWQsCiAgICAgICAgIHJlY29tbWVuZGF0aW9uX3VybCwKICAgICAgICAgYWNjaWRlbnRfcmVwb3J0X3VybAogICAgICAgICApCmBgYAoKYGBge3J9Cmpzb25fZGF0YSA8LSByZWFkX2NzdigiZGF0YS9yYWlsX3NhZmV0eV9qc29uX2RhdGEuY3N2IikKYGBgCgpgYGB7cn0KeCA8LSBjbGVhbl9yYWlsX3JlY3MgfD4KICBsZWZ0X2pvaW4oanNvbl9kYXRhLCBqb2luX2J5KHJlY29tbWVuZGF0aW9uX2lkLCByZWNvbW1lbmRhdGlvbikpCmBgYAo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluZGluZyB0aGUgU3Rvcnk6IFRyYW5zcG9ydGF0aW9uIERhdGEiCmF1dGhvcjogIkNvZGUgYnkgQ2F0IE11cnBoeSwgSG93YXJkIENlbnRlciBmb3IgSW52ZXN0aWdhdGl2ZSBKb3VybmFsaXNtIGF0IHRoZSBVbml2ZXJzaXR5IG9mIE1hcnlsYW5kIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyBTdGVwIDE6IEluc3RhbGwgJiBMb2FkIFBhY2thZ2VzCgpUaGVzZSBhcmUgdGhlIHBhY2thZ2VzIHdlJ2xsIGJlIHVzaW5nIGZvciB0aGlzIGRhdGEgZXhwbG9yYXRpb24gcHJvY2Vzcy4gSWYgeW91IGRvbid0IGhhdmUgdGhlbSBpbnN0YWxsZWQsIHlvdSBjYW4gcnVuIHRoZSBpbnN0YWxsLnBhY2thZ2VzKCkgbGluZXMgdG8gaW5zdGFsbCB0aGVtLiBPdGhlcndpc2UsIGp1c3QgbG9hZCB0aGUgbGlicmFyaWVzIGFuZCB3ZSdsbCBnZXQgZ29pbmchCgpgYGB7ciBpbnN0YWxsX3BhY2thZ2VzfQojIGluc3RhbGwucGFja2FnZXMoInRpZHl2ZXJzZSIpCmxpYnJhcnkodGlkeXZlcnNlKQoKIyBpbnN0YWxsLnBhY2thZ2VzKCJkcGx5ciIpCmxpYnJhcnkoZHBseXIpCgojIGluc3RhbGwucGFja2FnZXMoImphbml0b3IiKQpsaWJyYXJ5KGphbml0b3IpCmBgYAoKIyMgU3RlcCAyOiBMb2FkIERhdGEgJiBDbGVhbiBDb2x1bW4gTmFtZXMKCipTb3VyY2U6IE5hdGlvbmFsIFRyYW5zcG9ydGF0aW9uIFNhZmV0eSBCb2FyZCdzIENBUk9MIERhdGFiYXNlKgoKKkxpbmsgdG8gQ3VzdG9tIFNlYXJjaCBCdWlsZGVyOiA8aHR0cHM6Ly9kYXRhLm50c2IuZ292L2Nhcm9sLW1haW4tcHVibGljL3F1ZXJ5LWJ1aWxkZXI+KgoKIyMjIFVzZSBgbG9hZF9jc3ZgKCkgdG8gbG9hZCB0aGUgZGF0YQoKVGhlIGZpcnN0IHN0ZXAgaW4gb3VyIGRhdGEgZXhwbG9yYXRpb24gcHJvY2VzcyBpcyB0byBsb2FkIHRoYXQgZGF0YSB3ZSB3ZXJlIHdvcmtpbmcgd2l0aC4KCldlJ3JlIGdvaW5nIHRvIHVzZSB0aGUgYHJlYWRfY3N2KClgIGZ1bmN0aW9uIHRvIGhlbHAgdXMgZG8gdGhhdCBhbmQgdGhlbiB3ZSdsbCBjbGVhbiB0aGUgY29sdW1uIG5hbWVzIGFuZCBwZWVrIGF0IHRoZSBkYXRhIHVzaW5nIGBnbGltcHNlKClgIHRvIGdldCBhIHNlbnNlIG9mIHdoYXQgd2UncmUgd29ya2luZyB3aXRoLgoKYGBge3IgbG9hZF9kYXRhfQojIHN5bnRheDoKIyB3aGF0X3lvdV93YW50X3RvX25hbWVfeW91cl9kYXRhIDwtIHJlYWRfY3N2KCJwYXRoL3RvL3lvdXIvZGF0YS5jc3YiKQoKcmVjcyA8LSByZWFkX2NzdigiZGF0YS9yYWlsX3NhZmV0eV9yZWNzLmNzdiIpIAoKIyB0YWtlIGEgbG9vayB0byBzZWUgd2hhdCB3ZSBoYXZlCmdsaW1wc2UocmVjcykKYGBgCgpHcmVhdCEgQnV0IHRob3NlIGNvbHVtbiBuYW1lcyBhcmUgYSBsaXR0bGUgaGFyZCB0byB3b3JrIHdpdGguCgojIyMgVXNlIGBjbGVhbl9uYW1lcygpYCB0byBjbGVhbiBjb2x1bW4gbmFtZXMKClNvIGxldCdzIHVzZSB0aGUgYGNsZWFuX25hbWVzKClgIGZ1bmN0aW9uIGZyb20gdGhlIGBqYW5pdG9yYCBwYWNrYWdlIHRvIG1ha2Ugb3VyIGNvbHVtbiBuYW1lcyBlYXNpZXIgdG8gd29yayB3aXRoLCBhbmQgdGhlbiB3ZSBjYW4gdXNlIGBnbGltcHNlKClgIHRvIHBlZWsgYXQgdGhlIGRhdGEgYWdhaW4uCgpgYGB7ciBjbGVhbl9uYW1lc19hbmRfZ2xpbXBzZX0KcmVjcyA8LSByZWNzIHw+CiAgIyBjbGVhbiBuYW1lcwogIGNsZWFuX25hbWVzKCkgfD4KICAKICAjIHBlZWsgYXQgZGF0YQogIGdsaW1wc2UoKQpgYGAKCk11Y2ggZWFzaWVyIHRvIHdvcmsgd2l0aCEKCiMjIFN0ZXAgMzogRXhwbG9yaW5nICYgQ2xlYW5pbmcgdGhlIERhdGEKCiMjIyBFeHBsb3JlIHJlY29tbWVuZGF0aW9ucyB3aXRoIG11bHRpcGxlIHJlY2lwaWVudHMKCk9LLCByZW1lbWJlciB0aGF0IGV4YW1wbGUgd2hlcmUgb25lIHJlY29tbWVuZGF0aW9uIGhhZCBtdWx0aXBsZSByZWNpcGllbnRzIHdpdGggZGlmZmVyZW50IHN0YXR1c2VzLCBhbmQgZXZlcnl0aGluZyB3YXMgamFtbWVkIGludG8gb25lIGNvbHVtbj8gTGV0J3MgY2hlY2sgdGhhdCBvdXQgbm93IHRoYXQgd2UgaGF2ZSB0aGUgZGF0YSBsb2FkZWQgYW5kIGNsZWFuZWQuCgpgYGB7cn0KcmVjcyB8PgogICMgZmlsdGVyIGZvciByZWNvbW1lbmRhdGlvbnMgd2l0aCBtdWx0aXBsZSByZWNpcGllbnRzCiAgZmlsdGVyKGlzX211bHRpcGxlX3JlY2lwaWVudCA9PSBUUlVFKSB8PgogIAogICMgc2VsZWN0IG9ubHkgdGhlIGFkZHJlc3NlZSBkZXRhaWxzIGNvbHVtbiB0byBzZWUgd2hhdCB0aGUgcmVjaXBpZW50IGRldGFpbHMgbG9vayBsaWtlIGZvciByZWNvbW1lbmRhdGlvbnMgd2l0aCBtdWx0aXBsZSByZWNpcGllbnRzCiAgc2VsZWN0KGFkZHJlc3NlZV9kZXRhaWxzKSB8PgogIAogICMgdGFrZSBhIHBlZWsgYXQgdGhlIGZpcnN0IGZpdmUgcm93cwogIGhlYWQoNSkKYGBgCgojIyMjICoqQklHIFlJS0VTLioqCgpMaWtlIC4uLiBncm9zcy4gSG93IGFtIEkgc3VwcG9zZWQgdG8gYmUgYWJsZSB0byBsb29rIGF0IHdobyB0aGUgTlRTQiBpcyBnaXZpbmcgcmVjb21tZW5kYXRpb25zIHRvIGFuZCBob3cg4oCUIG9yIGlmIOKAlCB0aGV5J3ZlIHJlc3BvbmRlZCB3aGVuIGFsbCBvZiB0aGF0IGluZm9ybWF0aW9uIGlzIGluIG9uZSBtZXNzeSBjb2x1bW4/CgojIyMgV2hhdCB3ZSBrbm93IGFib3V0IHRoZSBkYXRhCgpXZSBjYW4gc2VlIHRoYXQgdGhlIGBhZGRyZXNzZWVfZGV0YWlsc2AgY29sdW1uIGNvbnRhaW5zOgoKLSAgIFRoZSBuYW1lIG9mIGVhY2ggb3JnYW5pemF0aW9uIG9yIGFnZW5jeSB0aGF0IHdhcyBzZW50IHRoZSByZWNvbW1lbmRhdGlvbgoKLSAgIFRoZSBzdGF0dXNlcyBvZiB0aGUgcmVjb21tZW5kYXRpb24gKG9wZW4gdnMuIGNsb3NlZCkKCi0gICBIb3cgdGhlIE5UU0IgaGFzIGNsYXNzaWZpZWQgdGhlaXIgcmVzcG9uc2UgdG8gdGhlIHJlY29tbWVuZGF0aW9uIChhY2NlcHRhYmxlIHZzLiB1bmFjY2VwdGFibGUsIGV0Yy4pCgotICAgVGhlIGRhdGUgdGhlIHJlY29tbWVuZGF0aW9uIHdhcyBjbG9zZWQgKGlmIGFwcGxpY2FibGUpCgpBbGwgb2YgdGhhdCBpbmZvIGlzIHN1cGVyIHVzZWZ1bCwgYnV0IGl0J3MgYWxsIGluIG9uZSBjb2x1bW4gYW5kIGl0J3MgcHJldHR5IG1lc3N5LgoKV2hhdCB3ZSB3ZSBuZWVkIHRvIGRvIGlzICoqY2xlYW4gdXAgdGhhdCBjb2x1bW4gYW5kIHNlcGFyYXRlIGl0IGludG8gZGlzdGluY3QgY29sdW1ucyoqIGZvciByZWNpcGllbnQgbmFtZSwgcmVjb21tZW5kYXRpb24gc3RhdHVzLCBhbmQgcmVjb21tZW5kYXRpb24gZGF0ZSBjbG9zZWQuCgpJZiB5b3UgbG9vayBhdCB0aGUgYGFkZHJlc3NlZV9kZXRhaWxzYCBjb2x1bW4sIHlvdSBjYW4gc2VlIHR3byB0aGluZ3M6CgotICAgVGhlIHJlY2lwaWVudHMgYXJlIHNlcGFyYXRlZCBieSBzZW1pY29sb25zICg7KQoKLSAgIFRoZSBkaWZmZXJlbnQgcGllY2VzIG9mIGluZm9ybWF0aW9uIGFyZSBzZXBhcmF0ZWQgYnkgYSBwaXBlIGNoYXJhY3RlciAoXHwpCgpXZSBjYW4gdXNlIHRob3NlIGNoYXJhY3RlcnMgdG8gaGVscCB1cyBzZXBhcmF0ZSB0aGUgaW5mb3JtYXRpb24uCgojIyMgQ3JlYXRpbmcgZGlzdGluY3Qgcm93cyBmb3IgZWFjaCByZWNpcGllbnQKCkxldCdzIHN0YXJ0IHdpdGggdGhlIHNlbWljb2xvbnMuIElmIHlvdSBsb29rIGNsb3NlLCBpbiBhZGRpdGlvbiB0byB0aGUgc2VtaWNvbG9ucyBzZXBhcmF0aW5nIGVhY2ggcmVjaXBpZW50LCB0aGVyZSBhcmUgYWN0dWFsbHkgdHJhaWxpbmcgc2VtaWNvbG9ucyBpbiB0aGUgYGFkZHJlc3NlZV9kZXRhaWxzYCBjb2x1bW4uIFNvIGlmIHdlIHNlcGFyYXRlIHRoZW0gYXMgaXMsIHdlJ2xsIGVuZCB1cCB3aXRoIHNvbWUgcm93cyB3aXRob3V0IHJlY2lwaWVudHMgYmVjYXVzZSBpdCB3aWxsIHRoaW5rIHRoYXQgbGFzdCBzZW1pY29sb24gbWVhbnMgaXQgc2hvdWxkIGNyZWF0ZSBhIHJvdy4gU28gbGV0J3MgY2xlYW4gdGhvc2UgdXAgZmlyc3QgYW5kIHRoZW4gd2UgY2FuIHVzZSB0aGUgc2VtaWNvbG9ucyB0byBzZXBhcmF0ZSB0aGUgcmVjaXBpZW50cyBpbnRvIGRpc3RpbmN0IHJvd3MuCgpOb3RlIHRoYXQgbWFueSBmdW5jdGlvbnMgd2UgdXNlIGluIFIgcmVxdWlyZSB5b3UgdG8gcHV0IGl0IGluc2lkZSAqYW5vdGhlciogZnVuY3Rpb24gY2FsbGVkIGBtdXRhdGUoKWAuIFRoaXMgaXMgYmVjYXVzZSBgbXV0YXRlKClgIGlzIHdoYXQgYWxsb3dzIHlvdSB0byBjcmVhdGUgbmV3IGNvbHVtbnMgYW5kIG1vZGlmeSBleGlzdGluZyBvbmVzLiBCYXNpY2FsbHksIHlvdSB0ZWxsIFIgdG8gcnVuIGEgZnVuY3Rpb24gb24gYSBjb2x1bW4sIGFuZCB0aGVuIHlvdSBjYW4gYXNzaWduIHRoYXQgbXV0YXRlZCB2ZXJzaW9uIG9mIHRoZSBjb2x1bW4gYmFjayB0byB0aGUgb3JpZ2luYWwgY29sdW1uIG5hbWUgdG8gb3ZlcndyaXRlIGl0LCBvciB5b3UgY2FuIGFzc2lnbiBpdCB0byBhIG5ldyBjb2x1bW4gbmFtZSBpZiB5b3Ugd2FudCB0byBrZWVwIHRoZSBvcmlnaW5hbCBjb2x1bW4gYXMgd2VsbC4KCiMjIyMgUmVtb3ZpbmcgdHJhaWxpbmcgc2VtaWNvbG9ucwoKYGBge3IgcmVtb3ZlX3RyYWlsaW5nX3NlbWljb2xvbnN9CnJlY3MgPC0gcmVjcyB8PgogICMgcmVtb3ZlIHRyYWlsaW5nIHNlbWljb2xvbnMgaW4gcmVjaXBpZW50IGRldGFpbHMKICBtdXRhdGUoYWRkcmVzc2VlX2RldGFpbHMgPSBzdHJfcmVtb3ZlX2FsbChhZGRyZXNzZWVfZGV0YWlscywgIjskIikpCgpyZWNzIHw+CiAgc2VsZWN0KGFkZHJlc3NlZV9kZXRhaWxzKSB8PgogIGhlYWQoNSkKCiMgTk9URTogdGhlICQgaW4gdGhlIHN5bnRheCBpcyB0ZWxsaW5nIFIgdGhhdCB3ZSBvbmx5IHdhbnQgdG8gcmVtb3ZlIHNlbWljb2xvbnMgdGhhdCBhcmUgYXQgdGhlIGVuZCBvZiBhIHN0cmluZy4gdGhpcyBpcyBhIHR5cGUgb2YgcmVndWxhciBleHByZXNzaW9uIChyZWdleCkuIHRoZXkncmUgY29tcGxpY2F0ZWQgYW5kIHVzdWFsbHkgbm9uLWludHVpdGl2ZSwgc28gZG9uJ3Qgd29ycnkgYWJvdXQgcmVtZW1iZXJpbmcgdGhhdC4geW91IGNhbiAoYXMgaSBvZnRlbiBkbykganVzdCBsb29rIHVwIHRoZSBjb3JyZWN0IHN5bnRheCA6KQpgYGAKCk5vIG1vcmUgdHJhaWxpbmcgc2VtaWNvbG9ucyEgQnV0IHdoYXQgYXJlIHRob3NlIHdlaXJkIG5ld2xpbmUgZWxlbWVudHM/IFRob3NlIGFyZSBqdXN0IHRoZSB3YXkgdGhlIGRhdGEgaXMgZm9ybWF0dGVkIGluIHRoZSBvcmlnaW5hbCBzb3VyY2UuIEx1Y2tpbHksIHdlIGNhbiB1c2UgYHN0cl9zcXVpc2goKWAgdG8gZml4IHRoYXQuCgojIyMjIFJlbW92aW5nIGV4dHJhIHdoaXRlIHNwYWNlIHdpdGggYW5kIG5ld2xpbmUgY2hhcmFjdGVycyB3aXRoIGBzdHJfc3F1aXNoKClgCgpgc3RyX3NxdWlzaCgpYCDigJQgdGhlIG1vc3QgYWRvcmFibGUtc291bmRpbmcgZnVuY3Rpb24g4oCUIGp1c3QgcmVtb3ZlcyBleHRyYSB3aGl0ZSBzcGFjZSBmcm9tIHRoZSBzdGFydCBhbmQgZW5kIG9mIGEgc3RyaW5nLCBhbmQgcmVwbGFjZXMgYWxsIGludGVybmFsIHdoaXRlIHNwYWNlcyB3aXRoIGEgc2luZ2xlIHNwYWNlLCBzbyBpdCdzIHBlcmZlY3QgZm9yIHRoaXMgam9iIChub3QgdG8gbWVudGlvbiBhd2Vzb21lIHRvIHNheSkuCgpgYGB7cn0KcmVjcyA8LSByZWNzIHw+CiAgIyByZW1vdmUgZXh0cmEgd2hpdGUgc3BhY2UgZnJvbSBhZGRyZXNzZWUgZGV0YWlscwogIG11dGF0ZShhZGRyZXNzZWVfZGV0YWlscyA9IHN0cl9zcXVpc2goYWRkcmVzc2VlX2RldGFpbHMpKQoKIyBsZXQncyB0YWtlIGEgbG9vayBhdCB0aGUgYWRkcmVzc2VlX2RldGFpbHMgY29sdW1uIG9uZSBtb3JlIHRpbWUgdG8gbWFrZSBzdXJlIHRoZSBleHRyYSB3aGl0ZSBzcGFjZSBpcyBnb25lIQpyZWNzIHw+CiAgZmlsdGVyKGlzX211bHRpcGxlX3JlY2lwaWVudCA9PSBUUlVFKSB8PgogIHNlbGVjdChhZGRyZXNzZWVfZGV0YWlscykgfD4KICBoZWFkKDUpCmBgYAoKIyMjIyBVc2luZyBgc2VwYXJhdGVfcm93cygpYCB0byBjcmVhdGUgZGlzdGluY3Qgcm93cyBmb3IgZWFjaCByZWNpcGllbnQKCk5vdyB0aGF0IGl0IGxvb2tzIG1vcmUgbm9ybWFsIC4uLiB3ZWxsLCBub3JtYWwtaXNoIC4uLiB3ZSBjYW4gdXNlIHRoZSByZW1haW5pbmcgc2VtaWNvbG9ucyB0byBzZXBhcmF0ZSB0aGUgcmVjaXBpZW50cyBpbnRvIGRpc3RpbmN0IHJvd3MuCgpgYGB7ciBzZXBhcmF0ZV9yZWNvbW1lbmRhdGlvbnNfYnlfYWRkcmVzc2VlfQpyZWNzIDwtIHJlY3MgfD4KICAjIHVzZSBzZW1pY29sb25zIHRvIHB1dCBhc3NpZ24gZWFjaCByZWNpcGllbnQgaXRzIG93biByZWNvbW1lbmRhdGlvbiByb3cgd2hlbiBhIHNpbmdsZSByZWNvbW1lbmRhdGlvbiBoYXMgbXVsdGlwbGUgcmVjaXBpZW50cwogIHNlcGFyYXRlX3Jvd3MoYWRkcmVzc2VlX2RldGFpbHMsIHNlcCA9ICI7IikKCgojIGxldCdzIHRha2UgYSBwZWVrIGF0IG91ciBkYXRhIGZyYW1lIGFnYWluCnJlY3MgfD4KICBmaWx0ZXIoaXNfbXVsdGlwbGVfcmVjaXBpZW50ID09IFRSVUUpIHw+CiAgc2VsZWN0KGFkZHJlc3NlZV9kZXRhaWxzKSB8PgogIGhlYWQoNSkKYGBgCgpQZXJmZWN0ISBXZSBoYXZlIG9uZSByb3cgcGVyIHJlY2lwaWVudCBhbmQgbm8gZXh0cmEgd2hpdGUgc3BhY2UgaW4gdGhlIGBhZGRyZXNzZWVfZGV0YWlsc2AgY29sdW1uLiAKCiMjIyBDcmVhdGluZyBzZXBhcmF0ZSBjb2x1bW5zIGZvciB0aGUgaW5mb3JtYXRpb24gaW4gdGhlIGBhZGRyZXNzZWVfZGV0YWlsc2AgY29sdW1uCgpXZSBzdGlsbCBoYXZlIGFsbCBvZiB0aGUgaW5mb3JtYXRpb24gZm9yIHRoYXQgcmVjaXBpZW50IGluIHRoZSBgYWRkcmVzc2VlX2RldGFpbHNgIGNvbHVtbiwgd2hpY2ggaXMgcHJldHR5IG1lc3N5LgoKTGV0J3MgdXNlIHRoZSBwaXBlIGNoYXJhY3RlcnMgYW5kIHRoZSBmdW5jdGlvbiBgc2VwYXJhdGUoKWAg4oCUIHdoaWNoIGlzIHZlcnkgc2ltaWxhciB0byBgc2VwYXJhdGVfcm93cygpYCDigJQgdG8gc2VwYXJhdGUgdGhhdCBpbmZvcm1hdGlvbiBpbnRvIHRocmVlIGNvbHVtbnM6IHJlY2lwaWVudCBuYW1lLCByZWNvbW1lbmRhdGlvbiBzdGF0dXMgYW5kIHRoZSBkYXRlIHRoZSByZWNvbW1lbmRhdGlvbiB3YXMgY2xvc2VkIChpZiBhcHBsaWNhYmxlKS4KCmBgYHtyIHNlcGFyYXRlX2FkZHJlc3NlZV9kZXRhaWxzfQpyZWNzIDwtIHJlY3MgfD4KICAjIHNlcGFyYXRlIHJlY2lwaWVudCBkZXRhaWxzIGludG8gdGhyZWUgZGlzdGluY3QgY29sdW1ucwogIHNlcGFyYXRlKGFkZHJlc3NlZV9kZXRhaWxzLCAKICAgICAgICAgICBpbnRvID0gYygicmVjaXBpZW50IiwgCiAgICAgICAgICAgICAgICAgICAgInJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMiLCAKICAgICAgICAgICAgICAgICAgICAicmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkIiksIAogICAgICAgICAgIHNlcCA9ICIgXFx8ICIpCgojIGFsbCB3ZSdyZSBkb2luZyBoZXJlIGlzIHRlbGxpbmcgUiB0bzoKICAjIGxvb2sgYXQgdGhlIGFkZHJlc3NlZV9kZXRhaWxzIGNvbHVtbgogICMgc2VwYXJhdGUgaXQgaW50byB0aHJlZSBuZXcgY29sdW1ucyBjYWxsZWQgcmVjaXBpZW50LCByZWNvbW1lbmRhdGlvbl9zdGF0dXMgYW5kIHJlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkCiAgIyB1c2UgdGhlIHBpcGUgY2hhcmFjdGVyICh8KSBhcyB0aGUgc2VwYXJhdG9yCgojIHdlIGFsc28gaGF2ZSB0byBhZGQgYSBzcGFjZSBiZWZvcmUgYW5kIGFmdGVyIHRoZSBwaXBlIGNoYXJhY3RlciBpbiB0aGUgc2VwYXJhdG9yIGFyZ3VtZW50IHNpbmNlIHRoZXJlIGlzIGEgc3BhY2UgYmVmb3JlIGFuZCBhZnRlciB0aGUgcGlwZSBjaGFyYWN0ZXIgaW4gdGhlIGFkZHJlc3NlZV9kZXRhaWxzIGNvbHVtbi4KCgojIHRoZW4gd2UgY2FuIGNoZWNrIG91dCB0aGUgbmV3IGNvbHVtbnMgd2UganVzdCBjcmVhdGVkIHRvIG1ha2Ugc3VyZSB0aGV5IGxvb2sgcmlnaHQhCnJlY3MgfD4KICBmaWx0ZXIoaXNfbXVsdGlwbGVfcmVjaXBpZW50ID09IFRSVUUpIHw+CiAgc2VsZWN0KHJlY2lwaWVudCwgcmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3N0YXR1cywgcmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkKSB8PgogIGhlYWQoNSkKYGBgCgpMb29rIGF0IHRoYXQhIE5vdyB3ZSBoYXZlIHNlcGFyYXRlIGNvbHVtbnMgZm9yIHJlY2lwaWVudCBuYW1lLCByZWNvbW1lbmRhdGlvbiBzdGF0dXMgYW5kIHRoZSBkYXRlIGZvciB3aGVuIHRoZSByZWNvbW1lbmRhdGlvbiB3YXMgY2xvc2VkIChpZiBhcHBsaWNhYmxlKS4KCiMjIyMgUmVtb3ZpbmcgdW5uZWNlc3NhcnkgY29sdW1ucwoKQW5kIGJlY2F1c2Ugd2UgaGF2ZSB0aGUgcmVjaXBpZW50LXNwZWNpZmljIGNvbHVtbnMgbm93LCB3ZSBhY3R1YWxseSBkb24ndCBuZWVkIHRoZSBgb3ZlcmFsbF9kYXRlX2Nsb3NlZGAgb3IgYG92ZXJhbGxfc3RhdHVzYCBjb2x1bW4gYW55bW9yZSwgc28gd2UgY2FuIGRyb3AgdGhhdCB1c2luZyBgc2VsZWN0KClgIHdpdGggYSBtaW51cyBzaWduIHRvIGVzc2VudGlhbGx5IHRlbGwgUiB0byAqZGVzZWxlY3QqIHRob3NlIGNvbHVtbnMuCgpgYGB7cn0KcmVjcyA8LSByZWNzIHw+CiAgIyBkcm9wIG92ZXJhbGwgc3RhdHVzIGFuZCBkYXRlIGNsb3NlZCBjb2x1bW5zIHNpbmNlIHdlIG5vdyBoYXZlIHJlY2lwaWVudC1zcGVjaWZpYyBzdGF0dXMgYW5kIGRhdGUgY2xvc2VkIGNvbHVtbnMKICBzZWxlY3QoLW92ZXJhbGxfc3RhdHVzLCAtb3ZlcmFsbF9kYXRlX2Nsb3NlZCkKYGBgCgojIyMjIFRyYW5zZm9ybWluZyB0aGUgbmV3bHkgY3JlYXRlZCBkYXRlIGNvbHVtbiB0byBkYXRlIGZvcm1hdAoKQmVjYXVzZSB3ZSBleHRyYWN0ZWQgdGhlIG5ldyBkYXRlIGNvbHVtbiBmcm9tIHRoZSBgYWRkcmVzc2VlX2RldGFpbHNgIGNvbHVtbiwgaXQncyBpbiBjaGFyYWN0ZXIgZm9ybWF0IGluc3RlYWQgb2YgZGF0ZSBmb3JtYXQsIHdoaWNoIG1lYW5zIHdlIHdvbid0IGJlIGFibGUgdG8gZG8gYW55IGRhdGUgY2FsY3VsYXRpb25zIHdpdGggaXQuIFRoZSBkYXRlIGlzIGluIGEgbW0vZGQveXl5eSBmb3JtYXQsIHNvIHdlJ2xsIGFkanVzdCBpdCB1c2luZyB0aGUgYG1keSgpYCBmdW5jdGlvbi4gVGhpcyBpcyBhbm90aGVyIGZ1bmN0aW9uIHRoYXQgbmVlZHMgdG8gYmUgcHV0IHdpdGhpbiBhIGBtdXRhdGUoKWAgc3RhdGVtZW50LgoKYGBge3J9CnJlY3MgPC0gcmVjcyB8PgogICMgY29udmVydCByZWNpcGllbnQgZGF0ZSBjb2x1bW4gdG8gZGF0ZSBmb3JtYXQgdXNpbmcgbWR5KCkgc2luY2UgaXQgd2FzIGV4dHJhY3RlZCBmcm9tIHRoZSBhZGRyZXNzZWVfZGV0YWlscyBjb2x1bW4gYW5kIGlzIGluIGEgZGlmZmVyZW50IGZvcm1hdCB0aGFuIHRoZSBvdmVyYWxsIGRhdGUgY29sdW1ucwogIG11dGF0ZShyZWNpcGllbnRfcmVjb21tZW5kYXRpb25fZGF0ZV9jbG9zZWQgPSBtZHkocmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX2RhdGVfY2xvc2VkKSkKYGBgCgpIb25lc3RseSwgdGhpcyBpcyBhbHJlYWR5IGEgbXVjaCBtb3JlIHVzYWJsZSBkYXRhc2V0IHRoYW4gd2hhdCB3ZSBzdGFydGVkIHdpdGgsIGJ1dCB3ZSBjYW4gbWFrZSBpdCBldmVuIGJldHRlciBieSBwYXJzaW5nIHRoZSByZWNpcGllbnQgcmVjb21tZW5kYXRpb24gc3RhdHVzIGNvbHVtbiB0byBnZXQgYSBtb3JlIGFjY3VyYXRlIHBpY3R1cmUgb2Ygd2hpY2ggd2hldGhlciBlYWNoIHJlY2lwaWVudCdzIHJlY29tbWVuZGF0aW9uIGlzIG9wZW4gb3IgY2xvc2VkIGFuZCBob3cgdGhlIE5UU0IgaGFzIGNsYXNzaWZpZWQgdGhlaXIgcmVzcG9uc2UgdG8gdGhlIHJlY29tbWVuZGF0aW9uLgoKSGVyZSwgd2UncmUgZ29pbmcgdG8gdXNlIGBjYXNlX3doZW4oKWAgdG8gYW5hbHl6ZSB0aGUgY3VycmVudCBjb2x1bW4gYW5kIGNyZWF0ZSBhIG5ldyBjb2x1bW4gdGhhdCBqdXN0IHRlbGxzIHVzIHdoZXRoZXIgdGhlIHJlY29tbWVuZGF0aW9uIGlzIG9wZW4gb3IgY2xvc2VkLgoKQWxsIGEgYGNhc2Vfd2hlbigpYCBkb2VzIGlzIHBhcnNlIG9uZSBjb2x1bW4gYW5kIGNyZWF0ZSBhIG5ldyBjb2x1bW4gYmFzZWQgb24gd2hldGhlciBjZXJ0YWluIGNvbmRpdGlvbnMgYXJlIG1ldC4gSW4gdGhpcyBjYXNlLCB0aGUgY29uZGl0aW9ucyBhcmUgd2hldGhlciB0aGUgYHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXNgIGNvbHVtbiBjb250YWlucyB0aGUgd29yZCAiQ0xPU0VEIiBvciAiT1BFTiIsIHNvIHdlJ3JlIGdvaW5nIHRvIHVzZSBgc3RyX2RldGVjdCgpYCDigJQgbGl0ZXJhbGx5LCBkZXRlY3QgIndoYXRfaV93YW50X3RvX2xvb2tfZm9yIiBpbiBhIGdpdmVuIHN0cmluZyDigJQgdG8gY2hlY2sgZm9yIHRob3NlIHdvcmRzIGluIHRoZSBjb2x1bW4gYW5kIHRoZW4gY3JlYXRlIGEgbmV3IGNvbHVtbiBjYWxsZWQgYHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9vcGVuX2Nsb3NlZGAgdGhhdCBqdXN0IHRlbGxzIHVzIHdoZXRoZXIgdGhlIHJlY29tbWVuZGF0aW9uIGlzIG9wZW4gb3IgY2xvc2VkIGZvciBlYWNoIHJlY2lwaWVudC4KCmBgYHtyfQpyZWNzIDwtIHJlY3MgfD4KICAjIHN0ZXAgMSDigJQgY3JlYXRlIG9wZW4vY2xvc2VkIGNvbHVtbiB1c2luZyBjYXNlX3doZW4oKQogIG11dGF0ZSgKICAgIHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9vcGVuX2Nsb3NlZCA9IGNhc2Vfd2hlbigKICAgICAgCiAgICAgIHN0cl9kZXRlY3QocmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3N0YXR1cywgIkNsb3NlZCIpIH4gIkNsb3NlZCIsCiAgICAgIAogICAgICBzdHJfZGV0ZWN0KHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMsICJPcGVuIikgfiAiT3BlbiIpCiAgICApCmBgYAoKTm93IHdlJ2xsIHVzZSBgc3RyX3JlbW92ZV9hbGwoKWAgYW5kIGBzdHJfc3F1aXNoKClgIOKAlCB0aGUgZmlyc3Qgb2Ygd2hpY2ggZG9lcyB3aGF0IHlvdSB0aGluaywgcmVtb3ZlIGVsZW1lbnRzIG9mIGEgc3RyaW5nIOKAlCB0byBjcmVhdGUgYW5vdGhlciBjb2x1bW4gdGhhdCAqanVzdCogdGVsbHMgdXMgaG93IHRoZSBOVFNCIGhhcyBjbGFzc2lmaWVkIHRoZSByZWNpcGllbnQncyByZXNwb25zZSB0byB0aGUgcmVjb21tZW5kYXRpb24gKGFjY2VwdGFibGUsIHVuYWNjZXB0YWJsZSwgZXRjLikgd2l0aG91dCBhbGwgb2YgdGhlIGV4dHJhIGluZm9ybWF0aW9uIGFib3V0IHdoZXRoZXIgaXQncyBvcGVuIG9yIGNsb3NlZC4KCmBgYHtyfQpyZWNzIDwtIHJlY3MgfD4gIAogICMgc3RlcCAyIOKAlCByZXNwb25zZSBzdGF0dXMgY29sdW1uIHVzaW5nIHN0cl9yZW1vdmVfYWxsKCkgJiBzdHJfdHJpbSgpCiAgbXV0YXRlKAogICAgcmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3Jlc3BvbnNlX3N0YXR1cyA9IHN0cl9zcXVpc2goCiAgICAgIHN0cl9yZW1vdmVfYWxsKAogICAgICAgIHJlY2lwaWVudF9yZWNvbW1lbmRhdGlvbl9zdGF0dXMsIAogICAgICAgICJDbG9zZWR8T3BlbnwtIikKICAgICAgIyB0aGlzIGlzIHRoZSBwYXJ0IHdoZXJlIHdlIHRlbGwgUiB0byByZW1vdmUgdGhlIHdvcmRzICJDTE9TRUQiLCAiT1BFTiIgYW5kIGFueSBkYXNoZXMgZnJvbSB0aGUgcmVjaXBpZW50X3JlY29tbWVuZGF0aW9uX3N0YXR1cyBjb2x1bW4KICAgICAgKQogICAgKQpgYGAKClNpbmNlIHdlIG5vdyBoYXZlIHNlcGFyYXRlIGNvbHVtbnMgZm9yIHdoZXRoZXIgdGhlIHJlY29tbWVuZGF0aW9uIGlzIG9wZW4gb3IgY2xvc2VkIGFuZCBob3cgdGhlIE5UU0IgaGFzIGNsYXNzaWZpZWQgdGhlIHJlY2lwaWVudCdzIHJlc3BvbnNlIHRvIHRoZSByZWNvbW1lbmRhdGlvbiwgd2UgY2FuIGRyb3AgdGhlIG9yaWdpbmFsIGByZWNpcGllbnRfcmVjb21tZW5kYXRpb25fc3RhdHVzYCBjb2x1bW4gc2luY2UgaXQgY29udGFpbnMgYWxsIG9mIHRoYXQgaW5mb3JtYXRpb24gaW4gb25lIG1lc3N5IHN0cmluZy4KCmBgYHtyfQpyZWNzIDwtIHJlY3MgfD4KICAjIGRyb3Agb3JpZ2luYWwgcmVjaXBpZW50IHJlY29tbWVuZGF0aW9uIHN0YXR1cyBjb2x1bW4gc2luY2Ugd2Ugbm93IGhhdmUgc2VwYXJhdGUgY29sdW1ucyBmb3Igb3Blbi9jbG9zZWQgc3RhdHVzCiAgc2VsZWN0KC1yZWNpcGllbnRfcmVjb21tZW5kYXRpb25fc3RhdHVzKQpgYGAKCldlbGwsIG5vdyB0aGF0IHdlJ3ZlIGdvdCBhbGwgdGhpcyBjbGVhbmVkIHVwLCB3ZSBjYW4gd3JpdGUgaXQgYmFjayBpbnRvIGEgY3N2IGFuZCBzYXZlIGl0IOKAlCB0aGF0IHdheSB3ZSBoYXZlIGEgY2xlYW5lZCB2ZXJzaW9uIHNhdmVkLCBhbmQgd2UgY2FuIGltcG9ydCBpdCBpbnRvIEdvb2dsZSBTaGVldHMgaWYgd2Ugd2FudCB0by4KCmBgYHtyfQojIHdyaXRlIHRvIGNzdgp3cml0ZV9jc3YocmVjcywgImRhdGEvY2xlYW5fcmFpbF9zYWZldHlfcmVjcy5jc3YiKQpgYGAKCiMjIEJPTlVTOiBFeHBsb3JpbmcgdGhlIEZ1bGwgRGF0YQoKIyMjIEdvIHRocm91Z2ggdGhlc2UgbmV4dCBzdGVwcyBvbiB5b3VyIG93biwgaWYgeW91IHdhbnQgdG8gdHJ5IGdldHRpbmcgc29tZSBhZGRpdGlvbmFsIGluZm9ybWF0aW9uIG91dCBvZiB0aGUgZGF0YSEKCk5vdGUgdGhhdCB0aGlzIGlzICpzdW1tYXJ5KiBkYXRhIGZyb20gTlRTQidzIENBUk9MIGRhdGFiYXNlLCB3aGljaCBtZWFucyBpdCdzIG1pc3Npbmcgc29tZSBvZiB0aGUgY29udGV4dHVhbCBpbmZvcm1hdGlvbiB0aGF0IHlvdSBjYW4gc2VlIG9ubGluZSDigJQgbGlrZSBhIHJlY29tbWVuZGF0aW9uJ3MgcHJpb3JpdHkgbGV2ZWwsIGhhem1hdCBzdGF0dXMsIGV0Yy4KClRoZSByZWFzb24/IFRoZSBmdWxsIGRhdGEgaXMgaW4gYSBuZXN0ZWQgSlNPTiBmaWxlIHRoYXQgYnkgaXRzZWxmIGlzIHByZXR0eSB1bm1hbmFnZWFibGUuIFdlJ2xsIGNvbWUgYmFjayB0byB0aGlzLCBidXQgZm9yIG5vdywgdGhlIHN1bW1hcnkgZGF0YSBpcyB3aGF0IHdlJ3JlIGdvaW5nIHRvIGZvY3VzIG9uLgo=</div>
 
 
 
@@ -2056,7 +2269,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("ntsb_cleaning.Rmd");
+  window.initializeSourceEmbed("ntsb_data_exploration.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
