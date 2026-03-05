@@ -25,7 +25,7 @@ library(janitor)
 
 *Link to Custom Search Builder: <https://data.ntsb.gov/carol-main-public/query-builder>*
 
-### Use `load_csv`() to load the data
+### Use `load_csv()` to load the data
 
 The first step in our data exploration process is to load that data we were working with.
 
