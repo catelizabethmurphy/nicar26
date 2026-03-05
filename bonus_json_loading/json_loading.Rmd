@@ -1,0 +1,79 @@
+---
+title: "Finding the Story: Transportation Data — JSON Data Loading (*BONUS*)"
+author: "Cat Murphy"
+output: html_notebook
+---
+
+```{r load_json_packagaes}
+# install.packages("jsonlite)
+library(jsonlite)
+
+# install.packages("tibble")
+library(tibble)
+```
+
+```{r load_json_list}
+# load raw json list
+nested_json <- fromJSON("rail_safety_recs.json", simplifyDataFrame = FALSE)
+```
+
+```{r define_null_to_na_function}
+# define a function to convert json null values to NA to prevent it from stumbling over the null values when we convert to a tibble
+convert_null_to_na <- function(json_element) if (is.null(json_element)) NA else json_element
+```
+
+```{r convert_json_to_tibble}
+# here, essentially, we want to take every element in rail_safety_recs_json_full, call it "rec", run a function to drop the nested arrays, and bind the results into a dataframe
+json_recs <- map_dfr(nested_json, function(recommendation) {
+  
+  # drop nested arrays (we don't need them enough to deal with unnesting them)
+  recommendation <- recommendation[!names(recommendation) %in% c("notations", "addressees")]
+  
+  # convert JSON null -> NA so tibble can process
+  recommendation <- map(recommendation, convert_null_to_na)
+  
+  # convert to tibble
+  as_tibble(recommendation)
+}) 
+```
+
+```{r}
+json_recs <- json_recs |>
+  
+  # drop duplicate rows (there are some duplicates in the json data)
+  
+  # clean column names
+  clean_names() |>
+  
+  # rename columns — this will make it easier to 
+    # a) read the column names and 
+    # b) join the two versions of the data together later on
+  rename(recommendation_id = srid,
+         recommendation = subject,
+         rec_letter_url = green_sheet,
+         recommendation_year = year,
+         priority_number = priority_num) |>
+  
+  # convert date_closed to date format
+  mutate(date_closed = as.Date(date_closed)) |>
+  
+  # drop unneeded column names like "saftey"_rec_codings column since it contains the same information as the recommendation_encodings column in the csv version of the data, which is easier to work with since it's not nested
+  select(recommendation_id, 
+         recommendation, 
+         keywords, 
+         priority, 
+         priority_number, 
+         hazmat, 
+         is_reiterated, 
+         times_reiterated, 
+         rec_letter_url) |>
+  
+  mutate(across(everything(), ~str_to_upper(.))) |>
+  
+  distinct()
+```
+
+```{r}
+# write to csv (this is the version of the data we're joining to the csv summary data)
+write_csv(json_recs, "../data/rail_safety_json_data.csv")
+```
