@@ -213,6 +213,10 @@ Because we extracted the new date column from the `addressee_details` column, it
 recs <- recs |>
   # convert recipient date column to date format using mdy() since it was extracted from the addressee_details column and is in a different format than the overall date columns
   mutate(recipient_recommendation_date_closed = mdy(recipient_recommendation_date_closed))
+
+recs |>
+  select(recipient_recommendation_date_closed) |>
+  tail(5)
 ```
 
 Honestly, this is already a much more usable dataset than what we started with, but we can make it even better by parsing the recipient recommendation status column to get a more accurate picture of which whether each recipient's recommendation is open or closed and how the NTSB has classified their response to the recommendation.
@@ -231,6 +235,11 @@ recs <- recs |>
       
       str_detect(recipient_recommendation_status, "Open") ~ "Open")
     )
+
+recs |>
+  filter(is_multiple_recipient == TRUE) |>
+  select(recipient, recipient_recommendation_open_closed, recipient_recommendation_status, recipient_recommendation_date_closed) |>
+  head(5)
 ```
 
 Now we'll use `str_remove_all()`to get rid of those details, since we just put them in a new column called `recipient_recommendation_open_closed`. That way create another column that *just* tells us how the NTSB has classified the recipient's response to the recommendation (acceptable, unacceptable, etc.) without all of the extra information about whether it's open or closed. 
@@ -247,6 +256,12 @@ recs <- recs |>
   # mutate(recipient_recommendation_response_status = str_remove_all(recipient_recommendation_status, "Closed"),
   #        recipient_recommendation_response_status = str_remove_all(recipient_recommendation_response_status, "Open"),
   #        recipient_recommendation_response_status = str_remove_all(recipient_recommendation_response_status, "-"))
+
+
+recs |>
+  filter(is_multiple_recipient == TRUE) |>
+  select(recipient, recipient_recommendation_open_closed, recipient_recommendation_response_status, recipient_recommendation_date_closed) |>
+  tail(5)
 ```
 
 We can also use `str_squish()` just like we did earlier to clean up any extra white space that might be left over.
