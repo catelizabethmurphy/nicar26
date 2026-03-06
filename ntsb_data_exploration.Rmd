@@ -301,45 +301,52 @@ write_csv(recs, "data/clean_recs.csv")
 
 ```{r open_recommendations_by_recipient}
 # filter for open recommendations, group by recipient, count the number of open recommendations for each recipient, and arrange in descending order to see which recipients have the most open recommendations
-recs |>
+open_recommendations_by_recipient <- recs |>
   filter(recipient_recommendation_open_closed == "Open") |>
   group_by(recipient) |>
   count() |>
   arrange(desc(n))
+
+open_recommendations_by_recipient
 ```
 
 *What are the unacceptable recommendation responses?*
 
 ```{r unacceptable_responses}
 # filter for recommendations where the NTSB has classified the recipient's response as unacceptable to see what those responses are
-recs |>
-  filter(str_detect(recipient_recommendation_response_status, "Unacceptable")) |>
-  head(10)
+unacceptable_responses <- recs |>
+  filter(str_detect(recipient_recommendation_response_status, "Unacceptable")) 
+
+unacceptable_responses
 ```
 
 *How about unacceptable recommendation responses by recipient?*
 
 ```{r unacceptable_by_recipient}
 # filter for recommendations where the NTSB has classified the recipient's response as unacceptable, group by recipient, count the number of unacceptable responses for each recipient, and arrange in descending order to see which recipients have the most unacceptable recommendation responses
-recs |>
+unacceptable_by_recipient <- recs |>
   filter(str_detect(recipient_recommendation_response_status, "Unacceptable")) |>
   group_by(recipient) |>
   count() |>
   arrange(desc(n)) |>
   head(10)
+
+glimpse(unacceptable_by_recipient)
 ```
 
 
 *How many open recommendations does the NTSB have for the FRA, and how has the NTSB classified the FRA's response to those recommendations?*
 
-```{r}
+```{r open_recommendations_for_fra}
 # filter for open recommendations for the FRA, group by how the NTSB has classified the FRA's response to those recommendations, count the number of recommendations in each response category, and arrange in descending order to see how many open recommendations the NTSB has for the FRA and how the NTSB has classified the FRA's response to those recommendations
-recs |>
+open_recommendations_for_fra <- recs |>
   filter(recipient == "FRA" &
          recipient_recommendation_open_closed == "Open") |>
   group_by(recipient_recommendation_response_status) |>
   count() |>
   arrange(desc(n))
+
+open_recommendations_for_fra
 ```
 
 ### Other ideas:
