@@ -331,7 +331,7 @@ unacceptable_by_recipient <- recs |>
   arrange(desc(n)) |>
   head(10)
 
-glimpse(unacceptable_by_recipient)
+unacceptable_by_recipient
 ```
 
 
