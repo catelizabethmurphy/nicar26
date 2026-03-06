@@ -37,7 +37,7 @@ json_recs <- map_dfr(nested_json, function(recommendation) {
 }) 
 ```
 
-```{r}
+```{r clean_json_data}
 json_recs <- json_recs |>
   
   # drop duplicate rows (there are some duplicates in the json data)
@@ -48,8 +48,7 @@ json_recs <- json_recs |>
   # rename columns — this will make it easier to 
     # a) read the column names and 
     # b) join the two versions of the data together later on
-  rename(recommendation_id = srid,
-         recommendation = subject,
+  rename(recommendation = subject,
          rec_letter_url = green_sheet,
          recommendation_year = year,
          priority_number = priority_num) |>
@@ -58,7 +57,7 @@ json_recs <- json_recs |>
   mutate(date_closed = as.Date(date_closed)) |>
   
   # drop unneeded column names like "saftey"_rec_codings column since it contains the same information as the recommendation_encodings column in the csv version of the data, which is easier to work with since it's not nested
-  select(recommendation_id, 
+  select(srid, 
          recommendation, 
          keywords, 
          hazmat,
@@ -70,12 +69,10 @@ json_recs <- json_recs |>
          times_reiterated, 
          rec_letter_url) |>
   
-  mutate(across(everything(), ~str_to_upper(.))) |>
-  
   distinct()
 ```
 
-```{r}
+```{r write_to_csv}
 # write to csv (this is the version of the data we're joining to the csv summary data)
 write_csv(json_recs, "rail_safety_json_data.csv")
 ```

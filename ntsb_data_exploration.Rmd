@@ -56,7 +56,7 @@ recs <- recs |>
   glimpse()
 ```
 
-Much easier to work with!
+Alright, now that's much easier to work with!
 
 ## Step 3: Exploring & Cleaning the Data
 
@@ -92,7 +92,7 @@ We can see that the `addressee_details` column contains:
 
 -   The date the recommendation was closed (if applicable)
 
-All of that info is super useful, but it's all in one column and it's pretty messy.
+Of course, all of that info is super useful, but it's impossible to analyze it when it's all jammed together in one column.
 
 What we we need to do is **clean up that column and separate it into distinct columns** for recipient name, recommendation status, and recommendation date closed.
 
@@ -106,22 +106,24 @@ We can use those characters to help us separate the information.
 
 ### Creating distinct rows for each recipient
 
-Let's start with the semicolons. If you look close, in addition to the semicolons separating each recipient, there are actually trailing semicolons in the `addressee_details` column. So if we separate them as is, we'll end up with some rows without recipients because it will think that last semicolon means it should create a row. So let's clean those up first and then we can use the semicolons to separate the recipients into distinct rows.
+Let's start with the semicolons. If you look close, in addition to the semicolons separating each recipient, there are actually trailing semicolons in the `addressee_details` column. So if we separate them as is, we'll end up with some rows without recipients because it will think that last semicolon means it should create a row. 
 
-Note that many functions we use in R require you to put it inside *another* function called `mutate()`. This is because `mutate()` is what allows you to create new columns and modify existing ones. Basically, you tell R to run a function on a column, and then you can assign that mutated version of the column back to the original column name to overwrite it, or you can assign it to a new column name if you want to keep the original column as well.
+So let's clean those up first using a function called `str_remove_all` — literally, remove all instances of "the thing i want removed" from column_im_telling_you_to_remove_it_from. If you're newer to R, note that this is a function that can't stand on its own. You'll have to wrap it inside a `mutate` function so that R knows to, well, mutate a specific column. 
 
 #### Removing trailing semicolons
 
 ```{r remove_trailing_semicolons}
 recs <- recs |>
-  # remove trailing semicolons in recipient details
   mutate(addressee_details = str_remove_all(addressee_details, ";$"))
+
+  # NOTE: the $ in the syntax is telling R that we only want to remove semicolons that are at the end of a string; not including it would mean removing all of the semicolons, which we don't want to do because we need them to separate the recipients into distinct rows in the next step
+
+  # by saying we want addressee_details to equal the result of str_remove_all, we're telling R to replace the existing column with the new version. if we wanted a new column — let's call it flooberdoof — with the mutated version of addressee_details, we could say:
+    # mutate(flooberdoof = str_remove_all(addressee_details, ";$"))
 
 recs |>
   select(addressee_details) |>
   head(5)
-
-# NOTE: the $ in the syntax is telling R that we only want to remove semicolons that are at the end of a string. this is a type of regular expression (regex). they're complicated and usually non-intuitive, so don't worry about remembering that. you can (as i often do) just look up the correct syntax :)
 ```
 
 No more trailing semicolons! But what are those weird newline elements? Those are just the way the data is formatted in the original source. Luckily, we can use `str_squish()` to fix that.
@@ -135,7 +137,7 @@ recs <- recs |>
   # remove extra white space from addressee details
   mutate(addressee_details = str_squish(addressee_details))
 
-# let's take a look at the addressee_details column one more time to make sure the extra white space is gone!
+# and let's take a look at the addressee_details column one more time to make sure the extra white space is gone!
 recs |>
   filter(is_multiple_recipient == TRUE) |>
   select(addressee_details) |>
@@ -144,13 +146,12 @@ recs |>
 
 #### Using `separate_rows()` to create distinct rows for each recipient
 
-Now that it looks more normal ... well, normal-ish ... we can use the remaining semicolons to separate the recipients into distinct rows.
+Now that it looks more normal ... well, normal-ish ... we can use the remaining semicolons to separate the recipients into distinct rows. The creatively named `separate_rows()` function is perfect for the job. It does exactly what you think it does: it separates rows based on a separator that you specify. So in this case, we want to separate the rows in the `addressee_details` column based on the semicolons.
 
 ```{r separate_recommendations_by_addressee}
 recs <- recs |>
   # use semicolons to put assign each recipient its own recommendation row when a single recommendation has multiple recipients
   separate_rows(addressee_details, sep = ";")
-
 
 # let's take a peek at our data frame again
 recs |>
@@ -163,7 +164,7 @@ Perfect! We have one row per recipient and no extra white space in the `addresse
 
 ### Creating separate columns for the information in the `addressee_details` column
 
-We still have all of the information for that recipient in the `addressee_details` column, which is pretty messy.
+Alright, but we still have all of the information for that recipient in the `addressee_details` column, which is pretty messy.
 
 Let's use the pipe characters and the function `separate()` — which is very similar to `separate_rows()` — to separate that information into three columns: recipient name, recommendation status and the date the recommendation was closed (if applicable).
 
@@ -175,6 +176,7 @@ recs <- recs |>
                     "recipient_recommendation_status", 
                     "recipient_recommendation_date_closed"), 
            sep = " \\| ")
+
 
 # all we're doing here is telling R to:
   # look at the addressee_details column
@@ -217,7 +219,7 @@ Honestly, this is already a much more usable dataset than what we started with, 
 
 Here, we're going to use `case_when()` to analyze the current column and create a new column that just tells us whether the recommendation is open or closed.
 
-All a `case_when()` does is parse one column and create a new column based on whether certain conditions are met. In this case, the conditions are whether the `recipient_recommendation_status` column contains the word "CLOSED" or "OPEN", so we're going to use `str_detect()` — literally, detect "what_i_want_to_look_for" in a given string — to check for those words in the column and then create a new column called `recipient_recommendation_open_closed` that just tells us whether the recommendation is open or closed for each recipient.
+All a `case_when()` does is parse one column and create a new column based on whether certain conditions are met. In this case, the conditions are whether the `recipient_recommendation_status` column contains the word "CLOSED" or "OPEN", so we're going to use `str_detect()` — literally, detect "what i want to look for" in column_im_asking_you_to_look_for_it_in — to check for those words in the column and then create a new column called `recipient_recommendation_open_closed` that just tells us whether the recommendation is open or closed for each recipient.
 
 ```{r}
 recs <- recs |>
@@ -231,30 +233,45 @@ recs <- recs |>
     )
 ```
 
-Now we'll use `str_remove_all()` and `str_squish()` — the first of which does what you think, remove elements of a string — to create another column that *just* tells us how the NTSB has classified the recipient's response to the recommendation (acceptable, unacceptable, etc.) without all of the extra information about whether it's open or closed.
+Now we'll use `str_remove_all()`to get rid of those details, since we just put them in a new column called `recipient_recommendation_open_closed`. That way create another column that *just* tells us how the NTSB has classified the recipient's response to the recommendation (acceptable, unacceptable, etc.) without all of the extra information about whether it's open or closed. 
 
 ```{r}
 recs <- recs |>  
-  # step 2 — response status column using str_remove_all() & str_trim()
   mutate(
-    recipient_recommendation_response_status = str_squish(
-      str_remove_all(
-        recipient_recommendation_status, 
-        "Closed|Open|-")
-      # this is the part where we tell R to remove the words "CLOSED", "OPEN" and any dashes from the recipient_recommendation_status column
-      )
+    recipient_recommendation_response_status = 
+      str_remove_all(recipient_recommendation_status, "Closed|Open|-")
     )
+
+
+# here, the pipe (|) in the syntax means "and." it's just telling R to remove all instances of "Closed" AND "Open" AND "-" from the recipient_recommendation_status column and put the result in a new column called recipient_recommendation_response_status. it's a shorter way of writing this:
+  # mutate(recipient_recommendation_response_status = str_remove_all(recipient_recommendation_status, "Closed"),
+  #        recipient_recommendation_response_status = str_remove_all(recipient_recommendation_response_status, "Open"),
+  #        recipient_recommendation_response_status = str_remove_all(recipient_recommendation_response_status, "-"))
+```
+
+We can also use `str_squish()` just like we did earlier to clean up any extra white space that might be left over.
+
+```{r remove_extra_white_space_from_response_status}
+recs <- recs |>
+  # remove extra white space from new recipient response status column
+  mutate(recipient_recommendation_response_status = str_squish(recipient_recommendation_response_status))
 ```
 
 Since we now have separate columns for whether the recommendation is open or closed and how the NTSB has classified the recipient's response to the recommendation, we can drop the original `recipient_recommendation_status` column since it contains all of that information in one messy string.
 
-```{r}
+```{r drop_original_recommendation_status_column}
 recs <- recs |>
   # drop original recipient recommendation status column since we now have separate columns for open/closed status
   select(-recipient_recommendation_status)
 ```
 
-Well, now that we've got all this cleaned up, we can write it back into a csv and save it — that way we have a cleaned version saved, and we can import it into Google Sheets if we want to.
+Now let's look at our new dataset!
+
+```{r}
+recs
+```
+
+Well, now that we've got all this cleaned up, we can write it back into a csv and save it — that way we have this version saved, and we can import it into Google Sheets if we want to.
 
 ```{r}
 # write to csv
@@ -265,6 +282,31 @@ write_csv(recs, "data/clean_rail_safety_recs.csv")
 
 ### Go through these next steps on your own, if you want to try getting some additional information out of the data!
 
-Note that this is *summary* data from NTSB's CAROL database, which means it's missing some of the contextual information that you can see online — like a recommendation's priority level, hazmat status, etc.
+Note that the data we're dealing with here is the *summary* data from NTSB's CAROL database, which means it's missing some of the contextual information that you can see online — like a recommendation's priority level, hazmat status, etc.
 
-The reason? The full data is in a nested JSON file that by itself is pretty unmanageable. We'll come back to this, but for now, the summary data is what we're going to focus on.
+The reason? The full data is in a nested JSON file that by itself is pretty unmanageable. There are ways to handle nested JSON data in R, but it can be a little tricky. You can check out the `json_loading.Rmd` file in this repo to see how I handled it, but for the sake of time, I'm going to load in the cleaned version of the JSON data that I created in that file.
+
+```{r load_cleaned_json_data}
+json_data <- read_csv("bonus_json_loading/rail_safety_json_data.csv")
+```
+
+Now that we have the JSON data loaded, we can take a look at it and see what additional information it contains that we might want to analyze.
+
+```{r view_json_data}
+glimpse(json_data)
+```
+Wow! The JSON data contains a lot of additional information that we don't have in the summary data. Luckily, the cleaned JSON data also contains columns called `srid` and `recommendation` — just like same the`srid` and `recommendation` columns in the summary data.
+
+Now, we're going to merge the JSON data with the summary data that we just cleaned up.  so we can use those as our keys to merge the two datasets together using a `left_join`.
+
+```{r}
+# merge json data with summary data
+full_recs <- recs |>
+  left_join(json_data, join_by(srid, recommendation))
+```
+
+Let's take a look!
+
+```{r}
+full_recs
+```
