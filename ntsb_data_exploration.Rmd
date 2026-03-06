@@ -296,7 +296,7 @@ write_csv(recs, "data/clean_recs.csv")
 
 # Analysis Examples: Things to Look At
 
-*Which recipients have the most open recommendations?*
+### Which recipients have the most open recommendations?
 
 
 ```{r open_recommendations_by_recipient}
@@ -310,7 +310,7 @@ open_recommendations_by_recipient <- recs |>
 open_recommendations_by_recipient
 ```
 
-*What are the unacceptable recommendation responses?*
+### What are the unacceptable recommendation responses?
 
 ```{r unacceptable_responses}
 # filter for recommendations where the NTSB has classified the recipient's response as unacceptable to see what those responses are
@@ -320,7 +320,7 @@ unacceptable_responses <- recs |>
 unacceptable_responses
 ```
 
-*How about unacceptable recommendation responses by recipient?*
+### How about unacceptable recommendation responses by recipient?
 
 ```{r unacceptable_by_recipient}
 # filter for recommendations where the NTSB has classified the recipient's response as unacceptable, group by recipient, count the number of unacceptable responses for each recipient, and arrange in descending order to see which recipients have the most unacceptable recommendation responses
@@ -335,7 +335,7 @@ glimpse(unacceptable_by_recipient)
 ```
 
 
-*How many open recommendations does the NTSB have for the FRA, and how has the NTSB classified the FRA's response to those recommendations?*
+### How many open recommendations does the NTSB have for the FRA, and how has the NTSB classified the FRA's response to those recommendations?
 
 ```{r open_recommendations_for_fra}
 # filter for open recommendations for the FRA, group by how the NTSB has classified the FRA's response to those recommendations, count the number of recommendations in each response category, and arrange in descending order to see how many open recommendations the NTSB has for the FRA and how the NTSB has classified the FRA's response to those recommendations
