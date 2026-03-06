@@ -284,7 +284,7 @@ write_csv(recs, "data/clean_rail_safety_recs.csv")
 
 Note that the data we're dealing with here is the *summary* data from NTSB's CAROL database, which means it's missing some of the contextual information that you can see online — like a recommendation's priority level, hazmat status, etc.
 
-The reason? The full data is in a nested JSON file that by itself is pretty unmanageable. There are ways to handle nested JSON data in R, but it can be a little tricky. You can check out the `json_loading.Rmd` file in this repo to see how I handled it, but for the sake of time, I'm going to load in the cleaned version of the JSON data that I created in that file.
+The reason? The full data is in a nested JSON file that by itself is pretty unmanageable. There are ways to handle nested JSON data in R, but it can be a little tricky. You can check out the `json_loading.Rmd` file in this repo to see how I handled it, but for the sake of (your) time, I'm going to load in the cleaned version of the JSON data that I created in that file.
 
 ```{r load_cleaned_json_data}
 json_data <- read_csv("bonus_json_loading/rail_safety_json_data.csv")
