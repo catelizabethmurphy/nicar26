@@ -289,17 +289,16 @@ recs
 
 Well, now that we've got all this cleaned up, we can write it back into a csv and save it — that way we have this version saved, and we can import it into Google Sheets if we want to.
 
-```{r}
+```{r write_cleaned_data_to_csv}
 # write to csv
 write_csv(recs, "data/clean_recs.csv")
 ```
-
 
 # Analysis Examples: Things to Look At
 
 ### Which recipients have the most open recommendations?
 
-```{r}
+```{r open_recommendations_by_recipient}
 # filter for open recommendations, group by recipient, count the number of open recommendations for each recipient, and arrange in descending order to see which recipients have the most open recommendations
 recs |>
   filter(recipient_recommendation_open_closed == "Open") |>
@@ -310,7 +309,7 @@ recs |>
 
 ### What are the unacceptable recommendation responses?
 
-```{r}
+```{r unacceptable_responses}
 # filter for recommendations where the NTSB has classified the recipient's response as unacceptable to see what those responses are
 recs |>
   filter(str_detect(recipient_recommendation_response_status, "Unacceptable"))
@@ -318,7 +317,7 @@ recs |>
 
 ### How about unacceptable recommendation responses by recipient?
 
-```{r}
+```{r unacceptable_by_recipient}
 # filter for recommendations where the NTSB has classified the recipient's response as unacceptable, group by recipient, count the number of unacceptable responses for each recipient, and arrange in descending order to see which recipients have the most unacceptable recommendation responses
 recs |>
   filter(str_detect(recipient_recommendation_response_status, "Unacceptable")) |>
