@@ -328,8 +328,7 @@ unacceptable_by_recipient <- recs |>
   filter(str_detect(recipient_recommendation_response_status, "Unacceptable")) |>
   group_by(recipient) |>
   count() |>
-  arrange(desc(n)) |>
-  head(10)
+  arrange(desc(n))
 
 unacceptable_by_recipient
 ```
