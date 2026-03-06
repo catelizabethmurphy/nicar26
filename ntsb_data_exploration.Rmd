@@ -283,6 +283,7 @@ recs <- recs |>
 Now let's look at our new dataset!
 
 ```{r}
+# take a look at the cleaned data frame
 recs
 ```
 
@@ -299,6 +300,7 @@ write_csv(recs, "data/clean_recs.csv")
 ### Which recipients have the most open recommendations?
 
 ```{r}
+# filter for open recommendations, group by recipient, count the number of open recommendations for each recipient, and arrange in descending order to see which recipients have the most open recommendations
 recs |>
   filter(recipient_recommendation_open_closed == "Open") |>
   group_by(recipient) |>
@@ -309,6 +311,7 @@ recs |>
 ### What are the unacceptable recommendation responses?
 
 ```{r}
+# filter for recommendations where the NTSB has classified the recipient's response as unacceptable to see what those responses are
 recs |>
   filter(str_detect(recipient_recommendation_response_status, "Unacceptable"))
 ```
@@ -316,6 +319,7 @@ recs |>
 ### How about unacceptable recommendation responses by recipient?
 
 ```{r}
+# filter for recommendations where the NTSB has classified the recipient's response as unacceptable, group by recipient, count the number of unacceptable responses for each recipient, and arrange in descending order to see which recipients have the most unacceptable recommendation responses
 recs |>
   filter(str_detect(recipient_recommendation_response_status, "Unacceptable")) |>
   group_by(recipient) |>
@@ -327,6 +331,7 @@ recs |>
 ### How many open recommendations does the NTSB have for the FRA, and how has the NTSB classified the FRA's response to those recommendations?
 
 ```{r}
+# filter for open recommendations for the FRA, group by how the NTSB has classified the FRA's response to those recommendations, count the number of recommendations in each response category, and arrange in descending order to see how many open recommendations the NTSB has for the FRA and how the NTSB has classified the FRA's response to those recommendations
 recs |>
   filter(recipient == "FRA" &
          recipient_recommendation_open_closed == "Open") |>
