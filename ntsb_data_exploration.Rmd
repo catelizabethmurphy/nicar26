@@ -310,3 +310,50 @@ Let's take a look!
 ```{r}
 full_recs
 ```
+
+# Analysis Examples: Things to Look At
+
+## What are the open urgent recommendations?
+
+```{r}
+full_recs |>
+  filter(priority == "Urgent" & 
+         recipient_recommendation_open_closed == "Open")
+```
+
+## What are the unacceptable urgent recommendations?
+
+```{r}
+full_recs |>
+  filter(str_detect(recipient_recommendation_response_status, "Unacceptable")) |>
+  filter(priority == "Urgent")
+```
+
+## How many open recommendations does the NTSB have for the FRA, and how has the NTSB classified the FRA's response to those recommendations?
+
+```{r}
+full_recs |>
+  filter(recipient == "FRA" &
+         recipient_recommendation_open_closed == "Open") |>
+  group_by(recipient_recommendation_response_status) |>
+  count()
+```
+
+## Other ideas:
+
+-   How many recommendations has each government agency received, and how has the NTSB classified their response to those recommendations?
+
+-  How many recommendations has each government agency received in each priority level, and how has the NTSB classified their response to those recommendations?
+
+- How long does it take for recommendations to be closed, and does that vary by recipient or priority level?
+
+- How many of the recommendations concern hazardous materials?
+
+- Where were the accidents that led to the recommendations located?
+
+- How many of the recommendations are on the NTSB's Most Wanted List?
+
+- How many of the recommendations are reiterated recommendations, and how many times have they been reiterated?
+
+
+
