@@ -313,7 +313,7 @@ full_recs
 
 # Analysis Examples: Things to Look At
 
-## What are the open urgent recommendations?
+### What are the open urgent recommendations?
 
 ```{r}
 full_recs |>
@@ -321,7 +321,7 @@ full_recs |>
          recipient_recommendation_open_closed == "Open")
 ```
 
-## What are the unacceptable urgent recommendations?
+### What are the unacceptable urgent recommendations?
 
 ```{r}
 full_recs |>
@@ -329,7 +329,7 @@ full_recs |>
   filter(priority == "Urgent")
 ```
 
-## How many open recommendations does the NTSB have for the FRA, and how has the NTSB classified the FRA's response to those recommendations?
+### How many open recommendations does the NTSB have for the FRA, and how has the NTSB classified the FRA's response to those recommendations?
 
 ```{r}
 full_recs |>
@@ -339,7 +339,7 @@ full_recs |>
   count()
 ```
 
-## Other ideas:
+### Other ideas:
 
 -   How many recommendations has each government agency received, and how has the NTSB classified their response to those recommendations?
 
